@@ -1,0 +1,317 @@
+﻿/* Common */
+.checkout__wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.checkout__wrap + .checkout__wrap {
+    margin-top: 16px;
+}
+
+.checkout__heading {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+/* CSS phần checkout */
+.checkout {
+    background: #f3f4f6;
+    padding: 30px 0;
+}
+
+.checkout__back {
+    display: inline-block;
+    padding: 12px 16px;
+}
+
+.checkout__back-text {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.428;
+    color: #3650dc;
+}
+
+.checkout-item {
+    display: grid;
+    grid-template-columns: 64px 1fr 12px 120px;
+    /* ảnh - thông tin - quantity - price */
+    gap: 16px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.checkout-item:last-child {
+    border-bottom: none;
+}
+
+.checkout-item__img {
+    padding: 6px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+}
+
+.checkout-item__title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.checkout-item__name {
+    --line-clamp: 1;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--line-clamp);
+}
+
+.checkout-item__color {
+    display: inline-block;
+    width: fit-content;
+    padding: 4px 8px;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    border-radius: 4px;
+    background: #f3f4f6;
+    color: var(--text-color);
+}
+
+.checkout-item__quantity {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+.checkout-item__price-box {
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.checkout-item__price-current {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.checkout-item__price-old {
+    color: #9ca3af;
+    font-size: 1.3rem;
+    text-decoration: line-through;
+}
+
+.checkout-gift {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: fit-content;
+    padding: 2px 8px;
+    background: #fef3c7;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.checkout-gift__text {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.428;
+    white-space: nowrap;
+}
+
+.checkout-gift__icon,
+.checkout-gift__count,
+.checkout-gift__text,
+.checkout-gift__arrow {
+    color: #d97706;
+}
+
+/* CSS phần người đặt hàng */
+.checkout-order__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.checkout-order__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.checkout-order__label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.checkout-order__input {
+    padding: 10px 12px;
+    font-size: 1.4rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.2s ease;
+    width: 100%;
+}
+
+.checkout-order__input:focus {
+    border-color: #1f2937;
+}
+
+/* CSS phần hình thức nhận hàng */
+.checkout-address__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.checkout-address__section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.checkout-delivery {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.checkout-delivery__option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.checkout-delivery__radio {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+}
+
+.checkout-delivery__label {
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+.checkout-address__label {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.checkout-address__input {
+    padding: 10px 12px;
+    font-size: 1.4rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: #fff;
+    transition: border-color 0.2s ease;
+    outline: none;
+}
+
+.checkout-address__input:focus {
+    border-color: #1f2937;
+}
+
+.checkout-note__label {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.checkout-note__textarea {
+    padding: 10px 12px;
+    min-height: 80px;
+    resize: vertical;
+    font-size: 1.4rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: #fff;
+    transition: border-color 0.2s ease;
+    outline: none;
+}
+
+.checkout-note__textarea:focus {
+    border-color: #1f2937;
+}
+
+.checkout-option__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkout-option__checkbox {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+}
+
+.checkout-option__label {
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+/* CSS phần hình thức thanh toán */
+.checkout-payment {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.checkout-payment__option {
+    display: flex;
+}
+
+.checkout-payment__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #fff;
+    transition: background 0.2s ease;
+    width: 100%;
+}
+
+.checkout-payment__radio {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+}
+
+.checkout-payment__label {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+.checkout-payment__item:hover {
+    background: #f9fafb;
+}
+
+.checkout-payment__item:has(.checkout-payment__radio:checked) {
+    background: #f3f4f6;
+}
+
+.checkout-payment__radio:checked + .checkout-payment__label {
+    font-weight: 500;
+}
