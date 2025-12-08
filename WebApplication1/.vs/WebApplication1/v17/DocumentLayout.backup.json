@@ -1,22 +1,78 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\.net\\baiTHso5\\WebApplication1\\",
+  "WorkspaceRootPath": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\baithso5\\webapplication1\\webapplication1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\baithso5\\webapplication1\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\models\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\models\\carts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\carts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\models\\orders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\orders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\models\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\wwwroot\\css\\cart.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\wwwroot\\css\\cart.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\wwwroot\\css\\checkout.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\wwwroot\\css\\checkout.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\wwwroot\\css\\base.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\wwwroot\\css\\base.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|c:\\users\\nguye\\source\\repos\\ltw_dotnet\\webapplication1\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\baithso5\\webapplication1\\webapplication1\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\baithso5\\webapplication1\\webapplication1\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,59 +82,251 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 11,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\.net\\baiTHso5\\WebApplication1\\WebApplication1\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\.net\\baiTHso5\\WebApplication1\\WebApplication1\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "WebApplication1\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA2AAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "CartItem.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\CartItem.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\CartItem.cs",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\CartItem.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\CartItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T15:22:24.928Z",
+              "WhenOpened": "2025-12-08T00:40:22.946Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Carts.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Carts.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Carts.cs",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Carts.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Carts.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T00:40:20.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CheckoutController.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\CheckoutController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\CheckoutController.cs",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\CheckoutController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\CheckoutController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T00:59:05.921Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "cart.css",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\wwwroot\\css\\cart.css",
+              "RelativeDocumentMoniker": "WebApplication1\\wwwroot\\css\\cart.css",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\wwwroot\\css\\cart.css",
+              "RelativeToolTip": "WebApplication1\\wwwroot\\css\\cart.css",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAuwDwAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-12-08T02:30:14.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Orders.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Orders.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Orders.cs",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Orders.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Orders.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T01:04:22.258Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\.net\\baiTHso5\\WebApplication1\\WebApplication1\\Program.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
-              "ToolTip": "D:\\.net\\baiTHso5\\WebApplication1\\WebApplication1\\Program.cs",
-              "RelativeToolTip": "WebApplication1\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAnAAAAAAAAAA==",
+              "Title": "Users.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Users.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Users.cs",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Users.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Users.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T15:22:17.482Z",
+              "WhenOpened": "2025-12-08T01:24:28.276Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "_ViewStart.cshtml",
-              "DocumentMoniker": "D:\\.net\\baiTHso5\\WebApplication1\\WebApplication1\\Views\\_ViewStart.cshtml",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\_ViewStart.cshtml",
-              "ToolTip": "D:\\.net\\baiTHso5\\WebApplication1\\WebApplication1\\Views\\_ViewStart.cshtml",
-              "RelativeToolTip": "WebApplication1\\Views\\_ViewStart.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-04T15:22:14.036Z",
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T00:48:58.546Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "D:\\.net\\baiTHso5\\WebApplication1\\WebApplication1\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\_ViewImports.cshtml",
-              "ToolTip": "D:\\.net\\baiTHso5\\WebApplication1\\WebApplication1\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "WebApplication1\\Views\\_ViewImports.cshtml",
+              "Title": "CartController.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\CartController.cs",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\CartController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\CartController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T00:56:54.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Checkout\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Checkout\\Index.cshtml",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Checkout\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Checkout\\Index.cshtml",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAAANsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-08T00:30:07.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "OrderItem.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\OrderItem.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\OrderItem.cs",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\OrderItem.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\OrderItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T01:22:54.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Home\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-04T15:22:12.135Z",
+              "WhenOpened": "2025-12-08T14:05:49.98Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Cart\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Cart\\Index.cshtml",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Cart\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Cart\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-08T14:17:51.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T14:18:59.26Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "checkout.css",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\wwwroot\\css\\checkout.css",
+              "RelativeDocumentMoniker": "WebApplication1\\wwwroot\\css\\checkout.css",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\wwwroot\\css\\checkout.css",
+              "RelativeToolTip": "WebApplication1\\wwwroot\\css\\checkout.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-12-08T01:53:12.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Products.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Products.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Products.cs",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Products.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Products.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T01:25:23.55Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACEAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-08T00:37:13.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "base.css",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\wwwroot\\css\\base.css",
+              "RelativeDocumentMoniker": "WebApplication1\\wwwroot\\css\\base.css",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\wwwroot\\css\\base.css",
+              "RelativeToolTip": "WebApplication1\\wwwroot\\css\\base.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-12-08T03:01:30.028Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
+              "ToolTip": "C:\\Users\\nguye\\source\\repos\\LTW_dotnet\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeToolTip": "WebApplication1\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T00:36:50.196Z"
             }
           ]
         }

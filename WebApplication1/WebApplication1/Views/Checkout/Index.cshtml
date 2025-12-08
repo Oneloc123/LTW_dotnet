@@ -1,0 +1,227 @@
+﻿@model List<CartItem>
+
+@{
+    ViewData["Title"] = "Thanh toán";
+}
+
+<!-- Link font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+<!-- Link icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Link CSS -->
+<link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/grid.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/checkout.css" asp-append-version="true" />
+
+<div class="checkout">
+    <div class="grid wide">
+
+        <a href="#!" class="checkout__back">
+            <i class="fa-solid fa-angle-left"></i>
+            <span checkout__back-text>Quay lại giỏ hàng</span>
+        </a>
+
+        <div class="row small-gutter">
+
+            <!-- left checkout -->
+            <div class="col l-9 m-12 c-12">
+                <div class="checkout__wrap">
+                    <h2 class="checkout__heading">Sản phẩm trong đơn (<span id="countSelected">2</span>)</h2>
+
+                    <!-- list sản phẩm -->
+                    <div class="checkout__list">
+
+                        @foreach (var item in Model)
+                        {
+                            <article class="checkout-item">
+
+                                <img src="@item.ImageUrl" class="checkout-item__img" alt="@item.Name" />
+
+                                <div class="checkout-item__title">
+                                    <h3 class="checkout-item__name">@item.Name</h3>
+
+                                    <div class="checkout-item__color">
+                                        Màu: <span class="checkout-item__color-selected">Cam vũ trụ</span>
+                                    </div>
+                                </div>
+
+                                <div class="checkout-item__quantity">
+                                    <span class="checkout-item__quantity-multifly">x</span>
+                                    <span class="checkout-item__quantity-value">@item.Quantity</span>
+                                </div>
+
+                                <div class="checkout-item__price-box">
+                                    <span class="checkout-item__price-current">
+                                        @((item.Price * (1 - item.Discount / 100m)).ToString("N0"))đ
+                                    </span>
+
+                                    @if (item.Discount > 0)
+                                    {
+                                        <span class="checkout-item__price-old">@item.Price.ToString("N0")đ</span>
+                                    }
+                                </div>
+
+                            </article>
+                        }
+
+                    </div>
+
+                    <!-- gift section -->
+                    <div class="checkout-gift">
+                        <i class="checkout-gift__icon fa-solid fa-gift"></i>
+                        <span class="checkout-gift__text">
+                            <span class="checkout-gift__count">0</span> Quà tặng đơn hàng
+                        </span>
+                        <i class="fa-solid fa-angle-right checkout-gift__arrow"></i>
+                    </div>
+
+                </div>
+
+                <div class="checkout__wrap">
+                    <h2 class="checkout__heading">Người đặt hàng</h2>
+
+                    <form class="checkout-order__form" method="post" action="/checkout/pay">
+
+                        <div class="checkout-order__field">
+                            <label class="checkout-order__label">Họ và tên</label>
+                            <input type="text" name="fullname" class="checkout-order__input" required placeholder="Nhập họ và tên" />
+                        </div>
+
+                        <div class="checkout-order__field">
+                            <label class="checkout-order__label">Số điện thoại</label>
+                            <input type="text" name="phone" class="checkout-order__input" required placeholder="Nhập số điện thoại" />
+                        </div>
+
+                        <div class="checkout-order__field">
+                            <label class="checkout-order__label">Email (không bắt buộc)</label>
+                            <input type="email" name="email" class="checkout-order__input" placeholder="Nhập email" />
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="checkout__wrap">
+                    <h2 class="checkout__heading">Hình thức nhận hàng</h2>
+
+                    <form class="checkout-address__form">
+                        <!-- Loại hình nhận hàng -->
+                        <div class="checkout-address__section checkout-delivery">
+                            <label class="checkout-delivery__option">
+                                <input type="radio" name="receiveType" value="home" class="checkout-delivery__radio" checked>
+                                <span class="checkout-delivery__label">Giao hàng tận nơi</span>
+                            </label>
+
+                            <label class="checkout-delivery__option">
+                                <input type="radio" name="receiveType" value="store" class="checkout-delivery__radio">
+                                <span class="checkout-delivery__label">Nhận tại cửa hàng</span>
+                            </label>
+                        </div>
+                        <!-- Địa chỉ -->
+                        <div class="checkout-address__section checkout-address">
+                            <label class="checkout-address__label">Địa chỉ nhận hàng</label>
+                            <input type="text"
+                                   class="checkout-address__input"
+                                   name="address"
+                                   placeholder="Nhập địa chỉ của bạn">
+                        </div>
+                        <!-- Ghi chú -->
+                        <div class="checkout-address__section checkout-note">
+                            <label class="checkout-note__label">Ghi chú</label>
+                            <textarea class="checkout-note__textarea"
+                                      name="note"
+                                      placeholder="Ghi chú cho đơn hàng (Ví dụ: Hãy gọi tôi khi gói hàng xong)"></textarea>
+                        </div>
+
+                        <!-- Nhờ người khác nhận hàng -->
+                        <div class="checkout-address__section checkout-option">
+                            <label class="checkout-option__item">
+                                <input type="checkbox" class="checkout-option__checkbox" name="otherReceiver">
+                                <span class="checkout-option__label">Nhờ người khác nhận hàng</span>
+                            </label>
+                        </div>
+
+                        <!-- Yêu cầu kỹ thuật -->
+                        <div class="checkout-address__section checkout-option">
+                            <label class="checkout-option__item">
+                                <input type="checkbox" class="checkout-option__checkbox" name="techSupport">
+                                <span class="checkout-option__label">Yêu cầu kỹ thuật hỗ trợ khi giao hàng</span>
+                            </label>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="checkout__wrap">
+                    <h2 class="checkout__heading">Phương thức thanh toán</h2>
+
+                    <form class="checkout-payment">
+
+                        <!-- COD -->
+                        <div class="checkout-payment__option">
+                            <label class="checkout-payment__item">
+                                <input type="radio"
+                                       name="paymentMethod"
+                                       value="cod"
+                                       class="checkout-payment__radio"
+                                       checked>
+                                <span class="checkout-payment__label">Thanh toán khi nhận hàng (COD)</span>
+                            </label>
+                        </div>
+
+                        <!-- Ví điện tử -->
+                        <div class="checkout-payment__option">
+                            <label class="checkout-payment__item">
+                                <input type="radio"
+                                       name="paymentMethod"
+                                       value="ewallet"
+                                       class="checkout-payment__radio">
+                                <span class="checkout-payment__label">Ví điện tử (Momo, ZaloPay, ShopeePay)</span>
+                            </label>
+                        </div>
+
+                        <!-- Chuyển khoản -->
+                        <div class="checkout-payment__option">
+                            <label class="checkout-payment__item">
+                                <input type="radio"
+                                       name="paymentMethod"
+                                       value="bank"
+                                       class="checkout-payment__radio">
+                                <span class="checkout-payment__label">Chuyển khoản ngân hàng</span>
+                            </label>
+                        </div>
+
+                        <!-- Thẻ ngân hàng -->
+                        <div class="checkout-payment__option">
+                            <label class="checkout-payment__item">
+                                <input type="radio"
+                                       name="paymentMethod"
+                                       value="card"
+                                       class="checkout-payment__radio">
+                                <span class="checkout-payment__label">Thẻ ATM / Visa / Mastercard</span>
+                            </label>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- right checkout -->
+            <div class="col l-3 m-0 c-0">
+                <div class="checkout__wrap">
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
