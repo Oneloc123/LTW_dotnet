@@ -285,6 +285,10 @@
     color: var(--primary-color);
 }
 
+.cart-summary__item--total {
+    font-weight: 600;
+}
+
 .cart-summary__btn {
     --height: 50px;
 
