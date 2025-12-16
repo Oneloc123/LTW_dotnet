@@ -1,0 +1,58 @@
+############################
+# Visual Studio
+############################
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+############################
+# Build results
+############################
+bin/
+obj/
+
+############################
+# .NET Core
+############################
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+############################
+# NuGet
+############################
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+############################
+# ASP.NET Core
+############################
+appsettings.Development.json
+appsettings.Local.json
+
+############################
+# Logs
+############################
+*.log
+
+############################
+# OS generated files
+############################
+.DS_Store
+Thumbs.db
+
+############################
+# VS Code / Rider
+############################
+.vscode/
+.idea/
+
+############################
+# Publish
+############################
+**/wwwroot/lib/
+**/publish/
