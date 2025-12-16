@@ -1,58 +1,52 @@
-############################
-# Visual Studio
-############################
+﻿# Visual Studio files và thư mục .vs
 .vs/
+**/.vs/
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
+*.cache
 
-############################
-# Build results
-############################
+# Build outputs
+[Bb]in/
+[Oo]bj/
 bin/
 obj/
+*.exe
+*.dll
+*.pdb
+*.cache
 
-############################
-# .NET Core
-############################
-project.lock.json
-project.fragment.lock.json
-artifacts/
+# Project specific
+*.staticwebassets.endpoints.json
+apphost.exe
+*.sourcelink.json
+*.AssemblyInfo.cs
+*.AssemblyInfoInputs.cache
+*.metadata.v*.bin
+*.projects.v*.bin
+*.strings.v*.bin
 
-############################
-# NuGet
-############################
-*.nupkg
-*.snupkg
-packages/
-.nuget/
+# Thư mục cụ thể từ ví dụ của bạn
+**/CopilotIndices/
+**/DesignTimeBuild/
+**/.futdcache.*
+**/.dtbcache.*
+DocumentLayout.json
+DocumentLayout.backup.json
 
-############################
-# ASP.NET Core
-############################
-appsettings.Development.json
-appsettings.Local.json
+# Cấu hình cụ thể cho các loại file/directory
+**/ref/
+**/refint/
+*.dswa.cache.json
+rjimswa.dswa.cache.json
+rjsmcshtml.dswa.cache.json
+rjsmrazor.dswa.cache.json
 
-############################
-# Logs
-############################
-*.log
-
-############################
-# OS generated files
-############################
-.DS_Store
+# Các file hệ thống
 Thumbs.db
+.DS_Store
+*.db
 
-############################
-# VS Code / Rider
-############################
-.vscode/
-.idea/
-
-############################
-# Publish
-############################
-**/wwwroot/lib/
-**/publish/
+# User-specific files
+*.userprefs
