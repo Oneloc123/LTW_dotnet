@@ -175,7 +175,7 @@
 
     <div class="detail-wrapper">
         <div class="detail-left">
-            <img src="@Model.Images.FirstOrDefault()?.ImageUrl" alt="@Model.Name" />
+            @* <img src="@Model.Images.FirstOrDefault()?.ImageUrl" alt="@Model.Name" /> *@
         </div>
         <div class="detail-right">
             <h1 class="d-name">@Model.Name</h1>
@@ -203,7 +203,7 @@
 
             <div style="margin-bottom: 20px;">
                 <p>Thương hiệu: <strong style="color: #00bfa5">@Model.Brand</strong></p>
-                <p>Kho hàng: @Model.Stock sản phẩm</p>
+                @* <p>Kho hàng: @Model.Stock sản phẩm</p> *@
             </div>
 
             <button class="btn-buy">THÊM VÀO GIỎ HÀNG</button>
