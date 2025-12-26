@@ -1,0 +1,180 @@
+﻿@model List<WebApplication1.Models.Product>
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+}
+
+<style>
+    /* Reset và Font chữ */
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    /* Container: Căn giữa nội dung */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px 15px;
+    }
+
+    /* Tiêu đề */
+    h2.page-title {
+        color: #333;
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        border-bottom: 2px solid #d0011b;
+        display: inline-block;
+        padding-bottom: 5px;
+    }
+
+    /* Hệ thống Grid (Giả lập Bootstrap Row/Col) */
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .col-md-4 {
+        width: 33.3333%; /* Chia 3 cột */
+        padding: 0 15px;
+        margin-bottom: 30px;
+    }
+
+    /* Card Sản phẩm */
+    .card {
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        height: 100%; /* Giúp các thẻ cao bằng nhau */
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e1e1e1;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+        /* Hiệu ứng khi di chuột vào Card */
+        .card:hover {
+            transform: translateY(-5px); /* Nhấc lên 5px */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Đổ bóng */
+            border-color: #d0011b;
+        }
+
+    /* Phần khung ảnh */
+    .img-wrap {
+        height: 250px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+    .card-img-top {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain; /* Đảm bảo ảnh không bị méo */
+        transition: transform 0.3s;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.05); /* Phóng to nhẹ ảnh khi hover */
+    }
+
+    /* Phần thân Card */
+    .card-body {
+        padding: 20px;
+        flex: 1; /* Tự giãn để đẩy nút xuống đáy */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Tên sản phẩm */
+    h5.card-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 10px;
+        line-height: 1.4;
+        /* Cắt chữ nếu dài quá 2 dòng */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        height: 44px;
+    }
+
+    /* Giá tiền */
+    .price-text {
+        color: #d0011b;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    /* Nút bấm */
+    .btn-detail {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+        background-color: #fff;
+        color: #d0011b;
+        border: 1px solid #d0011b;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 14px;
+        transition: all 0.2s;
+    }
+
+        .btn-detail:hover {
+            background-color: #d0011b;
+            color: #fff;
+        }
+
+
+</style>
+
+<div class="container">
+    <h2 class="page-title">Danh sách sản phẩm</h2>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="img-wrap">
+                        @{
+                           
+                            // var imgSrc = item.Images.FirstOrDefault()?.ImageUrl ?? "https:placehold.co/400";
+                        }
+                        @* <img src="@imgSrc" class="card-img-top" alt="@item.Name" /> *@
+                    </div>
+
+                    <div class="card-body">
+                        <div>
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="border-info">@item.Description</p>
+                            <p class="price-text">@item.Price.ToString("#,##0") ₫</p>
+                        </div>
+
+                        <a href="/Product/Detail/@item.Id" class="btn-detail">
+                            Xem chi tiết
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

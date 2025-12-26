@@ -1,0 +1,52 @@
+﻿# Visual Studio files và thư mục .vs
+.vs/
+**/.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.cache
+
+# Build outputs
+[Bb]in/
+[Oo]bj/
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+
+# Project specific
+*.staticwebassets.endpoints.json
+apphost.exe
+*.sourcelink.json
+*.AssemblyInfo.cs
+*.AssemblyInfoInputs.cache
+*.metadata.v*.bin
+*.projects.v*.bin
+*.strings.v*.bin
+
+# Thư mục cụ thể từ ví dụ của bạn
+**/CopilotIndices/
+**/DesignTimeBuild/
+**/.futdcache.*
+**/.dtbcache.*
+DocumentLayout.json
+DocumentLayout.backup.json
+
+# Cấu hình cụ thể cho các loại file/directory
+**/ref/
+**/refint/
+*.dswa.cache.json
+rjimswa.dswa.cache.json
+rjsmcshtml.dswa.cache.json
+rjsmrazor.dswa.cache.json
+
+# Các file hệ thống
+Thumbs.db
+.DS_Store
+*.db
+
+# User-specific files
+*.userprefs

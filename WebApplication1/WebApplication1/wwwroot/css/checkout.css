@@ -298,6 +298,14 @@
     accent-color: var(--primary-color);
 }
 
+.checkout-payment__img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .checkout-payment__label {
     font-size: 1.4rem;
     color: var(--text-color);
@@ -314,4 +322,103 @@
 
 .checkout-payment__radio:checked + .checkout-payment__label {
     font-weight: 500;
+}
+
+/* Checkout - right (Đặt hàng) */
+/* Promo */
+.checkout-right__promo {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f3f4f6;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.checkout-right__promo-icon {
+    color: var(--primary-color);
+}
+
+.checkout-right__promo-text {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+/* Summary */
+.checkout-right__summary {
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.checkout-right__title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.checkout-right__group {
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.checkout-right__item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout-right__item--divider-dashed,
+.checkout-right__item--divider {
+    padding-bottom: 8px;
+}
+
+.checkout-right__item--divider {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.checkout-right__item--divider-dashed {
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.checkout-right__item--total {
+    font-weight: 600;
+}
+
+.checkout-right__text,
+.checkout-right__label {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.checkout-right__value {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.checkout-right__value--highlight {
+    color: var(--primary-color);
+}
+
+.checkout-right__btn {
+    --height: 50px;
+
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1.6rem;
+}
+
+.checkout-right__footer {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    color: var(--text-color);
 }

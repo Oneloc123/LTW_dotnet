@@ -1,4 +1,4 @@
-﻿@model List<CartItem> // load giao diện này với data lấy từ model cartitem
+﻿@model WebApplication1.Models.Carts
 @{
     ViewData["Title"] = "Giỏ hàng";
 }
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="cart__list">
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Items)
                         {
                             <article class="cart-item">
                                 <input type="checkbox" class="cart-item__checkbox" />
@@ -117,7 +117,9 @@
 
                         <div class="cart-summary__item cart-summary__divider">
                             <span class="cart-summary__label">Tổng tiền</span>
-                            <span class="cart-summary__value">0đ</span>
+                            <span class="cart-summary__value">
+                                @Model.TotalMoney.ToString("N0")đ
+                            </span>
                         </div>
 
                         <div class="cart-summary__item">

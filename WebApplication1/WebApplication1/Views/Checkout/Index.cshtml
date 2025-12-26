@@ -1,4 +1,5 @@
-﻿@model List<CartItem>
+﻿@using WebApplication1.Models
+@model List<CartItem>
 
 @{
     ViewData["Title"] = "Thanh toán";
@@ -172,6 +173,7 @@
                                        value="cod"
                                        class="checkout-payment__radio"
                                        checked>
+                                <img class="checkout-payment__img" src="~/images/cod.png" alt="Thanh toán khi nhận hàng" />
                                 <span class="checkout-payment__label">Thanh toán khi nhận hàng (COD)</span>
                             </label>
                         </div>
@@ -183,6 +185,7 @@
                                        name="paymentMethod"
                                        value="ewallet"
                                        class="checkout-payment__radio">
+                                <img class="checkout-payment__img" src="~/images/momo.png" alt="Ví điện tử (Momo, ZaloPay, ShopeePay)" />
                                 <span class="checkout-payment__label">Ví điện tử (Momo, ZaloPay, ShopeePay)</span>
                             </label>
                         </div>
@@ -194,6 +197,7 @@
                                        name="paymentMethod"
                                        value="bank"
                                        class="checkout-payment__radio">
+                                <img class="checkout-payment__img" src="~/images/alepay.png" alt="Chuyển khoảng ngân hàng" />
                                 <span class="checkout-payment__label">Chuyển khoản ngân hàng</span>
                             </label>
                         </div>
@@ -205,6 +209,7 @@
                                        name="paymentMethod"
                                        value="card"
                                        class="checkout-payment__radio">
+                                <img class="checkout-payment__img" src="~/images/alepay.png" alt="Thẻ ATM / Visa / Mastercard" />
                                 <span class="checkout-payment__label">Thẻ ATM / Visa / Mastercard</span>
                             </label>
                         </div>
@@ -217,6 +222,65 @@
             <!-- right checkout -->
             <div class="col l-3 m-0 c-0">
                 <div class="checkout__wrap">
+
+                    <!-- Chọn hoặc nhập ưu đãi -->
+                    <div class="checkout-right__promo">
+                        <i class="checkout-right__promo-icon fa-solid fa-ticket"></i>
+                        <p class="checkout-right__promo-text">Chọn hoặc nhập ưu đãi</p>
+                        <i class="checkout-right__promo-arrow fa-solid fa-angle-right"></i>
+                    </div>
+
+                    <!-- Thông tin đơn hàng -->
+                    <aside class="checkout-right__summary">
+                        <h3 class="checkout-right__title">Thông tin đơn hàng</h3>
+
+                        <div class="checkout-right__item checkout-right__item--divider">
+                            <span class="checkout-right__label">Tổng tiền</span>
+                            <span class="checkout-right__value">0đ</span>
+                        </div>
+
+                        <div class="checkout-right__item">
+                            <span class="checkout-right__label">Tổng khuyến mãi</span>
+                            <span class="checkout-right__value">0đ</span>
+                        </div>
+
+                        <!-- Nhóm giảm giá -->
+                        <div class="checkout-right__group">
+                            <div class="checkout-right__item">
+                                <span class="checkout-right__label">Giảm giá sản phẩm</span>
+                                <span class="checkout-right__value">0đ</span>
+                            </div>
+
+                            <div class="checkout-right__item">
+                                <span class="checkout-right__label">Voucher</span>
+                                <span class="checkout-right__value">0đ</span>
+                            </div>
+                        </div>
+
+                        <div class="checkout-right__item checkout-right__item--divider-dashed">
+                            <span class="checkout-right__label">Phí vận chuyển</span>
+                            <span class="checkout-right__text">Miễn phí</span>
+                        </div>
+
+                        <div class="checkout-right__item checkout-right__item--total">
+                            <span class="checkout-right__label">Cần thanh toán</span>
+                            <span class="checkout-right__value checkout-right__value--highlight">0đ</span>
+                        </div>
+
+                        <button class="checkout-right__btn btn btn--primary-color">
+                            Đặt hàng
+                        </button>
+                    </aside>
+
+                    <!-- Footer điều khoản -->
+                    <div class="checkout-right__footer">
+                        <p>
+                            Bằng việc tiến hành đặt mua hàng, bạn đồng ý với
+                            <a href="#!">Điều khoản dịch vụ</a> và
+                            <a href="#!">Chính sách xử lý dữ liệu cá nhân</a>
+                            của shop
+                        </p>
+                    </div>
 
                 </div>
             </div>
