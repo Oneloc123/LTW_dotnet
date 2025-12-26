@@ -1,78 +1,86 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\",
+  "WorkspaceRootPath": "D:\\.net\\LTW_dotnet\\WebApplication1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\models\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\models\\blogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\blogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\models\\userregistermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\userregistermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\models\\changepasswordmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\changepasswordmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\views\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\views\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\views\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\models\\userloginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\userloginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\models\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\models\\changepasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\changepasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\models\\blogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\blogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\views\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\views\\checkout\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\views\\checkout\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\checkout\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\views\\cart\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\ltw_dotnet\\webapplication1\\webapplication1\\views\\cart\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\cart\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|d:\\.net\\doanltw\\ltw_dotnet\\webapplication1\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{445C2AB6-1EBB-46B6-8A05-25E471D16D1F}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -82,47 +90,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Home\\Index.cshtml*",
-              "RelativeToolTip": "WebApplication1\\Views\\Home\\Index.cshtml*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-08T21:10:57.668Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Blogs.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Blogs.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Models\\Blogs.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Blogs.cs*",
-              "RelativeToolTip": "WebApplication1\\Models\\Blogs.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T21:05:48.005Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Products.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Products.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Models\\Products.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Products.cs",
-              "RelativeToolTip": "WebApplication1\\Models\\Products.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T21:04:46.959Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
@@ -137,154 +106,128 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ChangePassword.cshtml",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\ChangePassword.cshtml",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\Account\\ChangePassword.cshtml",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\ChangePassword.cshtml",
-              "RelativeToolTip": "WebApplication1\\Views\\Account\\ChangePassword.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-08T21:02:10.648Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ChangePasswordModel.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\ChangePasswordModel.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Models\\ChangePasswordModel.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\ChangePasswordModel.cs",
-              "RelativeToolTip": "WebApplication1\\Models\\ChangePasswordModel.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAABIAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:58:08.601Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\HomeController.cs*",
-              "RelativeToolTip": "WebApplication1\\Controllers\\HomeController.cs*",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAAABMAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:51:15.616Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "UserLoginModel.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\UserLoginModel.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Models\\UserLoginModel.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\UserLoginModel.cs",
-              "RelativeToolTip": "WebApplication1\\Models\\UserLoginModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:46:23.312Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UserRegisterModel.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\UserRegisterModel.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Models\\UserRegisterModel.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\UserRegisterModel.cs",
-              "RelativeToolTip": "WebApplication1\\Models\\UserRegisterModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:51:48.715Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Users.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Users.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Models\\Users.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Users.cs",
-              "RelativeToolTip": "WebApplication1\\Models\\Users.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:51:18.056Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 0,
               "Title": "Register.cshtml",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Register.cshtml",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Register.cshtml",
               "RelativeDocumentMoniker": "WebApplication1\\Views\\Account\\Register.cshtml",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Register.cshtml",
-              "RelativeToolTip": "WebApplication1\\Views\\Account\\Register.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Register.cshtml*",
+              "RelativeToolTip": "WebApplication1\\Views\\Account\\Register.cshtml*",
+              "ViewState": "AgIAAIkBAAAAAAAAAAAqwJUBAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-12-08T20:55:02.383Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\AccountController.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "WebApplication1\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABYAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:35:36.163Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Login.cshtml.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Login.cshtml.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\Account\\Login.cshtml.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Login.cshtml.cs",
-              "RelativeToolTip": "WebApplication1\\Views\\Account\\Login.cshtml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:42:28.728Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Cart\\Index.cshtml",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\Cart\\Index.cshtml",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Cart\\Index.cshtml",
-              "RelativeToolTip": "WebApplication1\\Views\\Cart\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-08T20:43:19.207Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 2,
               "Title": "Login.cshtml",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Login.cshtml",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "WebApplication1\\Views\\Account\\Login.cshtml",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Login.cshtml",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Login.cshtml",
               "RelativeToolTip": "WebApplication1\\Views\\Account\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAALYAAAAAAAAAAAAAABEAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-12-08T20:42:18.314Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 7,
+              "Title": "RegisterViewModel.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\RegisterViewModel.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\RegisterViewModel.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\RegisterViewModel.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\RegisterViewModel.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAAoAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T04:21:44.852Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Users.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Users.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Users.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Users.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Users.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T20:51:18.056Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\AccountController.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwBgAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T20:35:36.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChangePassword.cshtml",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Account\\ChangePassword.cshtml",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\ChangePassword.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Account\\ChangePassword.cshtml",
+              "ViewState": "AgIAAB8BAAAAAAAAAAAAAIABAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-08T21:02:10.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Products.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Products.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Products.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Products.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Products.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T21:04:46.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OrderItem.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\OrderItem.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\OrderItem.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\OrderItem.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\OrderItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T04:43:18.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Checkout\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Checkout\\Index.cshtml",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Checkout\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Checkout\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-26T04:42:58.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "CartController.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\CartController.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\CartController.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Controllers\\CartController.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\CartController.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\CartController.cs",
               "RelativeToolTip": "WebApplication1\\Controllers\\CartController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -293,42 +236,128 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Index.cshtml.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Checkout\\Index.cshtml.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\Checkout\\Index.cshtml.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Checkout\\Index.cshtml.cs",
-              "RelativeToolTip": "WebApplication1\\Views\\Checkout\\Index.cshtml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:42:53.488Z",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-08T21:10:57.668Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeToolTip": "WebApplication1\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T17:54:21.206Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ChangePasswordViewModel.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\ChangePasswordViewModel.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\ChangePasswordViewModel.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\ChangePasswordViewModel.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\ChangePasswordViewModel.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAABQAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T04:31:29.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\LoginViewModel.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\LoginViewModel.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\LoginViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T04:06:46.345Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAABMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T20:51:15.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Blogs.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Blogs.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Blogs.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Models\\Blogs.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Blogs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T21:05:48.005Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 16,
-              "Title": "Index.cshtml.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Cart\\Index.cshtml.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\Cart\\Index.cshtml.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Cart\\Index.cshtml.cs",
-              "RelativeToolTip": "WebApplication1\\Views\\Cart\\Index.cshtml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "Login.cshtml.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Login.cshtml.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Account\\Login.cshtml.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Account\\Login.cshtml.cs",
+              "RelativeToolTip": "WebApplication1\\Views\\Account\\Login.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:42:41.888Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T20:42:28.728Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 17,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Program.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
-              "ToolTip": "D:\\.net\\DoAnltw\\LTW_dotnet\\WebApplication1\\WebApplication1\\Program.cs",
-              "RelativeToolTip": "WebApplication1\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAASAAAAAAAAAA==",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Cart\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Cart\\Index.cshtml",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Cart\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Cart\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-08T20:43:19.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Checkout\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Checkout\\Index.cshtml.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Checkout\\Index.cshtml.cs",
+              "RelativeToolTip": "WebApplication1\\Views\\Checkout\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T17:54:21.206Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T20:42:53.488Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Cart\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Cart\\Index.cshtml.cs",
+              "ToolTip": "D:\\.net\\LTW_dotnet\\WebApplication1\\WebApplication1\\Views\\Cart\\Index.cshtml.cs",
+              "RelativeToolTip": "WebApplication1\\Views\\Cart\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T20:42:41.888Z"
             }
           ]
         }
