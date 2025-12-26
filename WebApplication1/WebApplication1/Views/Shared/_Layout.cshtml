@@ -10,25 +10,190 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <!-- Top Bar với thông tin hỗ trợ và chào mừng -->
+        <div class="top-bar bg-dark text-light py-2">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApplication1</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <small>
+                            <i class="fas fa-headset me-1"></i> Hỗ trợ 24/7: 1800.9999 |
+                            <i class="fas fa-truck ms-3 me-1"></i> Miễn phí vận chuyển đơn từ 2 triệu
+                        </small>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <small>
+                            <a href="#" class="text-light text-decoration-none me-3">
+                                <i class="fas fa-map-marker-alt me-1"></i> Hệ thống cửa hàng
+                            </a>
+                            <a href="#" class="text-light text-decoration-none me-3">
+                                <i class="fas fa-question-circle me-1"></i> Hỗ trợ
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <i class="fas fa-user me-1"></i> Tài khoản
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3 sticky-top">
+            <div class="container-fluid">
+                <!-- Logo -->
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/images/logo-techphone.svg" alt="TechPhone" height="40" class="d-inline-block align-text-top">
+                    <span class="fw-bold text-primary ms-2">TECH<span class="text-danger">PHONE</span></span>
+                </a>
+
+                <!-- Search Bar -->
+                <div class="search-bar mx-lg-3 flex-grow-1">
+                    <div class="input-group">
+                        <input type="text" class="form-control rounded-start" placeholder="Tìm kiếm điện thoại, phụ kiện..." aria-label="Search">
+                        <select class="form-select w-auto" style="max-width: 150px;">
+                            <option selected>Tất cả danh mục</option>
+                            <option value="smartphone">Điện thoại</option>
+                            <option value="tablet">Tablet</option>
+                            <option value="accessory">Phụ kiện</option>
+                            <option value="smartwatch">Đồng hồ thông minh</option>
+                        </select>
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-flex align-items-center ms-lg-3">
+                    <a href="#" class="nav-link text-dark position-relative me-3">
+                        <i class="fas fa-heart fa-lg"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </a>
+                    <a href="#" class="nav-link text-dark position-relative me-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            5
+                        </span>
+                    </a>
+                    <div class="dropdown">
+                        <a href="#" class="nav-link text-dark dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle fa-lg"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Tài khoản của tôi</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-box me-2"></i>Đơn hàng</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt me-2"></i>Đăng nhập</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-plus me-2"></i>Đăng ký</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </div>
+        </nav>
+
+        <!-- Category Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-2">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- Main Categories -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="brandDropdown" data-bs-toggle="dropdown">
+                                <i class="fas fa-mobile-alt me-1"></i> Thương hiệu
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="brandDropdown">
+                                <li><a class="dropdown-item" href="#"><img src="/images/brands/apple.svg" alt="Apple" height="20" class="me-2"> iPhone</a></li>
+                                <li><a class="dropdown-item" href="#"><img src="/images/brands/samsung.svg" alt="Samsung" height="20" class="me-2"> Samsung</a></li>
+                                <li><a class="dropdown-item" href="#"><img src="/images/brands/xiaomi.svg" alt="Xiaomi" height="20" class="me-2"> Xiaomi</a></li>
+                                <li><a class="dropdown-item" href="#"><img src="/images/brands/oppo.svg" alt="Oppo" height="20" class="me-2"> Oppo</a></li>
+                                <li><a class="dropdown-item" href="#"><img src="/images/brands/vivo.svg" alt="Vivo" height="20" class="me-2"> Vivo</a></li>
+                                <li><a class="dropdown-item" href="#"><img src="/images/brands/realme.svg" alt="Realme" height="20" class="me-2"> Realme</a></li>
+                            </ul>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-bolt me-1"></i> Khuyến mãi
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="priceDropdown" data-bs-toggle="dropdown">
+                                <i class="fas fa-tags me-1"></i> Giá tiền
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="priceDropdown">
+                                <li><a class="dropdown-item" href="#">Dưới 3 triệu</a></li>
+                                <li><a class="dropdown-item" href="#">3 - 6 triệu</a></li>
+                                <li><a class="dropdown-item" href="#">6 - 10 triệu</a></li>
+                                <li><a class="dropdown-item" href="#">10 - 15 triệu</a></li>
+                                <li><a class="dropdown-item" href="#">Trên 15 triệu</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="accessoryDropdown" data-bs-toggle="dropdown">
+                                <i class="fas fa-headphones me-1"></i> Phụ kiện
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="accessoryDropdown">
+                                <li><a class="dropdown-item" href="#">Tai nghe</a></li>
+                                <li><a class="dropdown-item" href="#">Sạc dự phòng</a></li>
+                                <li><a class="dropdown-item" href="#">Ốp lưng</a></li>
+                                <li><a class="dropdown-item" href="#">Cáp sạc</a></li>
+                                <li><a class="dropdown-item" href="#">Smartwatch</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-star me-1"></i> Sản phẩm nổi bật
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-newspaper me-1"></i> Tin công nghệ
+                            </a>
                         </li>
                     </ul>
+
+                    <!-- Hotline on category bar -->
+                    <div class="d-flex">
+                        <a href="tel:18009999" class="btn btn-warning btn-sm">
+                            <i class="fas fa-phone-alt me-1"></i> HOTLINE: 1800.9999
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>
+
+        <!-- Offcanvas Cart -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">
+                    <i class="fas fa-shopping-cart me-2"></i>Giỏ hàng
+                </h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="text-center py-4">
+                    <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">Chưa có sản phẩm trong giỏ hàng</p>
+                </div>
+                <div class="mt-auto">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary">Xem giỏ hàng</button>
+                        <button class="btn btn-outline-primary">Thanh toán</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main role="main" class="pb-3" style="height: 5000px">
@@ -45,4 +210,49 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<style>
+    .top-bar a:hover {
+        color: #ffc107 !important;
+    }
+
+    .search-bar .input-group {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .promo-banner {
+        background: linear-gradient(90deg, #007bff, #6610f2);
+    }
+
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
+
+    .dropdown-item img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+    }
+
+    /* media (max-width: 992px) {
+        .search-bar
+
+    {
+        order: 3;
+        width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .navbar > .container-fluid {
+        flex-wrap: wrap;
+    }
+
+    } */
+</style>
+
+<!-- Font Awesome for icons (add to your layout if not already included) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </html>
