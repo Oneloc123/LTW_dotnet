@@ -4,34 +4,30 @@ namespace WebApplication1.Models
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Tên đăng nhập là bắt buộc")]
-        [StringLength(20, MinimumLength = 6, ErrorMessage = "Tên đăng nhập phải từ 6 đến 20 ký tự")]
-        [RegularExpression(@"^[a-zA-Z0-9_]+$", ErrorMessage = "Tên đăng nhập chỉ có thể chứa chữ cái, số và dấu gạch dưới")]
-        [Display(Name = "Tên đăng nhập")]
+        [Required(ErrorMessage = "Vui lòng nhập tên đăng nhập")]
+        [StringLength(20, MinimumLength = 6,
+            ErrorMessage = "Tên đăng nhập từ 6–20 ký tự")]
+        [RegularExpression(@"^[a-zA-Z0-9_]+$",
+            ErrorMessage = "Chỉ chứa chữ, số và dấu gạch dưới")]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "Email là bắt buộc")]
-        [EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ")]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "Vui lòng nhập email")]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Mật khẩu là bắt buộc")]
-        [StringLength(100, MinimumLength = 8, ErrorMessage = "Mật khẩu phải có ít nhất 8 ký tự")]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$",
-            ErrorMessage = "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số")]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
+        [StringLength(100, MinimumLength = 8,
+            ErrorMessage = "Mật khẩu ít nhất 8 ký tự")]
         [DataType(DataType.Password)]
-        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Xác nhận mật khẩu là bắt buộc")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Xác nhận mật khẩu")]
+        [Required(ErrorMessage = "Vui lòng nhập lại mật khẩu")]
         [Compare("Password", ErrorMessage = "Mật khẩu không khớp")]
+        [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải đồng ý với điều khoản dịch vụ")]
-        [Range(typeof(bool), "true", "true", ErrorMessage = "Bạn phải đồng ý với điều khoản dịch vụ")]
-        [Display(Name = "Đồng ý điều khoản")]
+        [Range(typeof(bool), "true", "true",
+            ErrorMessage = "Bạn phải đồng ý điều khoản")]
         public bool AcceptTerms { get; set; }
     }
 }
