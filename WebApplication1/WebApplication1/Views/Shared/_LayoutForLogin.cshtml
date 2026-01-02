@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication1</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <!-- Top Bar với thông tin hỗ trợ và chào mừng -->
+        <div class="top-bar bg-dark text-light py-2">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <small>
+                            <i class="fas fa-headset me-1"></i> Hỗ trợ 24/7: 1800.9999 |
+                            <i class="fas fa-truck ms-3 me-1"></i> Miễn phí vận chuyển đơn từ 2 triệu
+                        </small>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <small>
+                            <a href="#" class="text-light text-decoration-none me-3">
+                                <i class="fas fa-map-marker-alt me-1"></i> Hệ thống cửa hàng
+                            </a>
+                            <a href="#" class="text-light text-decoration-none me-3">
+                                <i class="fas fa-question-circle me-1"></i> Hỗ trợ
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <i class="fas fa-user me-1"></i> Tài khoản
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3 sticky-top">
+            <div class="container-fluid">
+                <!-- Logo -->
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/images/logo-techphone.svg" alt="TechPhone" height="40" class="d-inline-block align-text-top">
+                    <span class="fw-bold text-primary ms-2">TECH<span class="text-danger">PHONE</span></span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="pb-3" style="height: 5000px">
+        @RenderBody()
+    </main>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+<style>
+    .top-bar a:hover {
+        color: #ffc107 !important;
+    }
+
+    .search-bar .input-group {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .promo-banner {
+        background: linear-gradient(90deg, #007bff, #6610f2);
+    }
+
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
+
+    .dropdown-item img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+    }
+
+    /* media (max-width: 992px) {
+            .search-bar
+
+        {
+            order: 3;
+            width: 100%;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .navbar > .container-fluid {
+            flex-wrap: wrap;
+        }
+
+        } */
+</style>
+
+<!-- Font Awesome for icons (add to your layout if not already included) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</html>

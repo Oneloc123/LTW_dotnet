@@ -22,10 +22,28 @@ namespace WebApplication1.Models
             EF Core tự hiểu:
             usersnet (table)  <-->  Users (class)
          */
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasIndex(u => u.Username).IsUnique();
+                entity.HasIndex(u => u.Email).IsUnique();
+
+                entity.Property(u => u.Role)
+                      .HasDefaultValue("User");
+
+                entity.Property(u => u.CreatedAt)
+                      .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
+        }
+
         public DbSet<Users> usersnet { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<Specification> Specifications { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

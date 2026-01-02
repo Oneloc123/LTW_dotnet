@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNetCore.Http
+
+@{
+    var userId = Context.Session.GetInt32("UserId");
+    var username = Context.Session.GetString("Username");
+}
+
+<div class="dropdown">
+    <a href="#" class="nav-link text-dark dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown">
+        <i class="fas fa-user-circle fa-lg"></i>
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+        @if (userId != null)
+        {
+            <!-- ĐÃ ĐĂNG NHẬP -->
+            <li class="dropdown-header text-center fw-bold">
+                Xin chào, @username
+            </li>
+
+            <li>
+                <a class="dropdown-item" asp-controller="Account" asp-action="Profile">
+                    <i class="fas fa-user me-2"></i> Tài khoản của tôi
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" asp-controller="Order" asp-action="Index">
+                    <i class="fas fa-box me-2"></i> Đơn hàng
+                </a>
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+
+            <li>
+                <a class="dropdown-item text-danger"
+                   asp-controller="Account"
+                   asp-action="Logout">
+                    <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                </a>
+            </li>
+        }
+        else
+        {
+            <!-- CHƯA ĐĂNG NHẬP -->
+            <li>
+                <a class="dropdown-item"
+                   asp-controller="Account"
+                   asp-action="Login">
+                    <i class="fas fa-sign-in-alt me-2"></i> Đăng nhập
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item"
+                   asp-controller="Account"
+                   asp-action="Register">
+                    <i class="fas fa-user-plus me-2"></i> Đăng ký
+                </a>
+            </li>
+        }
+    </ul>
+</div>
