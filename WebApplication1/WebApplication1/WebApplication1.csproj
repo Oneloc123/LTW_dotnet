@@ -16,8 +16,11 @@
   <ItemGroup>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <PackageReference Include="MySql.Data" Version="9.5.0" />
 =======
+=======
+>>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
 =======
 >>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
   <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
@@ -31,6 +34,9 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
+=======
 >>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
 =======
 >>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7

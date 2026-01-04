@@ -37,6 +37,7 @@ namespace WebApplication1.Models
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         public string Image { get; set; } = "";
 
         public List<ProductImage> Images { get; set; } = new List<ProductImage>();
@@ -45,11 +46,16 @@ namespace WebApplication1.Models
 =======
 =======
 >>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
+=======
+>>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
         // Navigation
         public List<Specification> Specifications { get; set; } = new();
         public List<Reviews> Reviews { get; set; } = new();
         public List<ProductVariant> ProductVariants { get; set; } = new();
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
+=======
 >>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
 =======
 >>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
