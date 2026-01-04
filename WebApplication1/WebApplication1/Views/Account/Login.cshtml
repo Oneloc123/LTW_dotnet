@@ -1,28 +1,384 @@
-﻿
-@model WebApplication1.Models.UserLoginModel
+﻿@model LoginViewModel
 @{
-    ViewBag.Title = "Đăng nhập";
+    ViewData["Title"] = "Đăng nhập";
+    Layout = "~/Views/Shared/_LayoutForLogin.cshtml";
 }
 
-<h2>Đăng nhập</h2>
-
-@using (Html.BeginForm())
-{
-    <div>
-        @Html.LabelFor(m => m.Username)
-        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Username)
+<div class="registration-container">
+    <div class="registration-header">
+        <h2 class="registration-title">Đăng nhập</h2>
+        <p class="registration-subtitle">Đăng nhập để tiếp tục sử dụng hệ thống</p>
     </div>
 
-    <div>
-        @Html.LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Password)
-    </div>
+    <form asp-action="Login" asp-controller="Account" method="post" class="registration-form">
+        @Html.AntiForgeryToken()
 
-    <br />
+        <div class="registration-body">
+            <!-- Validation summary -->
+            <div class="validation-summary" asp-validation-summary="ModelOnly"></div>
+            <!-- Username / Email -->
+            <div class="form-group">
+                <label asp-for="UsernameOrEmail" class="form-label"></label>
+                <div class="input-group">
+                    <span class="input-group-icon">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <input asp-for="UsernameOrEmail"
+                           class="form-control"
+                           placeholder="Tên đăng nhập hoặc Email"
+                           autocomplete="username" />
+                </div>
+                <span asp-validation-for="UsernameOrEmail" class="validation-message"></span>
+            </div>
 
-    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+            <!-- Password -->
+            <div class="form-group">
+                <label asp-for="Password" class="form-label"></label>
+                <div class="input-group">
+                    <span class="input-group-icon">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                    <input asp-for="Password"
+                           type="password"
+                           class="form-control"
+                           placeholder="Nhập mật khẩu"
+                           autocomplete="current-password"
+                           id="password" />
+                    <button type="button" class="password-toggle" id="togglePassword">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <span asp-validation-for="Password" class="validation-message"></span>
+            </div>
 
-    @Html.ValidationSummary()
+            <!-- Remember me -->
+            <div class="form-group terms-group">
+                <div class="checkbox-wrapper">
+                    <input asp-for="RememberMe" />
+                    <label asp-for="RememberMe" class="terms-label">
+                        Ghi nhớ đăng nhập
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-submit">
+                    <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                </button>
+            </div>
+
+            <!-- Links -->
+            <div class="login-link">
+                Chưa có tài khoản?
+                <a asp-action="Register" asp-controller="Account" class="login-link-text">
+                    Đăng ký ngay
+                </a>
+                <br />
+                <a asp-action="ForgotPassword" asp-controller="Account" class="login-link-text">
+                    Quên mật khẩu?
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+<style>
+    /* Base Styles */
+    .registration-container {
+        max-width: 500px;
+        margin: 40px auto;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .registration-header {
+        background: linear-gradient(135deg, #4f6df5 0%, #3a56d5 100%);
+        color: white;
+        padding: 30px 40px;
+        text-align: center;
+    }
+
+    .registration-title {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .registration-subtitle {
+        margin: 10px 0 0;
+        opacity: 0.9;
+        font-size: 16px;
+    }
+
+    .registration-body {
+        padding: 40px;
+    }
+
+    /* Form Group */
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+        font-size: 15px;
+    }
+
+    /* Input Groups */
+    .input-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-group-icon {
+        position: absolute;
+        left: 15px;
+        color: #6c757d;
+        z-index: 10;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 14px 14px 14px 45px;
+        font-size: 16px;
+        border: 2px solid #e1e5e9;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        background-color: #f8f9fa;
+    }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #4f6df5;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(79, 109, 245, 0.2);
+        }
+
+        .form-control::placeholder {
+            color: #aaa;
+        }
+
+    /* Password Toggle */
+    .password-toggle {
+        position: absolute;
+        right: 15px;
+        background: transparent;
+        border: none;
+        color: #6c757d;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 0;
+    }
+
+        .password-toggle:hover {
+            color: #4f6df5;
+        }
+
+    /* Form Hints */
+    .form-hint {
+        font-size: 13px;
+        color: #6c757d;
+        margin-top: 6px;
+    }
+
+    /* Password Strength */
+    .password-strength {
+        margin-top: 12px;
+    }
+
+    .strength-label {
+        font-size: 13px;
+        color: #6c757d;
+        margin-bottom: 5px;
+    }
+
+    .strength-meter {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 5px;
+    }
+
+    .strength-segment {
+        flex: 1;
+        height: 4px;
+        background-color: #e1e5e9;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    .strength-text {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    /* Terms and Conditions */
+    .terms-group {
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        margin-top: 30px;
+    }
+
+    .checkbox-wrapper {
+        display: flex;
+        align-items: flex-start;
+    }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            margin-top: 4px;
+            margin-right: 10px;
+            accent-color: #4f6df5;
+            transform: scale(1.2);
+        }
+
+    .terms-label {
+        font-size: 15px;
+        color: #333;
+        line-height: 1.5;
+    }
+
+    .terms-link {
+        color: #4f6df5;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .terms-link:hover {
+            text-decoration: underline;
+        }
+
+    /* Submit Button */
+    .btn-submit {
+        width: 100%;
+        padding: 16px;
+        font-size: 18px;
+        font-weight: 600;
+        background: linear-gradient(135deg, #4f6df5 0%, #3a56d5 100%);
+        border: none;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #3a56d5 0%, #2a46c5 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 109, 245, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+    /* Login Link */
+    .login-link {
+        text-align: center;
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid #e1e5e9;
+        color: #6c757d;
+        font-size: 15px;
+    }
+
+    .login-link-text {
+        color: #4f6df5;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+        .login-link-text:hover {
+            text-decoration: underline;
+        }
+
+    /* Validation Messages */
+    .validation-message {
+        color: #dc3545;
+        font-size: 14px;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .validation-summary {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #f8d7da;
+        border-radius: 8px;
+        border-left: 4px solid #dc3545;
+        color: #721c24;
+    }
+
+        .validation-summary ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .validation-summary li {
+            margin-bottom: 5px;
+        }
+
+    /* Responsive Design */
+    /* media (max-width: 576px) {
+                .registration-container
+
+            {
+                margin: 20px;
+                border-radius: 10px;
+            }
+
+            .registration-header {
+                padding: 25px 20px;
+            }
+
+            .registration-body {
+                padding: 25px;
+            }
+
+            .registration-title {
+                font-size: 24px;
+            }
+
+            .btn-submit {
+                padding: 14px;
+                font-size: 16px;
+            }
+
+            } */
+</style>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', function () {
+                    const type = passwordInput.type === 'password' ? 'text' : 'password';
+                    passwordInput.type = type;
+                    this.innerHTML = type === 'password'
+                        ? '<i class="fas fa-eye"></i>'
+                        : '<i class="fas fa-eye-slash"></i>';
+                });
+            }
+        });
+    </script>
 }

@@ -7,11 +7,19 @@ namespace WebApplication1.Models
     public class Specification
     {
         [Key]
+        [Column("id")]
         public int Id { get; set; }
 
-        public string SpecName { get; set; } = "";  
-        public string SpecValue { get; set; } = "";
+        [Column("spec_name")]
+        public string SpecName { get; set; } = "";  // Ví dụ: "RAM"
 
+        [Column("spec_value")]
+        public string SpecValue { get; set; } = ""; // Ví dụ: "8GB"
+
+        [Column("product_id")]
         public int ProductId { get; set; }
+
+        [ForeignKey("ProductId")]
+        public Product Product { get; set; } // Quan hệ navigation
     }
 }

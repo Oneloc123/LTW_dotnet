@@ -126,9 +126,17 @@
 
 <div class="product-detail-container">
 
+<<<<<<< HEAD
     <div class="top-section">
         <div class="img-main-box">
             <img src="@Model.Images" alt="@Model.Name" />
+=======
+    <a href="/Product" style="color: #666; text-decoration: none; margin-bottom: 10px; display: block;">&larr; Trở lại danh sách</a>
+
+    <div class="detail-wrapper">
+        <div class="detail-left">
+            @* <img src="@Model.Images.FirstOrDefault()?.ImageUrl" alt="@Model.Name" /> *@
+>>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
         </div>
 
         <div class="info-box">
@@ -143,9 +151,18 @@
                 <strong>Tình trạng:</strong> @(Model.Stock > 0 ? "Còn hàng" : "Hết hàng")
             </p>
 
+<<<<<<< HEAD
             <a href="/Cart/AddToCart/@Model.Id" class="btn-add-cart">
                 <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
             </a>
+=======
+            <div style="margin-bottom: 20px;">
+                <p>Thương hiệu: <strong style="color: #00bfa5">@Model.Brand</strong></p>
+                @* <p>Kho hàng: @Model.Stock sản phẩm</p> *@
+            </div>
+
+            <button class="btn-buy">THÊM VÀO GIỎ HÀNG</button>
+>>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
         </div>
     </div>
 
