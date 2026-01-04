@@ -36,16 +36,22 @@ namespace WebApplication1.Models
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         public string Image { get; set; } = "";
 
         public List<ProductImage> Images { get; set; } = new List<ProductImage>();
         public List<Specification> Specifications { get; set; } = new List<Specification>();
         public List<Reviews> Reviews { get; set; } = new List<Reviews>();
 =======
+=======
+>>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
         // Navigation
         public List<Specification> Specifications { get; set; } = new();
         public List<Reviews> Reviews { get; set; } = new();
         public List<ProductVariant> ProductVariants { get; set; } = new();
+<<<<<<< HEAD
+>>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
+=======
 >>>>>>> 16b8ce6228f999353b3fe3e5712299214bb452a7
     }
 }
