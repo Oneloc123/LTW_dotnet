@@ -10,6 +10,9 @@
         public string Brand { get; set; } = "";
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+        public string Image { get; set; } = "";
+
         public List<ProductImage> Images { get; set; } = new List<ProductImage>();
         public List<Specification> Specifications { get; set; } = new List<Specification>();
         public List<Reviews> Reviews { get; set; } = new List<Reviews>();

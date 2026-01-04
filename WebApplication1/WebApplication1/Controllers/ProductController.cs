@@ -1,23 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 
-namespace WebApplication1.Controllers { 
+namespace WebApplication1.Controllers
+{
     public class ProductController : Controller
     {
-    public IActionResult Index()
-    {
-        var products = ProductData.getAll(); 
-        return View(products);
+
+        string connectionString = "server=localhost;port=3306;database=netdb;user=root;password=1111";
+
+        public IActionResult Index(string search = "", string brand = "") 
+        {
+           
+            var products = ProductData.GetProducts(connectionString, search, brand);
+
+           
+            ViewBag.SearchKeyword = search;
+            ViewBag.CurrentBrand = brand;
+
+            return View(products);
+        }
+
+        public IActionResult Detail(int id)
+        {
+       
+            var product = ProductData.GetProductById(id, connectionString);
+
+            if (product == null)
+                return NotFound();
+
+            return View(product);
+        }
     }
-
-    public IActionResult Detail(int id)
-    {
-        var product = ProductData.getIdProduct(id);
-
-        if (product == null)
-            return NotFound();
-
-        return View(product);
-    }
-}}
-
+}
