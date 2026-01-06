@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.User
+﻿@model WebApplication1.Models.UserEdit.ProfileEditViewModel
 @{
     ViewData["Title"] = "Chỉnh sửa hồ sơ";
 }
@@ -13,10 +13,24 @@
                 </div>
 
                 <div class="card-body">
-                    <form asp-action="Edit" method="post">
+                    <form asp-action="Edit"
+                          method="post"
+                          enctype="multipart/form-data">
                         @Html.AntiForgeryToken()
 
-                        <input type="hidden" asp-for="Id" />
+                        <!-- Avatar -->
+                        <div>
+                            <img src="@Model.CurrentAvatarUrl"
+                                 style="width:120px;height:120px;border-radius:50%;object-fit:cover" />
+                        </div>
+
+                        <div>
+                            <label>Ảnh đại diện</label>
+                            <input asp-for="AvatarFile" type="file" accept="image/*" />
+                        </div>
+
+                        <hr />
+
 
                         <div class="mb-3">
                             <label class="form-label">Họ và tên</label>
@@ -26,6 +40,11 @@
                         <div class="mb-3">
                             <label class="form-label">Số điện thoại</label>
                             <input asp-for="PhoneNumber" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Địa chỉ</label>
+                            <input asp-for="FullAddress" class="form-control" />
                         </div>
 
                         <div class="mb-3">

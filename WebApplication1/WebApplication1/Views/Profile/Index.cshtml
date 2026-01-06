@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.User
+﻿@model WebApplication1.Models.UserEdit.ProfileEditViewModel
 @{
     ViewData["Title"] = "Hồ sơ cá nhân";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,11 +13,14 @@
                 <div class="card-body">
 
                     <!-- Avatar -->
-                    <img src="https://via.placeholder.com/150"
-                         class="rounded-circle mb-3"
-                         alt="Avatar"
-                         width="150"
-                         height="150" />
+                    <div class="profile-avatar">
+                        <img src="@(string.IsNullOrEmpty(Model.CurrentAvatarUrl)
+                                     ? "/images/default-avatar.png"
+                                     : Model.CurrentAvatarUrl)"
+                             alt="Avatar"
+                             style="width:120px;height:120px;border-radius:50%;object-fit:cover" />
+                    </div>
+
 
                     <h5 class="card-title">@Model.FullName</h5>
                     <p class="text-muted">@Model.Email</p>
@@ -55,6 +58,12 @@
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">Số điện thoại</div>
                         <div class="col-sm-8">@Model.PhoneNumber</div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Địa chỉ</div>
+                        <div class="col-sm-8">@Model.FullAddress</div>
                     </div>
 
                     <div class="row mb-3">

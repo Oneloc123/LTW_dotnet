@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebApplication1.Models.OrderEdit.Order;
+using WebApplication1.Models.User.User;
+using WebApplication1.Models.UserEdit;
 
 
-namespace WebApplication1.Models
+namespace WebApplication1.Models.UserEdit
 {
     public class AppDbContext : DbContext
     {
@@ -45,6 +48,8 @@ namespace WebApplication1.Models
         public DbSet<Specification> Specifications { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
         public DbSet<User> Users { get; set; }
+
+        public DbSet<UserAddress> UserAddresses { get; set; }
 
         // ===== Thêm DbSet cho các entity  order =====
         public DbSet<Order> Orders { get; set; }
