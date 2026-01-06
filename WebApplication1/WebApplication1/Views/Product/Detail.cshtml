@@ -1,323 +1,282 @@
 ﻿@model WebApplication1.Models.Product
+@using WebApplication1.Models
 
 @{
-    ViewData["Title"] =  Model.Name;
+    ViewData["Title"] = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Đã bổ sung Layout
+
+    // XỬ LÝ LỖI LAMBDA EXPRESSION:
+    // Tách logic xử lý chuỗi ra khỏi HTML để tránh lỗi Runtime
+    string moTaHienThi = "Đang cập nhật...";
+    if (!string.IsNullOrEmpty(Model.Description))
+    {
+        moTaHienThi = Model.Description.Replace("\n", "<br>");
+    }
 }
 
 <style>
-    /* --- KHUNG THÔNG TIN TRÊN  --- */
-    .detail-wrapper {
-        display: flex;
-        gap: 30px;
+    /* CSS giữ nguyên như cũ */
+    .product-detail-container {
+        background-color: #fff;
+        max-width: 1200px;
+        margin: 20px auto;
         padding: 20px;
-        background: white;
-        margin-bottom: 20px;
+        border-radius: 4px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
 
-    .detail-left {
+    .top-section {
+        display: flex;
+        gap: 30px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+
+    .img-main-box {
         flex: 0 0 40%;
-        border: 1px solid #eee;
-        padding: 10px;
         text-align: center;
     }
 
-        .detail-left img {
-            max-width: 100%;
+        .img-main-box img {
+            width: 100%;
+            max-width: 400px;
             height: auto;
+            object-fit: contain;
         }
 
-    .detail-right {
+    .info-box {
         flex: 1;
     }
 
-    .d-name {
+    .product-name {
         font-size: 24px;
-        font-weight: 500;
+        font-weight: 700;
+        color: #333;
         margin-bottom: 10px;
     }
 
-    .d-price {
-        color: #d0011b;
-        font-size: 30px;
+    .product-price {
+        font-size: 28px;
         font-weight: bold;
-        background: #fafafa;
-        padding: 15px;
+        color: #d70018;
         margin-bottom: 20px;
     }
 
-    .btn-buy {
-        background: #d0011b;
+    .btn-add-cart {
+        display: inline-block;
+        background-color: #d70018;
         color: white;
-        border: none;
-        padding: 12px 40px;
+        padding: 15px 40px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        text-transform: uppercase;
         font-size: 16px;
+        transition: 0.3s;
+        border: none;
         cursor: pointer;
-        border-radius: 2px;
+        width: 100%;
     }
 
-        .btn-buy:hover {
-            opacity: 0.9;
+        .btn-add-cart:hover {
+            background-color: #c00015;
+            color: white;
         }
 
-    /* --- PHẦN TABS BÊN DƯỚI (GIỐNG SHOPEE) --- */
-    .product-tabs {
-        background: white;
-        margin-top: 20px;
-        box-shadow: 0 1px 1px 0 rgba(0,0,0,.05);
-    }
-
-    /* Thanh tiêu đề Tab */
-    .tab-header {
+    .content-section {
         display: flex;
-        border-bottom: 1px solid #e0e0e0;
-        background: #fafafa;
+        gap: 30px;
     }
 
-    .tab-btn {
-        padding: 15px 30px;
-        cursor: pointer;
-        font-size: 16px;
-        color: #666;
-        background: none;
-        border: none;
-        border-bottom: 2px solid transparent; /* Đường gạch chân ẩn */
-        transition: all 0.3s;
+    .left-content {
+        flex: 0 0 65%;
     }
 
-        .tab-btn:hover {
-            color: #d0011b;
-        }
-
-        /* Nút đang được chọn */
-        .tab-btn.active {
-            color: #d0011b;
-            border-bottom: 2px solid #d0011b; /* Gạch chân đỏ */
-            background: white;
-        }
-
-    /* Nội dung của từng Tab */
-    .tab-content {
-        display: none; /* Mặc định ẩn hết */
-        padding: 30px;
-        line-height: 1.8;
-        color: #333;
+    .right-content {
+        flex: 1;
     }
 
-        .tab-content.active {
-            display: block; /* Chỉ hiện cái đang chọn */
-        }
+    .section-header {
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #f0f0f0;
+    }
 
-    /* --- BẢNG THÔNG SỐ KỸ THUẬT --- */
-    .spec-table {
+    .specs-table {
         width: 100%;
         border-collapse: collapse;
-        max-width: 600px;
+        font-size: 14px;
     }
 
-        .spec-table td {
+        .specs-table td {
             padding: 10px;
-            border-bottom: 1px solid #f1f1f1;
+            border: 1px solid #eee;
         }
 
-    .spec-label {
-        color: #999;
-        width: 150px;
-    }
+        .specs-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
 
-    /* --- PHẦN ĐÁNH GIÁ (REVIEWS) --- */
     .review-item {
         border-bottom: 1px solid #eee;
         padding: 15px 0;
-        display: flex;
-        gap: 15px;
     }
 
-    .user-avatar {
-        width: 40px;
-        height: 40px;
-        background: #ddd;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .review-user {
         font-weight: bold;
-        color: #555;
+        margin-bottom: 5px;
     }
-
-    .star-rating {
-        color: #ffce3d;
-    }
-    /* Màu vàng của sao */
-    .review-date {
-        color: #999;
-        font-size: 12px;
-    }
-
-    /* Form viết đánh giá */
-    .review-form {
-        margin-top: 30px;
-        background: #f9f9f9;
-        padding: 20px;
-    }
-
-        .review-form textarea {
-            width: 100%;
-            height: 80px;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-        }
 </style>
 
-<div class="container" style="max-width: 1200px; margin: 20px auto;">
+<div class="product-detail-container">
 
-    <a href="/Product" style="color: #666; text-decoration: none; margin-bottom: 10px; display: block;">&larr; Trở lại danh sách</a>
-
-    <div class="detail-wrapper">
-        <div class="detail-left">
-            @* <img src="@Model.Images.FirstOrDefault()?.ImageUrl" alt="@Model.Name" /> *@
+    <div class="top-section">
+        <div class="img-main-box">
+            <img src="@(string.IsNullOrEmpty(Model.MainImageUrl) ? "https://placehold.co/400" : Model.MainImageUrl)" alt="@Model.Name" />
         </div>
-        <div class="detail-right">
-            <h1 class="d-name">@Model.Name</h1>
 
-            <div style="margin-bottom: 15px;">
-                <span class="star-rating">
-                    @for (int i = 1; i <= 5; i++)
-                    {
-                        if (i <= Math.Round(Model.Price))
-                        {
-                            <span>&#9733;</span>
-                        } 
-                        else
-                        {
+        <div class="info-box">
+            <h1 class="product-name">@Model.Name</h1>
 
-                            <span style="color:#ddd;">&#9733;</span>
-                        } 
-                    }
-                </span>
-
-                <span style="color: #666; font-size: 14px; margin-left: 10px;">(@Model.Reviews.Count đánh giá) | Đã bán: 120</span>
+            <div class="product-price">
+                @Model.Price.ToString("#,##0")₫
             </div>
 
-            <div class="d-price">@Model.Price.ToString("#,##0") ₫</div>
+            <p style="margin-bottom: 20px;">
+                <strong>Thương hiệu:</strong> @Model.Brand <br>
+                <strong>Tình trạng:</strong> <span style="color:green; font-weight:bold;">Còn hàng</span>
+            </p>
 
-            <div style="margin-bottom: 20px;">
-                <p>Thương hiệu: <strong style="color: #00bfa5">@Model.Brand</strong></p>
-                @* <p>Kho hàng: @Model.Stock sản phẩm</p> *@
-            </div>
+            <form method="post" action="/Cart/AddToCart" style="margin-top: 20px;">
+                <input type="hidden" name="id" value="@Model.Id" />
 
-            <button class="btn-buy">THÊM VÀO GIỎ HÀNG</button>
+                <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                    <label style="font-weight: bold;">Số lượng:</label>
+                    <input type="number" name="quantity" value="1" min="1" max="100"
+                           style="width: 60px; padding: 5px; text-align: center; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+
+                <button type="submit" class="btn-add-cart">
+                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
+                </button>
+            </form>
         </div>
     </div>
 
+    <div class="content-section">
 
-    <div class="product-tabs">
-        <div class="tab-header">
-            <button class="tab-btn active" onclick="openTab(event, 'tab-desc')">MÔ TẢ SẢN PHẨM</button>
-            <button class="tab-btn" onclick="openTab(event, 'tab-spec')">THÔNG SỐ KỸ THUẬT</button>
-            <button class="tab-btn" onclick="openTab(event, 'tab-review')">ĐÁNH GIÁ (@Model.Reviews.Count)</button>
+        <div class="left-content">
+
+            <div style="margin-bottom: 40px;">
+                <h3 class="section-header" style="color: #d70018;">Đặc điểm nổi bật</h3>
+                <div style="line-height: 1.6; text-align: justify;">
+                    @Html.Raw(moTaHienThi)
+                </div>
+            </div>
+
+            <!--Reviews -->
+            <div>
+                <h3 class="section-header">Đánh giá & Nhận xét</h3>
+
+                <div style="margin-bottom: 30px; background: #fafafa; padding: 20px; border-radius: 8px; border: 1px dashed #ccc;">
+
+                    <h4 style="margin-top: 0;">Viết đánh giá của bạn</h4>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <p style="font-size: 13px; color: green;">
+                            <i class="fa-solid fa-user-check"></i> Bạn đang viết dưới tên: <strong>@User.Identity.Name</strong>
+                        </p>
+                    }
+                    else
+                    {
+                        <p style="font-size: 13px; color: #666;">
+                            <i class="fa-solid fa-user-secret"></i> Bạn đang viết ẩn danh (Guest)
+                        </p>
+                    }
+
+                    <form method="post" action="/Product/AddReview">
+                        <input type="hidden" name="productId" value="@Model.Id" />
+
+                        <div style="margin-bottom: 15px;">
+                            <label style="font-weight: bold;">Đánh giá:</label>
+                            <select name="rating" style="padding: 5px; border-radius: 4px;">
+                                <option value="5">5 Sao (Tuyệt vời)</option>
+                                <option value="4">4 Sao (Tốt)</option>
+                                <option value="3">3 Sao (Bình thường)</option>
+                                <option value="2">2 Sao (Tệ)</option>
+                                <option value="1">1 Sao (Rất tệ)</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <textarea name="comment" rows="3" placeholder="Sản phẩm dùng thế nào?..." required
+                                      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-add-cart" style="width: auto; padding: 10px 30px; font-size: 14px;">
+                            Gửi đánh giá
+                        </button>
+                    </form>
+                </div>
+
+                @if (Model.Reviews != null && Model.Reviews.Any())
+                {
+                    <div style="border: 1px solid #eee; padding: 15px; border-radius: 8px;">
+                        @foreach (var review in Model.Reviews)
+                        {
+                            if (review != null)
+                            {
+                                <div class="review-item">
+                                    <div class="review-user">
+                                        @(review.GetType().GetProperty("UserName")?.GetValue(review, null) ?? "Khách hàng")
+
+                                        <span style="color: #ffbf00; margin-left: 10px;">
+                                            @(review.GetType().GetProperty("Rating")?.GetValue(review, null) ?? 5)
+                                            <i class="fa-solid fa-star"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        @(review.GetType().GetProperty("Comment")?.GetValue(review, null))
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p style="color: #777; font-style: italic;">Chưa có đánh giá nào cho sản phẩm này.</p>
+                }
+            </div>
         </div>
 
-
-        <div id="tab-desc" class="tab-content active">
-            <h3>Chi tiết sản phẩm</h3>
-            <p style="white-space: pre-line;">@Model.Description</p>
-
-            <p style="margin-top: 20px; color: #888; font-style: italic;">
-                Sản phẩm được bảo hành chính hãng 12 tháng. Cam kết đổi trả trong vòng 7 ngày nếu có lỗi từ nhà sản xuất.
-            </p>
-        </div>
-
-        <div id="tab-spec" class="tab-content">
-            <h3>Thông số kỹ thuật</h3>
-            @if (Model.Specifications.Any())
+        <div class="right-content">
+            <h3 class="section-header">Thông số kỹ thuật</h3>
+            @if (Model.Specifications != null && Model.Specifications.Count > 0)
             {
-                <table class="spec-table">
+                <table class="specs-table">
                     @foreach (var spec in Model.Specifications)
                     {
-                        <tr>
-                            <td class="spec-label">@spec.SpecName</td>
-                            <td>@spec.SpecValue</td>
-                        </tr>
+                        var s = spec as WebApplication1.Models.Specification;
+                        if (s != null)
+                        {
+                            <tr>
+                                <td style="width: 140px; font-weight: 600; color: #666;">@s.SpecName</td>
+                                <td>@s.SpecValue</td>
+                            </tr>
+                        }
                     }
                 </table>
             }
             else
             {
-                <p>Chưa có thông số chi tiết cho sản phẩm này.</p>
+                <p>Đang cập nhật thông số...</p>
             }
-        </div>
-
-        <div id="tab-review" class="tab-content">
-            <h3>Đánh giá từ khách hàng</h3>
-
-            @if (Model.Reviews.Any())
-            {
-                foreach (var review in Model.Reviews)
-                {
-                    <div class="review-item">
-                        <div class="user-avatar">@review.UserName.Substring(0, 1)</div>
-
-                        <div>
-                            <div style="font-size: 14px;">@review.UserName</div>
-                            <div class="star-rating" style="font-size: 12px;">
-                                @for (int i = 1; i <= 5; i++)
-                                {
-                                    if (i <= review.Rating)
-                                    {
-                                        <span>&#9733;</span>
-                                    }
-                                    else
-                                    {
-
-                                        <span style="color:#ddd;">&#9733;</span>
-                                    }
-                                }
-                            </div>
-                            <div style="margin-top: 5px;">@review.Comment</div>
-                            <div class="review-date">@review.CreatedAt.ToString("dd/MM/yyyy HH:mm")</div>
-                        </div>
-                    </div>
-                }
-            }
-            else
-            {
-                <p style="color: #666;">Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá sản phẩm này!</p>
-            }
-
-            <div class="review-form">
-                <h4>Gửi đánh giá của bạn</h4>
-                <form>
-                    <label>Chọn mức độ hài lòng:</label>
-                    <select style="padding: 5px;">
-                        <option value="5">Tuyệt vời (5 sao)</option>
-                        <option value="4">Hài lòng (4 sao)</option>
-                        <option value="3">Bình thường (3 sao)</option>
-                        <option value="3">Tệ (3 sao)</option>
-                        <option value="3">Rất tệ(3 sao)</option>
-                        
-                    </select>
-
-                    <textarea placeholder="Chia sẻ cảm nhận của bạn về sản phẩm..."></textarea>
-
-                    <button type="button" class="btn-buy" style="padding: 10px 20px; font-size: 14px;">Gửi Đánh Giá</button>
-                </form>
-            </div>
         </div>
     </div>
 </div>
-<script>
-    function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-</script>
