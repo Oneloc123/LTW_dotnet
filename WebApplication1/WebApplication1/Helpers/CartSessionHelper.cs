@@ -30,5 +30,16 @@ namespace WebApplication1.Helpers
         {
             httpContext.Session.Remove(CART_KEY);
         }
+
+        public static void RemoveCart(HttpContext httpContext)
+        {
+            httpContext.Session.Remove(CART_KEY);
+        }
+
+        public static int GetTotalQuantity(HttpContext httpContext)
+        {
+            var cart = GetCart(httpContext);
+            return cart.TotalQuantity;
+        }
     }
 }

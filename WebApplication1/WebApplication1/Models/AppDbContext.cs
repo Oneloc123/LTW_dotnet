@@ -45,5 +45,10 @@ namespace WebApplication1.Models
         public DbSet<Specification> Specifications { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
         public DbSet<User> Users { get; set; }
+
+        // ===== Thêm DbSet cho các entity  order =====
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
     }
 }
