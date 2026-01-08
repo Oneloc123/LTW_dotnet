@@ -30,14 +30,14 @@
                             <input type="checkbox" class="cart__checkbox" id="selectAll" />
                             <span>Chọn tất cả (<span id="countSelected">0</span>)</span>
                         </label>
-
-                        <i class="fa-regular fa-trash-can cart__delete-all cart__delete-all--disable"></i>
+                        <!-- cart__delete-all--disable-->
+                        <i class="fa-regular fa-trash-can cart__delete-all"></i>
                     </div>
 
                     <div class="cart__list">
                         @foreach (var item in Model.Items)
                         {
-                            <article class="cart-item">
+                            <article class="cart-item" data-variant-id="@item.VariantId">
                                 <input type="checkbox" class="cart-item__checkbox" />
 
                                 <a href="#!">
@@ -83,8 +83,8 @@
                                         <span class="cart-item__price-old">@item.Price.ToString("N0")đ</span>
                                     }
                                 </div>
-
-                                <div class="cart-item__quantity .cart-item__quantity--disable">
+                                <!-- cart-item__quantity--disable-->
+                                <div class="cart-item__quantity">
                                     <button class="cart-item__btn cart-item__btn--minus">-</button>
                                     <span class="cart-item__quantity-value">@item.Quantity</span>
                                     <button class="cart-item__btn cart-item__btn--plus">+</button>
@@ -157,3 +157,73 @@
     </div>
 </div>
 
+<script>
+    const selectAll = document.getElementById("selectAll");
+    const deleteAllBtn = document.querySelector(".cart__delete-all");
+
+    selectAll.addEventListener("change", () => {
+        document.querySelectorAll(".cart-item__checkbox")
+            .forEach(cb => cb.checked = selectAll.checked);
+    });
+
+    document.querySelectorAll(".cart-item__delete").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const item = btn.closest(".cart-item");
+            const variantId = item.dataset.variantId;
+
+            fetch("/Cart/Remove", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `variantId=${variantId}`
+            }).then(() => location.reload());
+        });
+    });
+
+    deleteAllBtn.addEventListener("click", () => {
+        const ids = [];
+
+        document.querySelectorAll(".cart-item").forEach(item => {
+            if (item.querySelector(".cart-item__checkbox").checked) {
+                ids.push(parseInt(item.dataset.variantId));
+            }
+        });
+
+        if (ids.length === 0) return;
+
+        fetch("/Cart/RemoveSelected", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(ids)
+        }).then(() => location.reload());
+    });
+</script>
+
+<script>
+    document.querySelectorAll(".cart-item__btn--plus").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const item = btn.closest(".cart-item");
+            const variantId = item.dataset.variantId;
+
+            fetch("/Cart/Increase", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `variantId=${variantId}`
+            }).then(() => location.reload());
+        });
+    });
+</script>
+
+<script>
+    document.querySelectorAll(".cart-item__btn--minus").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const item = btn.closest(".cart-item");
+            const variantId = item.dataset.variantId;
+
+            fetch("/Cart/Decrease", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `variantId=${variantId}`
+            }).then(() => location.reload());
+        });
+    });
+</script>

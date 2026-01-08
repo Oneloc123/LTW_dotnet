@@ -17,6 +17,8 @@ namespace WebApplication1.Models
         {
             if (item == null || item.VariantId <= 0) return;
 
+            item.Quantity = Math.Max(item.Quantity, 1);
+
             if (ItemsDict.ContainsKey(item.VariantId))
                 ItemsDict[item.VariantId].Quantity += item.Quantity;
             else
@@ -36,10 +38,13 @@ namespace WebApplication1.Models
         {
             if (!IsValidVariant(variantId)) return;
 
-            ItemsDict[variantId].Quantity -= Math.Max(step, 1);
+            var item = ItemsDict[variantId];
+            item.Quantity -= Math.Max(step, 1);
 
-            if (ItemsDict[variantId].Quantity <= 0)
-                ItemsDict[variantId].Quantity = 1; // ép về 1
+            if (item.Quantity <= 0)
+            {
+                ItemsDict.Remove(variantId); // xóa luôn khỏi cart
+            }
         }
 
         // SET QUANTITY (INPUT TAY)
@@ -47,7 +52,11 @@ namespace WebApplication1.Models
         {
             if (!IsValidVariant(variantId)) return;
 
-            ItemsDict[variantId].Quantity = quantity <= 0 ? 1 : quantity;
+            //ItemsDict[variantId].Quantity = quantity <= 0 ? 1 : quantity;
+            if (quantity <= 0)
+                ItemsDict.Remove(variantId);
+            else
+                ItemsDict[variantId].Quantity = quantity;
         }
 
         // REMOVE
@@ -67,17 +76,11 @@ namespace WebApplication1.Models
         private bool IsValidVariant(int variantId)
             => variantId > 0 && ItemsDict.ContainsKey(variantId);
 
-        private void NormalizeQuantity(CartItem item)
-        {
-            if (item.Quantity <= 0)
-                item.Quantity = 1;
-        }
-
         // Update thuộc tính CartItem (ví dụ chỉ đổi màu)
-        public void ChangeColor(int variantId, string newColor)
-        {
-            if (!IsValidVariant(variantId)) return;
-            ItemsDict[variantId].Color = newColor;
-        }
+        //public void ChangeColor(int variantId, string newColor)
+        //{
+        //    if (!IsValidVariant(variantId)) return;
+        //    ItemsDict[variantId].Color = newColor;
+        //}
     }
 }

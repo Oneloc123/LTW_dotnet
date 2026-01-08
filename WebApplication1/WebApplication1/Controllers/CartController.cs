@@ -17,6 +17,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
+            Console.WriteLine("SESSION ID (Cart): " + HttpContext.Session.Id);
             var cart = CartSessionHelper.GetCart(HttpContext);
 
             if (!cart.Items.Any())
@@ -105,6 +106,25 @@ namespace WebApplication1.Controllers
             return Ok();
         }
 
+        /* Xóa nhiều cart item */
+        [HttpPost]
+        public IActionResult RemoveSelected([FromBody] List<int> variantIds)
+        {
+            var cart = CartSessionHelper.GetCart(HttpContext);
+
+            foreach (var id in variantIds)
+            {
+                cart.Remove(id);
+            }
+
+            CartSessionHelper.SaveCart(HttpContext, cart);
+            return Ok(new
+            {
+                totalQuantity = cart.TotalQuantity,
+                totalPrice = cart.TotalMoney
+            });
+        }
+
         /* post -> xóa hết sản phẩm trong cart */
         [HttpPost]
         public IActionResult Clear()
@@ -112,5 +132,21 @@ namespace WebApplication1.Controllers
             CartSessionHelper.Clear(HttpContext);
             return Ok();
         }
+
+        [HttpGet]
+        public IActionResult Offcanvas()
+        {
+            var cart = CartSessionHelper.GetCart(HttpContext);
+            return PartialView("~/Views/Shared/Components/CartOffcanvas/Default.cshtml", cart);
+        }
+
+        /* trả về tổng số lượng sản phẩm trong giỏ hàng => cập nhật số lượng trên đầu icon cart */
+        [HttpGet]
+        public IActionResult Count()
+        {
+            var cart = CartSessionHelper.GetCart(HttpContext);
+            return Json(new { totalQuantity = cart.TotalQuantity });
+        }
+
     }
 }

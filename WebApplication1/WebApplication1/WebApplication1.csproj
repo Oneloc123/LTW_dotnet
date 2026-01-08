@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewModels\**" />
     <Compile Remove="wwwroot\NewFolder\**" />
+    <Content Remove="ViewModels\**" />
     <Content Remove="wwwroot\NewFolder\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder\**" />
+    <None Remove="ViewModels\**" />
     <None Remove="wwwroot\NewFolder\**" />
   </ItemGroup>
 
@@ -21,9 +25,5 @@
   </PackageReference>
   <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0" />
 </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
 
 </Project>
