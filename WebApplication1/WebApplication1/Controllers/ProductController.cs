@@ -3,6 +3,7 @@ using WebApplication1.Models;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models.UserEdit;
 
+
 namespace WebApplication1.Controllers
 {
     public class ProductController : Controller
@@ -10,6 +11,7 @@ namespace WebApplication1.Controllers
         private readonly AppDbContext _context;
 
         public ProductController(AppDbContext context)
+
         {
             _context = context;
         }
