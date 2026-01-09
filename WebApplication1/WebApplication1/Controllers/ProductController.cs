@@ -1,14 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.Models.UserEdit;
+
 
 namespace WebApplication1.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly WebApplication1.Models.AppDbContext _context;
+        private readonly AppDbContext _context;
 
-        public ProductController(WebApplication1.Models.AppDbContext context)
+        public ProductController(AppDbContext context)
+
         {
             _context = context;
         }

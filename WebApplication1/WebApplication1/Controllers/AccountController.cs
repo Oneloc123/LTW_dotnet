@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
 using WebApplication1.Helpers;
+using WebApplication1.Models.UserEdit;
 namespace WebApplication1.Controllers
 {
     public class AccountController : Controller
@@ -101,6 +102,8 @@ namespace WebApplication1.Controllers
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("Username", user.Username);
             HttpContext.Session.SetString("Role", user.Role);
+            HttpContext.Session.SetString("avatar", user.AvatarUrl);
+
 
             // Remember me (basic)
             if (model.RememberMe)
@@ -182,7 +185,7 @@ namespace WebApplication1.Controllers
                 EmailConfirmed = false,
 
                 CreatedAt = DateTime.Now,
-                AvatarUrl = "/images/default-avatar.png",
+                AvatarUrl = "/uploads/avatars/default-avatar.png",
                 FullName = "",
                 PhoneNumber = "",
                 Gender = 0
@@ -200,5 +203,7 @@ namespace WebApplication1.Controllers
         }
 
     }
+    
+
 }
 

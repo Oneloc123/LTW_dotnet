@@ -1,0 +1,128 @@
+﻿@using WebApplication1.Models.BlogEdit
+@model Blog
+
+
+<div class="container mt-4">
+
+    <h2>@Model.Title</h2>
+
+    <p class="text-muted">
+        ✍️ Tác giả:
+        <strong>@Model.User?.FullName</strong>
+        |
+        📅 @Model.CreatedAt.ToString("dd/MM/yyyy")
+        |
+        👁 @Model.ViewCount lượt xem
+    </p>
+
+    <hr />
+
+    <!-- 📄 CONTENT -->
+    <div class="blog-content mb-4">
+        @Html.Raw(Model.Content)
+    </div>
+
+    <!-- ⭐ RATE -->
+    <form asp-action="Rate" method="post" class="mb-4">
+        <input type="hidden" name="blogId" value="@Model.Id" />
+        <select name="rating" class="form-select w-25 d-inline">
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+        </select>
+        <button class="btn btn-warning">Đánh giá</button>
+    </form>
+
+    <!-- 💬 COMMENTS -->
+
+
+
+    <h5>Bình luận</h5>
+
+    @foreach (var c in Model.Comments.OrderByDescending(x => x.CreatedAt))
+    {
+        <div class="comment-item border rounded p-3 mb-3"
+             id="comment-@c.Id">
+
+            <!-- HEADER: AVATAR + NAME + TIME -->
+            <div class="d-flex align-items-center mb-2">
+
+                <!-- Avatar -->
+                <img src="@(string.IsNullOrEmpty(c.User?.AvatarUrl)
+                                         ? "/uploads/avtars/default-avatar.png"
+                                         : c.User.AvatarUrl)"
+                     alt="Avatar"
+                     class="rounded-circle me-2"
+                     style="width:40px;height:40px;object-fit:cover" />
+
+                <!-- Name + time -->
+                <div class="flex-grow-1">
+                    <strong>@c.User?.FullName</strong>
+                    <div class="text-muted small">
+                        @c.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                    </div>
+                </div>
+
+                <!-- Dropdown (option) -->
+                <div class="dropdown">
+                    <a class="text-muted"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            @if (c.UserId == Context.Session.GetInt32("UserId"))
+                            {
+                                <button class="btn btn-sm btn-link text-danger p-0 ms-2"
+                                        onclick="deleteComment(@c.Id)">
+                                    <i class="fas fa-trash"></i> Xóa
+                                </button>
+                            }
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CONTENT -->
+            <p class="mb-0">@c.Content</p>
+
+        </div>
+
+    }
+
+
+    <!-- ✍️ ADD COMMENT -->
+    <form asp-action="AddComment" method="post">
+        <input type="hidden" name="blogId" value="@Model.Id" />
+        <textarea name="content" class="form-control mb-2"
+                  placeholder="Viết bình luận..."></textarea>
+        <button class="btn btn-primary">Gửi</button>
+    </form>
+
+</div>
+<script>
+    function deleteComment(commentId) {
+        if (!confirm("Bạn có chắc muốn xóa comment này?")) return;
+
+        fetch('/Blog/DeleteComment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'id=' + commentId
+        })
+        .then(res => {
+            if (res.ok) {
+                document.getElementById('comment-' + commentId).remove();
+            } else {
+                alert('Không thể xóa comment');
+            }
+        });
+    }
+</script>
