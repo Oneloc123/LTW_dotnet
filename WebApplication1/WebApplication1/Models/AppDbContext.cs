@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebApplication1.Models.BlogEdit;
 using WebApplication1.Models.OrderEdit.Order;
 using WebApplication1.Models.User.User;
 using WebApplication1.Models.UserEdit;
@@ -50,6 +51,12 @@ namespace WebApplication1.Models.UserEdit
         public DbSet<User> Users { get; set; }
 
         public DbSet<UserAddress> UserAddresses { get; set; }
+
+        public DbSet<Blog> Blogs { get; set; }
+
+        public DbSet<BlogComment> BlogComments { get; set; }
+
+        public DbSet<BlogRating> BlogRatings { get; set; }
 
         // ===== Thêm DbSet cho các entity  order =====
         public DbSet<Order> Orders { get; set; }

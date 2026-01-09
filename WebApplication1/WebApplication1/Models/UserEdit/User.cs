@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApplication1.Models.BlogEdit;
 
 namespace WebApplication1.Models.UserEdit
 {
@@ -74,5 +75,10 @@ namespace WebApplication1.Models.UserEdit
         public DateTime CreatedAt { get; set; } 
 
         public DateTime? UpdatedAt { get; set; }
+
+        public ICollection<Blog> Blogs { get; set; }
+        public ICollection<BlogComment> BlogComments { get; set; }
+
+
     }
 }

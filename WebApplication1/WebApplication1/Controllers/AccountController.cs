@@ -102,6 +102,8 @@ namespace WebApplication1.Controllers
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("Username", user.Username);
             HttpContext.Session.SetString("Role", user.Role);
+            HttpContext.Session.SetString("avatar", user.AvatarUrl);
+
 
             // Remember me (basic)
             if (model.RememberMe)
@@ -183,7 +185,7 @@ namespace WebApplication1.Controllers
                 EmailConfirmed = false,
 
                 CreatedAt = DateTime.Now,
-                AvatarUrl = "/images/default-avatar.png",
+                AvatarUrl = "/uploads/avatars/default-avatar.png",
                 FullName = "",
                 PhoneNumber = "",
                 Gender = 0

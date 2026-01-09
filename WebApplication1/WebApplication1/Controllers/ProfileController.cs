@@ -46,7 +46,7 @@ public class ProfileController : Controller
             AddressId = address?.Id,
             FullAddress = address?.FullAddress,
 
-            CurrentAvatarUrl = user.AvatarUrl ?? "/images/default-avatar.png"
+            CurrentAvatarUrl = user.AvatarUrl ?? "/uploads/avtars/default-avatar.png"
 
         };
 
@@ -79,7 +79,7 @@ public class ProfileController : Controller
             AddressId = address?.Id,
             FullAddress = address?.FullAddress,
 
-            CurrentAvatarUrl = user.AvatarUrl ?? "/images/default-avatar.png"
+            CurrentAvatarUrl = user.AvatarUrl ?? "/uploads/avtars/default-avatar.png"
 
         };
 
@@ -129,7 +129,7 @@ public class ProfileController : Controller
             );
 
 
-            Console.WriteLine("UPLOAD PATH = " + uploadPath);
+            //Console.WriteLine("UPLOAD PATH = " + uploadPath);
 
             if (!Directory.Exists(uploadPath))
                 Directory.CreateDirectory(uploadPath);
