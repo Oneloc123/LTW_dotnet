@@ -73,11 +73,9 @@
                             0
                         </span>
                     </a>
-                    <a class="nav-link text-dark position-relative me-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                    <a href="javascript:void(0)" id="cartButton" class="nav-link text-dark position-relative me-3">
                         <i class="fas fa-shopping-cart fa-lg"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            0
-                        </span>
+                        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
                     </a>
                     @await Html.PartialAsync("_UserMenu")
 
@@ -185,10 +183,13 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link"
+                               asp-controller="Blog"
+                               asp-action="Index">
                                 <i class="fas fa-newspaper me-1"></i> Tin công nghệ
                             </a>
                         </li>
+
                     </ul>
 
                     <!-- Hotline on category bar -->
@@ -202,24 +203,13 @@
         </nav>
 
         <!-- Offcanvas Cart -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas">
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title">
-                    <i class="fas fa-shopping-cart me-2"></i>Giỏ hàng
-                </h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+                <h5 class="offcanvas-title" id="cartOffcanvasLabel">Giỏ hàng</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
-                <div class="text-center py-4">
-                    <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
-                    <p class="text-muted">Chưa có sản phẩm trong giỏ hàng</p>
-                </div>
-                <div class="mt-auto">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-primary">Xem giỏ hàng</button>
-                        <button class="btn btn-outline-primary">Thanh toán</button>
-                    </div>
-                </div>
+            <div class="offcanvas-body" id="cartOffcanvasBody">
+                @await Component.InvokeAsync("CartOffcanvas")
             </div>
         </div>
     </header>
@@ -264,6 +254,11 @@
         object-fit: contain;
     }
 
+    .offcanvas-body .btn {
+        pointer-events: auto;
+        cursor: pointer;
+    }
+
     /* media (max-width: 992px) {
         .search-bar
 
@@ -280,6 +275,60 @@
 
     } */
 </style>
+
+<script>
+    function updateCartBadge() {
+        fetch('/Cart/Count', { credentials: 'same-origin' })
+            .then(res => res.json())
+            .then(data => {
+                const badge = document.getElementById('cart-count');
+                if (badge) badge.innerText = data.totalQuantity;
+            })
+            .catch(err => console.error('Error updating cart badge:', err));
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const cartBody = document.getElementById("cartOffcanvasBody");
+        const offcanvasEl = document.getElementById("cartOffcanvas");
+        const bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+
+        // load số lượng cart lúc page load
+        updateCartBadge();
+
+        // mở offcanvas khi click icon
+        document.getElementById("cartButton").addEventListener("click", () => {
+            fetch("/Cart/Offcanvas", { credentials: "same-origin" })
+                .then(res => res.text())
+                .then(html => {
+                    cartBody.innerHTML = html;
+                    bsOffcanvas.show();
+                });
+        });
+
+        // ajax thêm sản phẩm vào giỏ
+        window.addToCart = function (variantId, quantity = 1) {
+            fetch("/Cart/Add", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `variantId=${variantId}&quantity=${quantity}`,
+                credentials: "same-origin"
+            })
+            .then(res => res.json())
+            .then(data => {
+                updateCartBadge(); // cập nhật badge ngay lập tức
+
+                // reload offcanvas
+                return fetch("/Cart/Offcanvas", { credentials: "same-origin" });
+            })
+            .then(res => res.text())
+            .then(html => {
+                cartBody.innerHTML = html;
+                bsOffcanvas.show();
+            })
+            .catch(err => console.error(err));
+        };
+    });
+</script>
 
 <!-- Font Awesome for icons (add to your layout if not already included) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

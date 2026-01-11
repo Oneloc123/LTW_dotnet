@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.Product
+﻿@model WebApplication1.Models.Products
 @using WebApplication1.Models
 
 @{
@@ -151,19 +151,10 @@
                 <strong>Tình trạng:</strong> <span style="color:green; font-weight:bold;">Còn hàng</span>
             </p>
 
-            <form method="post" action="/Cart/AddToCart" style="margin-top: 20px;">
-                <input type="hidden" name="id" value="@Model.Id" />
-
-                <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-                    <label style="font-weight: bold;">Số lượng:</label>
-                    <input type="number" name="quantity" value="1" min="1" max="100"
-                           style="width: 60px; padding: 5px; text-align: center; border: 1px solid #ccc; border-radius: 4px;">
-                </div>
-
-                <button type="submit" class="btn-add-cart">
-                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
-                </button>
-            </form>
+            <button class="btn-buy"
+                    onclick="addToCart(@Model.ProductVariants.First().Id)">
+                THÊM VÀO GIỎ HÀNG
+            </button>
         </div>
     </div>
 

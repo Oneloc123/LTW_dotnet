@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.Models.UserEdit;
+
 
 namespace WebApplication1.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly WebApplication1.Models.AppDbContext _context;
+        private readonly AppDbContext _context;
 
-        public ProductController(WebApplication1.Models.AppDbContext context)
+        public ProductController(AppDbContext context)
         {
             _context = context;
         }
@@ -19,40 +21,28 @@ namespace WebApplication1.Controllers
         //Index
         public async Task<IActionResult> Index(string brand, decimal? minPrice, decimal? maxPrice, string category, string searchString)
         {
-            
-            var products = _context.Products.AsQueryable();
 
-            
+            var products = _context.Products
+            .Include(p => p.Images)
+            .Include(p => p.ProductVariants)
+            .AsQueryable();
+
             if (!string.IsNullOrEmpty(brand))
-            {
                 products = products.Where(p => p.Brand == brand);
-            }
 
-            
             if (minPrice.HasValue)
-            {
                 products = products.Where(p => p.Price >= minPrice.Value);
-            }
 
-            
             if (maxPrice.HasValue)
-            {
                 products = products.Where(p => p.Price <= maxPrice.Value);
-            }
-
-
 
             if (!string.IsNullOrEmpty(searchString))
-            {
                 products = products.Where(p => p.Name.Contains(searchString));
-            }
-
 
             ViewBag.CurrentBrand = brand;
             ViewBag.CurrentMinPrice = minPrice;
             ViewBag.CurrentMaxPrice = maxPrice;
 
-           
             return View(await products.ToListAsync());
         }
 
@@ -65,17 +55,12 @@ namespace WebApplication1.Controllers
                 .Include(p => p.Specifications)
                 .FirstOrDefault(p => p.Id == id);
 
-            if (product == null) return NotFound();
-
-            decimal range = 3000000;
-
-            var relatedProducts = _context.Products
-                .Where(p => p.Price >= (product.Price - range) &&
-                            p.Price <= (product.Price + range) &&
-                            p.Id != id)
-                .OrderBy(p => Guid.NewGuid()) 
-                .Take(4)
-                .ToList();
+            var product = _context.Products
+            .Include(p => p.Images)
+            .Include(p => p.Specifications)
+            .Include(p => p.Reviews)
+            .Include(p => p.ProductVariants)
+            .FirstOrDefault(p => p.Id == id);
 
 
             ViewBag.RelatedProducts = relatedProducts;
@@ -113,4 +98,3 @@ namespace WebApplication1.Controllers
         }
     }
 }
-

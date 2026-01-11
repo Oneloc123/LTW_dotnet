@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebApplication1.Models; 
+using WebApplication1.Models;
+using WebApplication1.Models.BlogEdit;
+using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
@@ -30,14 +33,26 @@ namespace WebApplication1.Controllers
 
             
             var blogs = new List<Blogs>()
+            // Data demo sản phẩm nổi bật
+            var products = new List<Products>()
+            {
+                new Products(){ Id=1, Name="Laptop Gaming MSI", MainImageUrl="/images/laptop.jpg", Price=25000000, Description="Hiệu năng mạnh mẽ" },
+                new Products(){ Id=2, Name="Iphone 15 Pro", MainImageUrl="/images/iphone.jpg", Price=32000000, Description="Camera cực tốt" },
+                new Products(){ Id=3, Name="Tai nghe Sony", MainImageUrl="/images/headphone.jpg", Price=3500000, Description="Chống ồn tốt" }
+            };
+
+            // Data demo blog
+            var blogs = new List<Blog>() { };
+            /*
             {
                 new Blogs(){ Id=1, Title="Tin công nghệ hot nhất 2025", Thumbnail="https://placehold.co/600x400", Summary="Cập nhật xu hướng mới..." },
                 new Blogs(){ Id=2, Title="Review laptop gaming", Thumbnail="https://placehold.co/600x400", Summary="Top sản phẩm đáng mua..." }
             };
 
             ViewBag.Products = featuredProducts;
+            */
             ViewBag.Blogs = blogs;
-
+            ViewBag.Products = products;
             return View();
         }
 
@@ -53,10 +68,23 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
+        //public ActionResult ProductDetail(int id)
+        //{
+        //    // Demo chi tiết sản phẩm
+        //    var product = new Products()
+        //    {
+        //        Id = id,
+        //        Name = "Laptop Gaming MSI",
+        //        MainImageUrl = "/images/laptop.jpg",
+        //        Price = 25000000,
+        //        Description = "CPU Core i7, RAM 16GB, SSD 1TB"
+        //    };
 
             return View(product);
         }
 
+        //    return View(product);
+        //}
         public IActionResult Privacy()
         {
             return View();
