@@ -312,17 +312,17 @@
     <div class="row g-4">
         @{
             // Lấy danh sách từ ViewBag
-            var rawList = ViewBag.Products as List<WebApplication1.Models.Product>;
+            var rawList = ViewBag.Products as List<WebApplication1.Models.Products>;
 
-            // LOGIC MỚI: Chỉ lấy 6 sản phẩm đầu tiên (nếu danh sách có nhiều hơn)
-            var listSanPham = rawList != null ? rawList.Take(6).ToList() : new List<WebApplication1.Models.Product>();
+
+            var listSanPham = rawList != null ? rawList.Take(6).ToList() : new List<WebApplication1.Models.Products>();
         }
 
         @if (listSanPham != null && listSanPham.Any())
         {
             @foreach (var item in listSanPham)
             {
-                // Tính toán sao trung bình (Logic cũ giữ nguyên)
+                // Tính toán sao trung bình 
                 double ratingSum = item.Reviews != null ? item.Reviews.Sum(r => r.Rating) : 0;
                 int reviewCount = item.Reviews != null ? item.Reviews.Count : 0;
                 double avgRating = reviewCount > 0 ? ratingSum / reviewCount : 0;

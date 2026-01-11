@@ -50,19 +50,28 @@ namespace WebApplication1.Controllers
         //Details
         public IActionResult Detail(int id)
         {
+
             var product = _context.Products
-                .Include(p => p.Reviews)        
-                .Include(p => p.Specifications)
+                .Include(p => p.Images)           
+                .Include(p => p.Specifications)   
+                .Include(p => p.Reviews)          
+                .Include(p => p.ProductVariants)  
                 .FirstOrDefault(p => p.Id == id);
 
-            var product = _context.Products
-            .Include(p => p.Images)
-            .Include(p => p.Specifications)
-            .Include(p => p.Reviews)
-            .Include(p => p.ProductVariants)
-            .FirstOrDefault(p => p.Id == id);
+            if (product == null) return NotFound();
 
+            // Logic Sản phẩm liên quan 
+            decimal range = 3000000;
 
+            var relatedProducts = _context.Products
+                .Where(p => p.Price >= (product.Price - range) &&
+                            p.Price <= (product.Price + range) &&
+                            p.Id != id)           
+                .OrderBy(p => Guid.NewGuid())     
+                .Take(4)                          
+                .ToList();
+
+            
             ViewBag.RelatedProducts = relatedProducts;
             return View(product);
         }
