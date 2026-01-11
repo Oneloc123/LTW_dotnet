@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using WebApplication1.Models;
+using WebApplication1.Models; 
+
 using WebApplication1.Models.BlogEdit;
+using WebApplication1.Models.UserEdit;
 using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
@@ -9,49 +12,56 @@ namespace WebApplication1.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-                    
-        public HomeController(ILogger<HomeController> logger)
+
+        
+        private readonly AppDbContext _context;
+
+        
+        public HomeController(ILogger<HomeController> logger, AppDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            // Data demo sản phẩm nổi bật
-            var products = new List<Products>()
-            {
-                new Products(){ Id=1, Name="Laptop Gaming MSI", MainImageUrl="/images/laptop.jpg", Price=25000000, Description="Hiệu năng mạnh mẽ" },
-                new Products(){ Id=2, Name="Iphone 15 Pro", MainImageUrl="/images/iphone.jpg", Price=32000000, Description="Camera cực tốt" },
-                new Products(){ Id=3, Name="Tai nghe Sony", MainImageUrl="/images/headphone.jpg", Price=3500000, Description="Chống ồn tốt" }
-            };
+            
+            var featuredProducts = _context.Products
+                .Include(p => p.Images)           
+                .Include(p => p.Reviews)          
+                .OrderByDescending(p => p.Reviews.Average(r => r.Rating)) 
+                .Take(6)                          
+                .ToList();
 
-            // Data demo blog
-            var blogs = new List<Blog>() { };
-            /*
-            {
-                new Blogs(){ Id=1, Title="Tin công nghệ hot nhất 2025", Thumbnail="/images/blog1.jpg", Summary="Cập nhật xu hướng mới..." },
-                new Blogs(){ Id=2, Title="Review laptop gaming", Thumbnail="/images/blog2.jpg", Summary="Top sản phẩm đáng mua..." }
-            };
+            
+            var blogs = _context.Blogs
+                .OrderByDescending(b => b.CreatedAt) 
+                .Take(4)
+                .ToList();
 
-            */
+           
+            ViewBag.Products = featuredProducts;
             ViewBag.Blogs = blogs;
-            ViewBag.Products = products;
+
             return View();
         }
-        //public ActionResult ProductDetail(int id)
-        //{
-        //    // Demo chi tiết sản phẩm
-        //    var product = new Products()
-        //    {
-        //        Id = id,
-        //        Name = "Laptop Gaming MSI",
-        //        MainImageUrl = "/images/laptop.jpg",
-        //        Price = 25000000,
-        //        Description = "CPU Core i7, RAM 16GB, SSD 1TB"
-        //    };
 
-        //    return View(product);
-        //}
+        public IActionResult ProductDetail(int id)
+        {
+            
+            var product = _context.Products
+                .Include(p => p.Reviews)
+                .Include(p => p.Specifications)
+                .FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+        }
+
         public IActionResult Privacy()
         {
             return View();
