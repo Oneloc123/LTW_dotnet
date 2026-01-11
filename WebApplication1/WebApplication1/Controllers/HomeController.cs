@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApplication1.Models;
+using WebApplication1.Models.BlogEdit;
 
 namespace WebApplication1.Controllers
 {
@@ -24,15 +25,16 @@ namespace WebApplication1.Controllers
             };
 
             // Data demo blog
-            var blogs = new List<Blogs>()
+            var blogs = new List<Blog>() { };
+            /*
             {
                 new Blogs(){ Id=1, Title="Tin công nghệ hot nhất 2025", Thumbnail="/images/blog1.jpg", Summary="Cập nhật xu hướng mới..." },
                 new Blogs(){ Id=2, Title="Review laptop gaming", Thumbnail="/images/blog2.jpg", Summary="Top sản phẩm đáng mua..." }
             };
 
-            ViewBag.Products = products;
+            */
             ViewBag.Blogs = blogs;
-
+            ViewBag.Products = products;
             return View();
         }
         public ActionResult ProductDetail(int id)

@@ -1,0 +1,29 @@
+﻿@using WebApplication1.Models.OrderEdit.Order
+@model Order
+
+<h2>Chi tiết đơn hàng #@Model.Id</h2>
+
+<p><b>Trạng thái:</b> @Model.Status</p>
+<p><b>Ngày đặt:</b> @Model.CreatedAt</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Tạm tính</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.Product.Price</td>
+                <td>@(item.Quantity* item.Product.Price)</td>
+            </tr>
+        }
+    </tbody>
+</table>

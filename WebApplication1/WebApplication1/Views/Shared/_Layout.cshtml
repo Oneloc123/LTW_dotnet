@@ -48,19 +48,21 @@
 
                 <!-- Search Bar -->
                 <div class="search-bar mx-lg-3 flex-grow-1">
-                    <div class="input-group">
-                        <input type="text" class="form-control rounded-start" placeholder="Tìm kiếm điện thoại, phụ kiện..." aria-label="Search">
-                        <select class="form-select w-auto" style="max-width: 150px;">
-                            <option selected>Tất cả danh mục</option>
-                            <option value="smartphone">Điện thoại</option>
-                            <option value="tablet">Tablet</option>
-                            <option value="accessory">Phụ kiện</option>
-                            <option value="smartwatch">Đồng hồ thông minh</option>
-                        </select>
-                        <button class="btn btn-primary" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                    <form asp-controller="Product" asp-action="Index" method="get">
+                        <div class="input-group">
+                            <input type="text" name="searchString" class="form-control rounded-start" placeholder="Tìm kiếm điện thoại, phụ kiện..." aria-label="Search">
+
+                            <select class="form-select w-auto" style="max-width: 150px;" name="category">
+                                <option value="">Tất cả danh mục</option>
+                                <option value="smartphone">Điện thoại</option>
+                                <option value="accessory">Phụ kiện</option>
+                            </select>
+
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- Action Buttons -->
@@ -93,25 +95,33 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarMain">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <!-- Main Categories -->
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="brandDropdown" data-bs-toggle="dropdown">
                                 <i class="fas fa-mobile-alt me-1"></i> Thương hiệu
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="brandDropdown">
-                                <li><a class="dropdown-item" href="#"><img src="/images/brands/apple.svg" alt="Apple" height="20" class="me-2"> iPhone</a></li>
-                                <li><a class="dropdown-item" href="#"><img src="/images/brands/samsung.svg" alt="Samsung" height="20" class="me-2"> Samsung</a></li>
-                                <li><a class="dropdown-item" href="#"><img src="/images/brands/xiaomi.svg" alt="Xiaomi" height="20" class="me-2"> Xiaomi</a></li>
-                                <li><a class="dropdown-item" href="#"><img src="/images/brands/oppo.svg" alt="Oppo" height="20" class="me-2"> Oppo</a></li>
-                                <li><a class="dropdown-item" href="#"><img src="/images/brands/vivo.svg" alt="Vivo" height="20" class="me-2"> Vivo</a></li>
-                                <li><a class="dropdown-item" href="#"><img src="/images/brands/realme.svg" alt="Realme" height="20" class="me-2"> Realme</a></li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-brand="Apple">
+                                        <img src="/images/brands/apple.svg" alt="Apple" height="20" class="me-2"> iPhone
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-brand="Samsung">
+                                        <img src="/images/brands/samsung.svg" alt="Samsung" height="20" class="me-2"> Samsung
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-brand="Xiaomi">
+                                        <img src="/images/brands/xiaomi.svg" alt="Xiaomi" height="20" class="me-2"> Xiaomi
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-brand="Oppo">
+                                        <img src="/images/brands/oppo.svg" alt="Oppo" height="20" class="me-2"> Oppo
+                                    </a>
+                                </li>
                             </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-bolt me-1"></i> Khuyến mãi
-                            </a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -119,11 +129,15 @@
                                 <i class="fas fa-tags me-1"></i> Giá tiền
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="priceDropdown">
-                                <li><a class="dropdown-item" href="#">Dưới 3 triệu</a></li>
-                                <li><a class="dropdown-item" href="#">3 - 6 triệu</a></li>
-                                <li><a class="dropdown-item" href="#">6 - 10 triệu</a></li>
-                                <li><a class="dropdown-item" href="#">10 - 15 triệu</a></li>
-                                <li><a class="dropdown-item" href="#">Trên 15 triệu</a></li>
+                                <li><a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-maxPrice="3000000">Dưới 3 triệu</a></li>
+
+                                <li><a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-minPrice="3000000" asp-route-maxPrice="6000000">3 - 6 triệu</a></li>
+
+                                <li><a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-minPrice="6000000" asp-route-maxPrice="10000000">6 - 10 triệu</a></li>
+
+                                <li><a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-minPrice="20000000" asp-route-maxPrice="25000000">20 - 25 triệu</a></li>
+
+                                <li><a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-minPrice="25000000">Trên 25 triệu</a></li>
                             </ul>
                         </li>
 
@@ -132,11 +146,35 @@
                                 <i class="fas fa-headphones me-1"></i> Phụ kiện
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="accessoryDropdown">
-                                <li><a class="dropdown-item" href="#">Tai nghe</a></li>
-                                <li><a class="dropdown-item" href="#">Sạc dự phòng</a></li>
-                                <li><a class="dropdown-item" href="#">Ốp lưng</a></li>
-                                <li><a class="dropdown-item" href="#">Cáp sạc</a></li>
-                                <li><a class="dropdown-item" href="#">Smartwatch</a></li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-category="Tai nghe">
+                                        Tai nghe
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-category="Sạc dự phòng">
+                                        Sạc dự phòng
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-category="Ốp lưng">
+                                        Ốp lưng
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-category="Cáp sạc">
+                                        Cáp sạc
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-category="Smartwatch">
+                                        Smartwatch
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -147,10 +185,13 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link"
+                               asp-controller="Blog"
+                               asp-action="Index">
                                 <i class="fas fa-newspaper me-1"></i> Tin công nghệ
                             </a>
                         </li>
+
                     </ul>
 
                     <!-- Hotline on category bar -->

@@ -3,11 +3,16 @@
 @{
     var userId = Context.Session.GetInt32("UserId");
     var username = Context.Session.GetString("Username");
+    var avatar = Context.Session.GetString("avatar");
 }
 
 <div class="dropdown">
     <a href="#" class="nav-link text-dark dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown">
-        <i class="fas fa-user-circle fa-lg"></i>
+        <img src="@(string.IsNullOrEmpty(avatar)
+                                                               ? "/uploads/avtars/default-avatar.png"
+                                                  : @avatar)"
+             alt="Avatar"
+             style="width:40px;height:40px;border-radius:50%;object-fit:cover" />
     </a>
 
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -19,7 +24,7 @@
             </li>
 
             <li>
-                <a class="dropdown-item" asp-controller="Account" asp-action="Profile">
+                <a class="dropdown-item" asp-controller="Profile" asp-action="Index">
                     <i class="fas fa-user me-2"></i> Tài khoản của tôi
                 </a>
             </li>

@@ -12,7 +12,7 @@ namespace WebApplication1.Models
 
         [Range(1, 5)]
         [Column("rating")]
-        public int Rating { get; set; } // 1 đến 5 sao
+        public int Rating { get; set; }
 
         [Column("review_comment")]
         public string Comment { get; set; } = "";
@@ -20,17 +20,16 @@ namespace WebApplication1.Models
         [Column("created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
+        // --- Liên kết Sản phẩm ---
         [Column("product_id")]
         public int ProductId { get; set; }
+
         [ForeignKey("ProductId")]
         public Product Product { get; set; }
 
-        [Column("user_id")]
-        public int UserId { get; set; }
-        [ForeignKey("UserId")]
-        public Users User { get; set; } // nếu có bảng người dùng
+      
+        [Column("user_name")]
+        public string UserName { get; set; }
 
-        [NotMapped]
-        public string UserName { get; set; } = "Khách ẩn danh";
     }
 }
