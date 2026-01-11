@@ -44,7 +44,7 @@ namespace WebApplication1.Models.UserEdit
         }
 
         public DbSet<Users> usersnet { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Products> Products { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<Specification> Specifications { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
@@ -61,6 +61,8 @@ namespace WebApplication1.Models.UserEdit
         // ===== Thêm DbSet cho các entity  order =====
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<Discount> Discounts { get; set; }
 
     }
 }

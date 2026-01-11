@@ -28,6 +28,6 @@ namespace WebApplication1.Models.OrderEdit.Order
 
         // Nếu có bảng Product
         [ForeignKey("ProductId")]
-        public Product Product { get; set; }
+        public Products Product { get; set; }
     }
 }

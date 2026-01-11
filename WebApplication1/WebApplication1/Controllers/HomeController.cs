@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using WebApplication1.Models;
 using WebApplication1.Models.BlogEdit;
+using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
@@ -19,9 +20,9 @@ namespace WebApplication1.Controllers
             // Data demo sản phẩm nổi bật
             var products = new List<Products>()
             {
-                new Products(){ Id=1, Name="Laptop Gaming MSI", Image="/images/laptop.jpg", Price=25000000, Description="Hiệu năng mạnh mẽ" },
-                new Products(){ Id=2, Name="Iphone 15 Pro", Image="/images/iphone.jpg", Price=32000000, Description="Camera cực tốt" },
-                new Products(){ Id=3, Name="Tai nghe Sony", Image="/images/headphone.jpg", Price=3500000, Description="Chống ồn tốt" }
+                new Products(){ Id=1, Name="Laptop Gaming MSI", MainImageUrl="/images/laptop.jpg", Price=25000000, Description="Hiệu năng mạnh mẽ" },
+                new Products(){ Id=2, Name="Iphone 15 Pro", MainImageUrl="/images/iphone.jpg", Price=32000000, Description="Camera cực tốt" },
+                new Products(){ Id=3, Name="Tai nghe Sony", MainImageUrl="/images/headphone.jpg", Price=3500000, Description="Chống ồn tốt" }
             };
 
             // Data demo blog
@@ -37,20 +38,20 @@ namespace WebApplication1.Controllers
             ViewBag.Products = products;
             return View();
         }
-        public ActionResult ProductDetail(int id)
-        {
-            // Demo chi tiết sản phẩm
-            var product = new Products()
-            {
-                Id = id,
-                Name = "Laptop Gaming MSI",
-                Image = "/images/laptop.jpg",
-                Price = 25000000,
-                Description = "CPU Core i7, RAM 16GB, SSD 1TB"
-            };
+        //public ActionResult ProductDetail(int id)
+        //{
+        //    // Demo chi tiết sản phẩm
+        //    var product = new Products()
+        //    {
+        //        Id = id,
+        //        Name = "Laptop Gaming MSI",
+        //        MainImageUrl = "/images/laptop.jpg",
+        //        Price = 25000000,
+        //        Description = "CPU Core i7, RAM 16GB, SSD 1TB"
+        //    };
 
-            return View(product);
-        }
+        //    return View(product);
+        //}
         public IActionResult Privacy()
         {
             return View();

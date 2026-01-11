@@ -11,7 +11,6 @@ namespace WebApplication1.Controllers
         private readonly AppDbContext _context;
 
         public ProductController(AppDbContext context)
-
         {
             _context = context;
         }
@@ -22,40 +21,28 @@ namespace WebApplication1.Controllers
         //Index
         public async Task<IActionResult> Index(string brand, decimal? minPrice, decimal? maxPrice, string category, string searchString)
         {
-            
-            var products = _context.Products.AsQueryable();
 
-            
+            var products = _context.Products
+            .Include(p => p.Images)
+            .Include(p => p.ProductVariants)
+            .AsQueryable();
+
             if (!string.IsNullOrEmpty(brand))
-            {
                 products = products.Where(p => p.Brand == brand);
-            }
 
-            
             if (minPrice.HasValue)
-            {
                 products = products.Where(p => p.Price >= minPrice.Value);
-            }
 
-            
             if (maxPrice.HasValue)
-            {
                 products = products.Where(p => p.Price <= maxPrice.Value);
-            }
-
-
 
             if (!string.IsNullOrEmpty(searchString))
-            {
                 products = products.Where(p => p.Name.Contains(searchString));
-            }
-
 
             ViewBag.CurrentBrand = brand;
             ViewBag.CurrentMinPrice = minPrice;
             ViewBag.CurrentMaxPrice = maxPrice;
 
-           
             return View(await products.ToListAsync());
         }
 
@@ -64,7 +51,12 @@ namespace WebApplication1.Controllers
         public IActionResult Detail(int id)
         {
 
-            var product = _context.Products.Include(p => p.Reviews).FirstOrDefault(p => p.Id == id);
+            var product = _context.Products
+            .Include(p => p.Images)
+            .Include(p => p.Specifications)
+            .Include(p => p.Reviews)
+            .Include(p => p.ProductVariants)
+            .FirstOrDefault(p => p.Id == id);
 
             if (product == null)
                 return NotFound();
@@ -103,4 +95,3 @@ namespace WebApplication1.Controllers
         }
     }
 }
-

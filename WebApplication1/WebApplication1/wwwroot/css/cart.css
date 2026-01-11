@@ -296,3 +296,15 @@
     border-radius: 8px;
     font-size: 1.6rem;
 }
+
+.cart-item__delete.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: default;
+}
+
+.cart__delete-all.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+}

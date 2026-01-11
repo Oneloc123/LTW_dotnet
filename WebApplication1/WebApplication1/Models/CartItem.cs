@@ -11,9 +11,18 @@
 
         public decimal Price { get; set; }
         public int Quantity { get; set; }
+
+        // Giảm giá theo %
         public int Discount { get; set; }
-        public decimal FinalPrice => Price - Price * Discount / 100m;
+
+        // Giảm theo tiền cố định (vd: 99k)
+        public decimal DiscountAmount { get; set; } = 0;
+
+        // Giá cuối 1 sản phẩm
+        public decimal FinalPrice => Math.Max(0, Price - Price * Discount / 100m - DiscountAmount);
+
         public decimal Total => FinalPrice * Quantity;
 
+        public List<(string Color, string ImageUrl)> AvailableColors { get; set; } = new();
     }
 }
