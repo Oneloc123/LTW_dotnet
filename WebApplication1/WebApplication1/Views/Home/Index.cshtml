@@ -1,6 +1,6 @@
 ﻿@{
     var products = ViewBag.Products as List<WebApplication1.Models.Products>;
-    var blogs = ViewBag.Blogs as List<WebApplication1.Models.Blogs>;
+   var blogs = ViewBag.Blogs as List<WebApplication1.Models.BlogEdit.Blog>;
     ViewData["Title"] = "Home Page";
 }
 
@@ -288,7 +288,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="product-card">
                     <div style="overflow: hidden;">
-                        <img src="@p.Image" alt="@p.Name" class="product-img" />
+                        <img src="@p.MainImageUrl" alt="@p.Name" class="product-img" />
                     </div>
                     <div class="product-info">
                         <h3 class="product-title">@p.Name</h3>
@@ -296,7 +296,7 @@
                         <p class="product-description">@p.Description</p>
 
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="@Url.Action("ProductDetail", "Home", new { id = p.Id })"
+                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@p.Id"
                                class="btn btn-primary-custom btn-custom">
                                 Xem chi tiết
                             </a>
@@ -343,7 +343,7 @@
                     </div>
                     <div class="blog-content">
                         <h3 class="blog-title">@b.Title</h3>
-                        <p class="blog-summary">@b.Summary</p>
+                        <p class="blog-summary">@b.Content</p>
 
                         <div class="d-flex justify-content-between align-items-center">
                             <a href="@Url.Action("BlogDetail", "Home", new { id = b.Id })"

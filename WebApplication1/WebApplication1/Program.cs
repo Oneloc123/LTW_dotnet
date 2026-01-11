@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 using WebApplication1.Models;
+using WebApplication1.Models.UserEdit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +62,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+
+// admin
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");

@@ -1,7 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebApplication1.Models.BlogEdit;
+using WebApplication1.Models.OrderEdit.Order;
+using WebApplication1.Models.User.User;
+using WebApplication1.Models.UserEdit;
 
 
-namespace WebApplication1.Models
+namespace WebApplication1.Models.UserEdit
 {
     public class AppDbContext : DbContext
     {
@@ -40,12 +44,25 @@ namespace WebApplication1.Models
         }
 
         public DbSet<Users> usersnet { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Products> Products { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<Specification> Specifications { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Orders> Orders { get; set; }
+
+        public DbSet<UserAddress> UserAddresses { get; set; }
+
+        public DbSet<Blog> Blogs { get; set; }
+
+        public DbSet<BlogComment> BlogComments { get; set; }
+
+        public DbSet<BlogRating> BlogRatings { get; set; }
+
+        // ===== Thêm DbSet cho các entity  order =====
+        public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<Discount> Discounts { get; set; }
+
     }
 }

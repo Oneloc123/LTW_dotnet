@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Tạo Blog";
+}
+
+<div class="container mt-4">
+    <h3>✍️ Tạo Blog mới</h3>
+
+    <form asp-action="Create"
+          method="post"
+          enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label class="form-label">Tiêu đề</label>
+            <input name="title" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Nội dung</label>
+            <textarea name="content"
+                      class="form-control"
+                      rows="8"
+                      placeholder="Nhập nội dung hoặc upload Word..."></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Upload Word (.docx)</label>
+            <input type="file"
+                   name="wordFile"
+                   accept=".docx"
+                   class="form-control" />
+        </div>
+
+        <button class="btn btn-success">
+            🚀 Đăng blog
+        </button>
+    </form>
+</div>

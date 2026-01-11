@@ -11,7 +11,24 @@ namespace WebApplication1.Models
         public IReadOnlyCollection<CartItem> Items => ItemsDict.Values;
 
         public int TotalQuantity => Items.Sum(i => i.Quantity);
-        public decimal TotalMoney => Items.Sum(i => i.Total);
+        // Tổng tiền trước giảm
+        public decimal TotalMoney => Items.Sum(i => i.Price * i.Quantity);
+
+        // Tổng giảm giá sản phẩm
+        public decimal TotalDiscount => Items.Sum(i => (i.Price - i.FinalPrice) * i.Quantity);
+
+        // Voucher giảm trực tiếp
+        public decimal TotalVoucherDiscount { get; private set; } = 0;
+
+        // Tiền cuối phải trả
+        public decimal TotalPayable => Math.Max(0, TotalMoney - TotalDiscount - TotalVoucherDiscount);
+
+        // Hàm áp dụng voucher (demo)
+        public void ApplyVoucher(decimal discountAmount)
+        {
+            // đảm bảo không âm
+            TotalVoucherDiscount = Math.Max(0, discountAmount);
+        }
 
         public void AddOrUpdate(CartItem item)
         {
@@ -64,12 +81,16 @@ namespace WebApplication1.Models
         {
             if (variantId <= 0) return;
             ItemsDict.Remove(variantId);
+            // Nếu giỏ rỗng thì reset voucher
+            if (!Items.Any())
+                TotalVoucherDiscount = 0;
         }
 
         // CLEAR
         public void Clear()
         {
             ItemsDict.Clear();
+            TotalVoucherDiscount = 0; // reset voucher khi xóa giỏ
         }
 
         // PRIVATE HELPERS
@@ -77,10 +98,18 @@ namespace WebApplication1.Models
             => variantId > 0 && ItemsDict.ContainsKey(variantId);
 
         // Update thuộc tính CartItem (ví dụ chỉ đổi màu)
-        //public void ChangeColor(int variantId, string newColor)
-        //{
-        //    if (!IsValidVariant(variantId)) return;
-        //    ItemsDict[variantId].Color = newColor;
-        //}
+        public void ChangeColor(int variantId, string newColor)
+        {
+            if (!IsValidVariant(variantId)) return;
+
+            var item = ItemsDict[variantId];
+            var variant = item.AvailableColors.FirstOrDefault(c => c.Color == newColor);
+            if (variant != default)
+            {
+                item.Color = variant.Color;
+                item.ImageUrl = variant.ImageUrl;
+            }
+        }
+
     }
 }

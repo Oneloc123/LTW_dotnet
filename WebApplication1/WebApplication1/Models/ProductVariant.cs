@@ -17,7 +17,7 @@ namespace WebApplication1.Models
         public int ProductId { get; set; }
 
         [ForeignKey("ProductId")]
-        public Product Product { get; set; }
+        public Products Product { get; set; }
 
         [Required, MaxLength(50)]
         [Column("color")]
@@ -27,16 +27,15 @@ namespace WebApplication1.Models
         [Column("memory")]
         public string Memory { get; set; } = "";
 
-        [Required, Range(0, double.MaxValue)]
+        [Required]
         [Column("price")]
         public decimal Price { get; set; }
 
-        [Required, Range(0, int.MaxValue)]
+        [Required]
         [Column("stock")]
         public int Stock { get; set; }
 
-        [Required, MaxLength(500)]
         [Column("image_url")]
-        public string ImageUrl { get; set; } = "";
+        public string? ImageUrl { get; set; }
     }
 }

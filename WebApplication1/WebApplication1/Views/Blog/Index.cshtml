@@ -1,0 +1,96 @@
+﻿@using WebApplication1.Models.BlogEdit
+@model List<Blog>
+
+<div class="container mt-4">
+
+    <!-- 🔍 SEARCH + FILTER -->
+    <form method="get" class="row mb-4">
+        <div class="col-md-4">
+            <input name="search" class="form-control" placeholder="Tìm theo tiêu đề..." />
+        </div>
+        <div class="col-md-3">
+            <input type="date" name="fromDate" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary">Lọc</button>
+        </div>
+    </form>
+
+    <div class="row">
+        <!-- 📰 BLOG LIST -->
+        <div class="col-md-8">
+            <div class="row g-4">
+                @foreach (var blog in Model)
+                {
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">@blog.Title</h5>
+                                <p class="card-text text-muted">
+                                    @blog.Content.Substring(0, Math.Min(100, blog.Content.Length))...
+                                </p>
+
+                                <small class="text-secondary">
+                                    👁 @blog.ViewCount lượt xem |
+                                    📅 @blog.CreatedAt.ToString("dd/MM/yyyy")
+                                </small>
+
+                                <div class="mt-2">
+                                    <a asp-action="Details"
+                                       asp-route-id="@blog.Id"
+                                       class="btn btn-sm btn-outline-primary">
+                                        Xem chi tiết
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- ⭐ FEATURED BLOG -->
+        <div class="col-md-4">
+            @{
+                var isLoggedIn = Context.Session.GetInt32("UserId") != null;
+            }
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3>📰 Blog</h3>
+
+                @if (isLoggedIn)
+                {
+                    <a asp-controller="Blog"
+                       asp-action="Create"
+                       class="btn btn-success">
+                        ✍️ Tạo blog
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Account"
+                       asp-action="Login"
+                       class="btn btn-outline-primary">
+                        🔐 Đăng nhập để viết blog
+                    </a>
+                }
+            </div>
+
+
+            <h5 class="mb-3">🔥 Blog nổi bật</h5>
+
+            @foreach (var f in ViewBag.FeaturedBlogs)
+            {
+                <div class="mb-2">
+                    <a asp-action="Details" asp-route-id="@f.Id">
+                        @f.Title
+                    </a>
+                    <small class="text-muted d-block">
+                        👁 @f.ViewCount lượt xem
+                    </small>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

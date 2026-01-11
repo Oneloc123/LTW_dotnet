@@ -1,4 +1,4 @@
-﻿@model List<WebApplication1.Models.Product>
+﻿@model List<WebApplication1.Models.Products>
 
 @{
     ViewData["Title"] = "Danh sách sản phẩm";
@@ -148,9 +148,10 @@
                                 <p class="price-text">@item.Price.ToString("#,##0") ₫</p>
                             </div>
 
-                            <a href="/Product/Detail/@item.Id" class="btn-detail">
+                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-primary-custom btn-custom">
                                 Xem chi tiết
                             </a>
+
                         </div>
                     </div>
                 </div>
