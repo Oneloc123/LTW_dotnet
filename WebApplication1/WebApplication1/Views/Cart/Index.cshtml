@@ -1,4 +1,5 @@
-﻿@model WebApplication1.Models.Carts
+﻿@using WebApplication1.Models.Enum
+@model WebApplication1.Models.Carts
 @{
     ViewData["Title"] = "Giỏ hàng";
 }
@@ -71,7 +72,7 @@
                                         @item.FinalPrice.ToString("N0")đ
                                     </span>
 
-                                    @if (item.Discount > 0 || item.DiscountAmount > 0)
+                                    @if (item.DiscountType != CartDiscountType.None)
                                     {
                                         <span class="cart-item__price-old">@item.Price.ToString("N0")đ</span>
                                     }
@@ -200,11 +201,13 @@
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: `variantId=${variantId}`
-            }).then(() => {
-                item.remove();
-                updateSelectedCount();
-                updateSummary(); // cập nhật summary
-            });
+                }).then(res => res.json())
+                .then(data => {
+                    item.remove();
+                    updateSelectedCount();
+                    updateSummary(data);
+                    updateCartBadge(); // thêm
+                });
         });
     });
 
@@ -221,15 +224,19 @@
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(ids)
-        }).then(() => {
-            document.querySelectorAll(".cart-item__checkbox:checked").forEach(cb => cb.closest(".cart-item").remove());
-            updateSelectedCount();
-            updateSummary();
-        });
+            }).then(res => res.json())          // nhận data từ controller
+            .then(data => {
+                document.querySelectorAll(".cart-item__checkbox:checked")
+                    .forEach(cb => cb.closest(".cart-item").remove());
+
+                updateSelectedCount();
+                updateSummary(data);          // truyền data
+                updateCartBadge(); // thêm
+            });
     });
 
     // Hàm cập nhật quantity + total price + summary
-    function updateItem(itemEl, data) {
+        function updateItem(itemEl, data) {
         const variantId = itemEl.dataset.variantId;
         const itemData = data.items.find(i => i.variantId == variantId);
 
@@ -241,17 +248,35 @@
         }
 
         itemEl.querySelector(".cart-item__quantity-value").textContent = itemData.quantity;
+        // finalPrice là giá 1 SP sau giảm, backend đảm bảo itemData.finalPrice * itemData.quantity
         itemEl.querySelector(".cart-item__price-current").textContent = (itemData.finalPrice * itemData.quantity).toLocaleString("vi-VN") + "đ";
     }
 
     // Cập nhật summary
-    function updateSummary(data) {
-        if (!data) return;
-        document.querySelector(".cart-summary__value").textContent = data.totalMoney.toLocaleString("vi-VN") + "đ";
-        document.querySelector(".cart-summary__value--highlight").textContent = data.totalPayable.toLocaleString("vi-VN") + "đ";
-        document.querySelectorAll(".cart-summary__value")[1].textContent = (data.totalDiscount + data.voucher).toLocaleString("vi-VN") + "đ"; // tổng khuyến mãi
-        document.querySelector(".cart-summary__group .cart-summary__value").textContent = data.totalDiscount.toLocaleString("vi-VN") + "đ"; // giảm giá sp
-        document.querySelector(".cart-summary__group .cart-summary__divider--dashed .cart-summary__value").textContent = data.voucher.toLocaleString("vi-VN") + "đ"; // voucher
+        function updateSummary(data) {
+        const summaryValues = document.querySelectorAll(".cart-summary__value");
+
+        if (summaryValues.length < 5) return;
+
+        // 0️⃣ Tạm tính (chưa giảm)
+        summaryValues[0].textContent =
+            data.totalMoney.toLocaleString("vi-VN") + "đ";
+
+        // 1️⃣ Tổng giảm (giảm SP + voucher)
+        summaryValues[1].textContent =
+            (data.totalDiscount + data.voucher).toLocaleString("vi-VN") + "đ";
+
+        // 2️⃣ Giảm sản phẩm
+        summaryValues[2].textContent =
+            data.totalDiscount.toLocaleString("vi-VN") + "đ";
+
+        // 3️⃣ Voucher
+        summaryValues[3].textContent =
+            data.voucher.toLocaleString("vi-VN") + "đ";
+
+        // 4️⃣ Tổng thanh toán
+        summaryValues[4].textContent =
+            data.totalPayable.toLocaleString("vi-VN") + "đ";
     }
 
     // Nút +
@@ -268,6 +293,7 @@
             .then(data => {
                 updateItem(item, data);
                 updateSummary(data);
+                updateCartBadge(); // thêm
             });
         });
     });
@@ -286,6 +312,7 @@
             .then(data => {
                 updateItem(item, data); // nếu quantity <= 0 thì item tự remove
                 updateSummary(data);
+                updateCartBadge(); // thêm
             });
         });
     });

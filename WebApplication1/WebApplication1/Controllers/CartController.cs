@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Helpers;
 using WebApplication1.Models;
+using WebApplication1.Models.Enum;
 using WebApplication1.Models.UserEdit;
 
 namespace WebApplication1.Controllers
@@ -20,40 +21,10 @@ namespace WebApplication1.Controllers
         {
             Console.WriteLine("SESSION ID (Cart): " + HttpContext.Session.Id);
             var cart = CartSessionHelper.GetCart(HttpContext);
-            /* demo */
-            //if (!cart.Items.Any())
-            //{
-            //    // Lấy variant đầu tiên trong DB để demo
-            //    var variant = db.ProductVariants
-            //        .Include(v => v.Product)
-            //        .FirstOrDefault();
-
-            //    if (variant != null)
-            //    {
-            //        cart.AddOrUpdate(new CartItem
-            //        {
-            //            VariantId = variant.Id,
-            //            Name = variant.Product.Name,
-            //            ImageUrl = !string.IsNullOrEmpty(variant.ImageUrl)
-            //                        ? variant.ImageUrl
-            //                        : variant.Product.MainImageUrl,
-            //            Color = variant.Color,
-            //            Memory = variant.Memory,
-            //            Price = variant.Price,
-            //            Quantity = 1,
-            //            Discount = 0,
-            //            AvailableColors = variant.Product.ProductVariants
-            //                .Select(v => (v.Color, v.ImageUrl ?? variant.Product.MainImageUrl))
-            //                .ToList()
-            //        });
-
-            //        CartSessionHelper.SaveCart(HttpContext, cart);
-            //    }
-            //}
 
             return View(cart);
         }
-        // truyền dữ liệu từ controller sang view
+        // truyền dữ liệu từ controller sang view 
 
         /* Thêm sản phẩm */
         [HttpPost]
@@ -63,28 +34,34 @@ namespace WebApplication1.Controllers
 
             var variant = db.ProductVariants
                 .Include(v => v.Product)
-                .FirstOrDefault(v => v.Id == variantId); // Dùng variantId từ client
+                .FirstOrDefault(v => v.Id == variantId); // Dùng variantId từ client 
 
             if (variant == null)
-                return NotFound(); // không tìm thấy variant
+                return NotFound(); // không tìm thấy variant 
 
-            // Lấy chương trình giảm giá đang active
+            // Lấy chương trình giảm giá đang active 
             var discount = db.Discounts
                 .Where(d => d.IsActive &&
                             (d.ProductId == null || d.ProductId == variant.ProductId) &&
                             d.StartDate <= DateTime.Now && d.EndDate >= DateTime.Now)
-                .OrderByDescending(d => d.Value) // giảm cao nhất
+                .OrderByDescending(d => d.Value) // giảm cao nhất 
                 .FirstOrDefault();
 
-            decimal discountAmount = 0;
-            int discountPercent = 0;
+            CartDiscountType discountType = CartDiscountType.None;
+            decimal discountValue = 0;
 
             if (discount != null)
             {
                 if (discount.Type == DiscountType.Percentage)
-                    discountPercent = (int)discount.Value;
+                {
+                    discountType = CartDiscountType.Percentage;
+                    discountValue = discount.Value;
+                }
                 else
-                    discountAmount = discount.Value;
+                {
+                    discountType = CartDiscountType.Amount;
+                    discountValue = discount.Value;
+                }
             }
 
             var cart = CartSessionHelper.GetCart(HttpContext);
@@ -94,25 +71,27 @@ namespace WebApplication1.Controllers
                 VariantId = variant.Id,
                 Name = variant.Product.Name,
                 ImageUrl = !string.IsNullOrEmpty(variant.ImageUrl)
-                            ? variant.ImageUrl
-                            : variant.Product.MainImageUrl,
+                ? variant.ImageUrl
+                : variant.Product.MainImageUrl,
                 Color = variant.Color,
                 Memory = variant.Memory,
                 Price = variant.Price,
-                Quantity = quantity, // lấy số lượng từ client
-                Discount = discountPercent,
-                DiscountAmount = discountAmount,
+                Quantity = quantity,
+
+                DiscountType = discountType,
+                DiscountValue = discountValue,
+
                 AvailableColors = variant.Product.ProductVariants
-                        .Select(v => (v.Color, v.ImageUrl ?? variant.Product.MainImageUrl))
-                        .ToList()
-            });
+            .Select(v => (v.Color, v.ImageUrl ?? variant.Product.MainImageUrl))
+            .ToList()
+                });
 
             CartSessionHelper.SaveCart(HttpContext, cart);
 
             return Ok(new
             {
                 totalQuantity = cart.TotalQuantity,
-                totalPrice = cart.TotalPayable, // đã tính cả voucher
+                totalPrice = cart.TotalPayable, // đã tính cả voucher 
                 totalDiscount = cart.TotalDiscount,
                 voucher = cart.TotalVoucherDiscount
             });
@@ -122,6 +101,10 @@ namespace WebApplication1.Controllers
         public IActionResult ApplyVoucher(string code)
         {
             var cart = CartSessionHelper.GetCart(HttpContext);
+
+            // chặn áp dụng voucher khi cart rỗng
+            if (!cart.Items.Any())
+                return BadRequest(new { message = "Giỏ hàng trống, không thể áp dụng voucher" });
 
             var voucher = db.Discounts
                 .Where(d => d.IsActive && d.ProductId == null &&
@@ -133,13 +116,10 @@ namespace WebApplication1.Controllers
             if (voucher == null)
                 return BadRequest(new { message = "Voucher không hợp lệ" });
 
-            decimal discountAmount = 0;
-            if (voucher.Type == DiscountType.Percentage)
-                discountAmount = cart.TotalMoney * (voucher.Value / 100m);
-            else
-                discountAmount = voucher.Value;
+            if (voucher.Type != DiscountType.Percentage)
+                return BadRequest(new { message = "Hiện chỉ hỗ trợ voucher %" });
 
-            cart.ApplyVoucher(discountAmount);
+            cart.ApplyVoucherPercent(voucher.Value);
             CartSessionHelper.SaveCart(HttpContext, cart);
 
             return Ok(new
@@ -158,8 +138,13 @@ namespace WebApplication1.Controllers
         {
             var cart = CartSessionHelper.GetCart(HttpContext);
             cart.Increase(variantId);
+            // recalc voucher nếu có % 
+            if (cart.VoucherPercent > 0)
+            {
+                cart.ApplyVoucherPercent(cart.VoucherPercent);
+            }
             CartSessionHelper.SaveCart(HttpContext, cart);
-            // Trả JSON cart đầy đủ để JS cập nhật
+            // Trả JSON cart đầy đủ để JS cập nhật 
             return Ok(new
             {
                 items = cart.Items.Select(i => new
@@ -182,6 +167,11 @@ namespace WebApplication1.Controllers
         {
             var cart = CartSessionHelper.GetCart(HttpContext);
             cart.Decrease(variantId);
+            // recalc voucher nếu có % 
+            if (cart.VoucherPercent > 0)
+            {
+                cart.ApplyVoucherPercent(cart.VoucherPercent);
+            }
             CartSessionHelper.SaveCart(HttpContext, cart);
             return Ok(new
             {
@@ -206,7 +196,14 @@ namespace WebApplication1.Controllers
             var cart = CartSessionHelper.GetCart(HttpContext);
             cart.Remove(variantId);
             CartSessionHelper.SaveCart(HttpContext, cart);
-            return Ok();
+            return Ok(new
+            {
+                totalQuantity = cart.TotalQuantity,
+                totalMoney = cart.TotalMoney,
+                totalDiscount = cart.TotalDiscount,
+                voucher = cart.TotalVoucherDiscount,
+                totalPayable = cart.TotalPayable
+            });
         }
 
         /* Xóa nhiều cart item */
@@ -224,7 +221,10 @@ namespace WebApplication1.Controllers
             return Ok(new
             {
                 totalQuantity = cart.TotalQuantity,
-                totalPrice = cart.TotalMoney
+                totalMoney = cart.TotalMoney,
+                totalDiscount = cart.TotalDiscount,
+                voucher = cart.TotalVoucherDiscount,
+                totalPayable = cart.TotalPayable
             });
         }
 

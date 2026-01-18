@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.Models
+﻿using WebApplication1.Models.Enum;
+
+namespace WebApplication1.Models
 {
     public class CartItem
     {
@@ -12,17 +14,40 @@
         public decimal Price { get; set; }
         public int Quantity { get; set; }
 
-        // Giảm giá theo %
-        public int Discount { get; set; }
+        // Sửa discount
+        // ===== DISCOUNT =====
+        public CartDiscountType DiscountType { get; set; }
+        public decimal DiscountValue { get; set; }
 
-        // Giảm theo tiền cố định (vd: 99k)
-        public decimal DiscountAmount { get; set; } = 0;
+        // Giá cuối 1 sản phẩm 
+        // ===== TÍNH GIÁ =====
+        public decimal FinalPrice
+        {
+            get
+            {
+                decimal price = Price;
 
-        // Giá cuối 1 sản phẩm
-        public decimal FinalPrice => Math.Max(0, Price - Price * Discount / 100m - DiscountAmount);
+                switch (DiscountType)
+                {
+                    case CartDiscountType.Percentage:
+                        price -= price * DiscountValue / 100m;
+                        break;
+
+                    case CartDiscountType.Amount:
+                        price -= DiscountValue;
+                        break;
+
+                    case CartDiscountType.None:
+                    default:
+                        break;
+                }
+
+                return Math.Max(0, price);
+            }
+        }
 
         public decimal Total => FinalPrice * Quantity;
-
+ 
         public List<(string Color, string ImageUrl)> AvailableColors { get; set; } = new();
     }
 }
