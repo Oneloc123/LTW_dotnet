@@ -35,13 +35,13 @@ namespace WebApplication1.Controllers
 
             
             var blogs = _context.Blogs
-                .OrderByDescending(b => b.CreatedAt) 
-                .Take(4)
+                .OrderByDescending(b => b.ViewCount) 
+                .Take(2)
                 .ToList();
 
            
             ViewBag.Products = featuredProducts;
-            ViewBag.Blogs = blogs;
+            ViewBag.Blogs = blogs.ToList();
 
             return View();
         }
