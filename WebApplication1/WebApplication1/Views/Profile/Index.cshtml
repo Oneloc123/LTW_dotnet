@@ -86,6 +86,117 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="card shadow-sm mt-4">
+                <div class="card-header bg-white">
+                    <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#blogs">
+                                📝 Blog đã viết
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#orders">
+                                🛒 Đơn hàng
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews">
+                                ⭐ Đánh giá
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-body tab-content">
+
+                    <!-- ===== Blogs ===== -->
+                    <div class="tab-pane fade show active" id="blogs">
+                        @if (!Model.Blogs.Any())
+                        {
+                            <p class="text-muted">Bạn chưa viết blog nào.</p>
+                        }
+                        else
+                        {
+                            <ul class="list-group list-group-flush">
+                                @foreach (var blog in Model.Blogs)
+                                {
+                                    <li class="list-group-item">
+                                        <a href="/Blog/Details/@blog.Id" class="fw-bold">
+                                            @blog.Title
+                                        </a>
+                                        <div class="text-muted small">
+                                            @blog.CreatedAt.ToString("dd/MM/yyyy")
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
+
+                    <!-- ===== Orders ===== -->
+                    <div class="tab-pane fade" id="orders">
+                        @if (!Model.Orders.Any())
+                        {
+                            <p class="text-muted">Chưa có đơn hàng nào.</p>
+                        }
+                        else
+                        {
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Mã đơn</th>
+                                        <th>Ngày</th>
+                                        <th>Tổng</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var o in Model.Orders)
+                                    {
+                                        <tr>
+                                            <td>#@o.Id</td>
+                                            <td>@o.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                            @*<td>@o.TotalPrice.ToString("N0") đ</td> *@
+                                            <td>
+                                                <span class="badge bg-info">@o.Status</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+
+                    <!-- ===== Reviews ===== -->
+                    @* <div class="tab-pane fade" id="reviews">
+                        @if (!Model.Reviews.Any())
+                        {
+                            <p class="text-muted">Bạn chưa đánh giá sản phẩm nào.</p>
+                        }
+                        else
+                        {
+                            @foreach (var r in Model.Reviews)
+                            {
+                                <div class="border-bottom pb-2 mb-2">
+                                    <div class="fw-bold">@r.ProductName</div>
+                                    <div class="text-warning">
+                                        @for (int i = 0; i < r.Rating; i++)
+                                        {
+                                            <i class="bi bi-star-fill"></i>
+                                        }
+                                    </div>
+                                    <div class="small text-muted">@r.CreatedAt.ToString("dd/MM/yyyy")</div>
+                                    <p>@r.Comment</p>
+                                </div>
+                            }
+                        }
+                    </div> *@
+
+                </div>
+            </div>
+
         </div>
 
     </div>

@@ -27,7 +27,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">@blog.Title</h5>
                                 <p class="card-text text-muted">
-                                    @blog.Content.Substring(0, Math.Min(100, blog.Content.Length))...
+                                    @blog.Content?.Substring(0, Math.Min(100, blog.Content.Length))...
                                 </p>
 
                                 <small class="text-secondary">
