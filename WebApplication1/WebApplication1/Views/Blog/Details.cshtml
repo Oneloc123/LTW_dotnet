@@ -1,7 +1,21 @@
 ﻿@using WebApplication1.Models.BlogEdit
 @model Blog
 
+<style>
+    .blog-thumb {
+        width: 100%;
+        height: 200px; /* chiều cao cố định */
+        overflow: hidden;
+        border-radius: 6px;
+    }
 
+    .blog-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* cắt ảnh cho vừa khung */
+    }
+
+</style>
 <div class="container mt-4">
 
     <h2>@Model.Title</h2>
@@ -14,6 +28,15 @@
         |
         👁 @Model.ViewCount lượt xem
     </p>
+
+    @{
+        var thumbnail = string.IsNullOrEmpty(Model.Thumbnail)
+        ? "https://i.ytimg.com/vi/FAVnv3Douvs/maxresdefault.jpg"
+        : Model.Thumbnail;
+    }
+    <div style="overflow: hidden;">
+        <img src="@thumbnail" alt="@Model.Title" class="blog-img" />
+    </div>
 
     <hr />
 

@@ -414,8 +414,13 @@
         {
             <div class="col-lg-6">
                 <div class="blog-card">
+                    @{
+                        var thumbnail = string.IsNullOrEmpty(b.Thumbnail)
+                        ? "https://i.ytimg.com/vi/FAVnv3Douvs/maxresdefault.jpg"
+                        : b.Thumbnail;
+                    }
                     <div style="overflow: hidden;">
-                        <img src="@b.Thumbnail" alt="@b.Title" class="blog-img" />
+                        <img src="@thumbnail" alt="@b.Title" class="blog-img" />
                     </div>
                     <div class="blog-content">
                         <h3 class="blog-title">@b.Title</h3>
