@@ -5,8 +5,6 @@
     ViewData["Title"] = "Chi tiết sản phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml"; // Đã bổ sung Layout
 
-    // XỬ LÝ LỖI LAMBDA EXPRESSION:
-    // Tách logic xử lý chuỗi ra khỏi HTML để tránh lỗi Runtime
     string moTaHienThi = "Đang cập nhật...";
     if (!string.IsNullOrEmpty(Model.Description))
     {
@@ -151,10 +149,19 @@
                 <strong>Tình trạng:</strong> <span style="color:green; font-weight:bold;">Còn hàng</span>
             </p>
 
-            <button class="btn-buy"
-                    onclick="addToCart(@Model.ProductVariants.First().Id)">
-                THÊM VÀO GIỎ HÀNG
-            </button>
+            @if (Model.ProductVariants != null && Model.ProductVariants.Any())
+            {
+                <button class="btn-add-cart"
+                        onclick="addToCart(@Model.ProductVariants.First().Id)">
+                    THÊM VÀO GIỎ HÀNG
+                </button>
+            }
+            else
+            {
+                <button class="btn-add-cart" style="background-color: #ccc; cursor: not-allowed;" disabled>
+                    TẠM HẾT HÀNG
+                </button>
+            }
         </div>
     </div>
 
