@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.Models.UserEdit
+﻿using WebApplication1.Models.OrderEdit.Order;
+
+namespace WebApplication1.Models.UserEdit
 {
     public class ProfileEditViewModel
     {
@@ -17,6 +19,10 @@
         // Avatar
         public IFormFile AvatarFile { get; set; }   // 👈 upload
         public string CurrentAvatarUrl { get; set; } // 👈 hiển thị ảnh cũ
+
+        public List<BlogEdit.Blog> Blogs { get; set; } = new();
+        public List<Order> Orders { get; set; } = new();
+       // public List<Review> Reviews { get; set; } = new();
     }
 }
 

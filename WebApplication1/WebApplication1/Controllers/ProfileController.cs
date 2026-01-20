@@ -35,6 +35,11 @@ public class ProfileController : Controller
         var address = _context.UserAddresses
             .FirstOrDefault(a => a.UserId == userId);
 
+        var blogs = _context.Blogs
+    .Where(b => b.UserId == user.Id)
+    .ToList();
+
+
         var vm = new ProfileEditViewModel
         {
             FullName = user.FullName,
@@ -46,7 +51,9 @@ public class ProfileController : Controller
             AddressId = address?.Id,
             FullAddress = address?.FullAddress,
 
-            CurrentAvatarUrl = user.AvatarUrl ?? "/uploads/avtars/default-avatar.png"
+            CurrentAvatarUrl = user.AvatarUrl ?? "/uploads/avtars/default-avatar.png",
+
+            Blogs = blogs
 
         };
 
