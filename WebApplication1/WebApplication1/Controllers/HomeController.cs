@@ -8,15 +8,18 @@ namespace WebApplication1.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-                    
-        public HomeController(ILogger<HomeController> logger)
+        private readonly Models.UserEdit.AppDbContext _context;
+
+
+        public HomeController(ILogger<HomeController> logger, Models.UserEdit.AppDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            // Data demo sản phẩm nổi bật
+            // ====== Demo sản phẩm ======
             var products = new List<Products>()
             {
                 new Products(){ Id=1, Name="Laptop Gaming MSI", Image="/images/laptop.jpg", Price=25000000, Description="Hiệu năng mạnh mẽ" },
@@ -24,19 +27,21 @@ namespace WebApplication1.Controllers
                 new Products(){ Id=3, Name="Tai nghe Sony", Image="/images/headphone.jpg", Price=3500000, Description="Chống ồn tốt" }
             };
 
-            // Data demo blog
-            var blogs = new List<Blog>() { };
-            /*
-            {
-                new Blogs(){ Id=1, Title="Tin công nghệ hot nhất 2025", Thumbnail="/images/blog1.jpg", Summary="Cập nhật xu hướng mới..." },
-                new Blogs(){ Id=2, Title="Review laptop gaming", Thumbnail="/images/blog2.jpg", Summary="Top sản phẩm đáng mua..." }
-            };
+            // ====== Query blog ======
+            var blogs = _context.Blogs.AsQueryable();
 
-            */
-            ViewBag.Blogs = blogs;
+            // Blog nổi bật
+            ViewBag.FeaturedBlogs = blogs
+                .OrderByDescending(b => b.ViewCount)
+                .Take(2)
+                .ToList();
+
+            ViewBag.Blogs = blogs.Take(2).ToList();
             ViewBag.Products = products;
+
             return View();
         }
+
         public ActionResult ProductDetail(int id)
         {
             // Demo chi tiết sản phẩm
@@ -51,6 +56,7 @@ namespace WebApplication1.Controllers
 
             return View(product);
         }
+
         public IActionResult Privacy()
         {
             return View();

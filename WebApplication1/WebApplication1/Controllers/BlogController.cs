@@ -77,7 +77,7 @@ namespace WebApplication1.Controllers
             if (!IsLoggedIn())
                 return RedirectToAction("Login", "Account");
             int? userId = HttpContext.Session.GetInt32("UserId");
-
+            
            
 
             
