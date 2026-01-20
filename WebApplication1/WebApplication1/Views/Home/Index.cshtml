@@ -18,46 +18,40 @@
     }
 
     /* Banner */
-    .hero-banner {
+    #heroCarousel {
         width: 100%;
         height: 500px;
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('/images/banner.jpg') center/cover no-repeat;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        position: relative;
         overflow: hidden;
+        position: relative;
+        background-color: #f0f0f0; 
+        margin-bottom: 2rem; 
     }
 
-        .hero-banner::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to top, white, transparent);
-        }
-
-    .hero-content {
-        z-index: 1;
-        color: white;
-        max-width: 800px;
-        padding: 20px;
+    .carousel-inner {
+        height: 100%;
     }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-        }
+    .carousel-item {
+        height: 100%;
+    }
 
-        .hero-content p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
+    .hero-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center; 
+    }
+
+    .carousel-control-prev, .carousel-control-next {
+        width: 5%; 
+        opacity: 0.7;
+    }
+
+    .carousel-control-prev:hover, .carousel-control-next:hover {
+        opacity: 1;
+        background: rgba(0,0,0,0.1); 
+    }
+    
 
     /* Tiêu đề section */
     .section-title {
@@ -95,6 +89,8 @@
         transition: var(--transition);
         height: 100%;
         background: white;
+        display: flex;
+        flex-direction: column;
     }
 
         .product-card:hover {
@@ -102,19 +98,24 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
         }
 
-    .product-img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        transition: var(--transition);
-    }
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1 / 1; 
 
-    .product-card:hover .product-img {
-        transform: scale(1.05);
-    }
-
+            object-fit: contain;
+        
+            padding: 15px;
+            background-color: #fff;
+            object-position: center;
+            transition: var(--transition);
+        
+            display: block;
+        }
     .product-info {
         padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
     }
 
     .product-title {
@@ -144,6 +145,7 @@
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        margin-bottom: auto;
     }
 
     /* Card blog */
@@ -265,61 +267,135 @@
 </style>
 
 <!-- Hero Banner -->
-<div class="hero-banner">
-    <div class="hero-content">
-        <h1>Chào mừng đến với website!</h1>
-        <p class="lead">Khám phá những sản phẩm chất lượng và bài viết hữu ích</p>
-        <a href="#featured-products" class="btn btn-light btn-lg mt-3 px-4 py-2 fw-bold" style="border-radius: 8px;">
-            Khám phá ngay
-        </a>
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" >
+
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
     </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/images/banner1.png" class="d-block w-100 hero-img" alt="Banner 1">
+        </div>
+        <div class="carousel-item">
+            <img src="/images/banner2.png" class="d-block w-100 hero-img" alt="Banner 2">
+        </div>
+        <div class="carousel-item">
+            <img src="/images/banner3.png" class="d-block w-100 hero-img" alt="Banner 3">
+        </div>
+        <div class="carousel-item">
+            <img src="/images/banner4.png" class="d-block w-100 hero-img" alt="Banner 4">
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.3); border-radius: 50%;"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.3); border-radius: 50%;"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
 
 <!-- Sản phẩm nổi bật -->
 <section id="featured-products" class="container py-5">
     <div class="section-title">
         <h2>Sản phẩm nổi bật</h2>
-        <p class="text-muted mt-2">Những sản phẩm được yêu thích nhất</p>
+        <p class="text-muted mt-2">Được đánh giá cao bởi cộng đồng</p>
     </div>
 
     <div class="row g-4">
-        @foreach (var p in products)
-        {
-            <div class="col-lg-4 col-md-6">
-                <div class="product-card">
-                    <div style="overflow: hidden;">
-                        <img src="@p.Image" alt="@p.Name" class="product-img" />
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">@p.Name</h3>
-                        <p class="product-price">@p.Price.ToString("N0") đ</p>
-                        <p class="product-description">@p.Description</p>
+        @{
+            // Lấy danh sách từ ViewBag
+            var rawList = ViewBag.Products as List<WebApplication1.Models.Products>;
 
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="@Url.Action("ProductDetail", "Home", new { id = p.Id })"
-                               class="btn btn-primary-custom btn-custom">
-                                Xem chi tiết
+
+            var listSanPham = rawList != null ? rawList.Take(6).ToList() : new List<WebApplication1.Models.Products>();
+        }
+
+        @if (listSanPham != null && listSanPham.Any())
+        {
+            @foreach (var item in listSanPham)
+            {
+                // Tính toán sao trung bình 
+                double ratingSum = item.Reviews != null ? item.Reviews.Sum(r => r.Rating) : 0;
+                int reviewCount = item.Reviews != null ? item.Reviews.Count : 0;
+                double avgRating = reviewCount > 0 ? ratingSum / reviewCount : 0;
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <div style="overflow: hidden; position: relative;">
+                            <a href="/Product/Detail/@item.Id">
+                                <img src="@(string.IsNullOrEmpty(item.MainImageUrl) ? "https://placehold.co/400" : item.MainImageUrl)"
+                                     alt="@item.Name" class="product-img" />
                             </a>
-                            <span class="badge bg-warning text-dark p-2">Nổi bật</span>
+
+                            @if (reviewCount > 0)
+                            {
+                                <span style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                                    <i class="fas fa-comment-alt"></i> @reviewCount
+                                </span>
+                            }
+                        </div>
+
+                        <div class="product-info">
+                            <h3 class="product-title">@item.Name</h3>
+
+                            <div class="mb-2">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= Math.Round(avgRating))
+                                    {
+                                        <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="far fa-star text-muted" style="font-size: 14px;"></i>
+                                    }
+                                }
+                                <span class="text-muted ms-1" style="font-size: 13px;">(@ratingSum điểm)</span>
+                            </div>
+
+                            <p class="product-price">@item.Price.ToString("N0") đ</p>
+
+                            <p class="product-description">
+                                @(string.IsNullOrEmpty(item.Description) ? "Đang cập nhật..." : item.Description)
+                            </p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="/Product/Detail/@item.Id" class="btn btn-primary-custom btn-custom">
+                                    Xem chi tiết
+                                </a>
+                                <span class="badge bg-danger text-white p-2">
+                                    <i class="fas fa-fire"></i> Hot
+                                </span>
+                            </div>
                         </div>
                     </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center">
+                <div class="alert alert-warning">
+                    Chưa có sản phẩm nào để hiển thị.
                 </div>
             </div>
         }
     </div>
 
-    @if (products != null && products.Count > 0)
+    @if (listSanPham != null && listSanPham.Any())
     {
         <div class="text-center mt-5">
-            <a href="@Url.Action("Products", "Home")" class="btn btn-outline-primary btn-lg px-4">
+            <a href="/Product/Index" class="btn btn-outline-primary btn-lg px-4">
                 Xem tất cả sản phẩm
             </a>
-        </div>
-    }
-    else
-    {
-        <div class="alert alert-info text-center">
-            Hiện chưa có sản phẩm nào. Vui lòng quay lại sau!
         </div>
     }
 </section>
@@ -346,13 +422,13 @@
                         <p class="blog-summary">@b.Content</p>
 
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="@Url.Action("BlogDetail", "Home", new { id = b.Id })"
+                            <a asp-controller="Blog"
+                               asp-action="Details"
+                               asp-route-id="@b.Id"
                                class="btn btn-success-custom btn-custom">
                                 Đọc bài viết
                             </a>
-                            <small class="text-muted">
-                                <i class="far fa-clock me-1"></i> 5 phút đọc
-                            </small>
+
                         </div>
                     </div>
                 </div>
@@ -363,7 +439,9 @@
     @if (blogs != null && blogs.Count > 0)
     {
         <div class="text-center mt-5">
-            <a href="@Url.Action("Blogs", "Home")" class="btn btn-outline-success btn-lg px-4">
+            <a asp-controller="Blog"
+               asp-action="Index"
+               class="btn btn-outline-success btn-lg px-4">
                 Xem tất cả bài viết
             </a>
         </div>

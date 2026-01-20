@@ -18,18 +18,18 @@ namespace WebApplication1.Models
         public string Comment { get; set; } = "";
 
         [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; }
 
-        // --- Liên kết Sản phẩm ---
         [Column("product_id")]
         public int ProductId { get; set; }
 
         [ForeignKey("ProductId")]
-        public Product Product { get; set; }
+        public Products Product { get; set; }
 
-      
+        [Column("user_id")]
+        public int? UserId { get; set; }
+
         [Column("user_name")]
-        public string UserName { get; set; }
-
+        public string? UserName { get; set; }
     }
 }

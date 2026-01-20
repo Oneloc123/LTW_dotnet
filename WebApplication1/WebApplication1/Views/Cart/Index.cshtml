@@ -1,4 +1,5 @@
-﻿@model WebApplication1.Models.Carts
+﻿@using WebApplication1.Models.Enum
+@model WebApplication1.Models.Carts
 @{
     ViewData["Title"] = "Giỏ hàng";
 }
@@ -30,14 +31,14 @@
                             <input type="checkbox" class="cart__checkbox" id="selectAll" />
                             <span>Chọn tất cả (<span id="countSelected">0</span>)</span>
                         </label>
-
-                        <i class="fa-regular fa-trash-can cart__delete-all cart__delete-all--disable"></i>
+                        <!-- cart__delete-all--disable -->
+                        <i class="fa-regular fa-trash-can cart__delete-all"></i>
                     </div>
 
                     <div class="cart__list">
                         @foreach (var item in Model.Items)
                         {
-                            <article class="cart-item">
+                            <article class="cart-item" data-variant-id="@item.VariantId">
                                 <input type="checkbox" class="cart-item__checkbox" />
 
                                 <a href="#!">
@@ -50,41 +51,34 @@
                                     </h3>
 
                                     <div class="cart-item__color">
-                                        Màu: <span class="cart-item__color-selected">Xám</span>
+                                        Màu: <span class="cart-item__color-selected">@item.Color</span>
                                         <i class="fa-solid fa-angle-down"></i>
 
                                         <!-- Dropdown menu -->
                                         <ul class="cart-item__color-menu">
-                                            <li class="cart-item__color-menu__item">
-                                                <img class="cart-item__color-menu__img" src="~/images/xiaomi_15t_pro_xam_5_a006830687.webp" alt="Xám">
-                                                <span class="cart-item__color-menu__name">Xám</span>
-                                            </li>
-
-                                            <li class="cart-item__color-menu__item">
-                                                <img class="cart-item__color-menu__img" src="img/red.png" alt="Vàng">
-                                                <span class="cart-item__color-menu__name">Vàng</span>
-                                            </li>
-
-                                            <li class="cart-item__color-menu__item">
-                                                <img class="cart-item__color-menu__img" src="img/blue.png" alt="Xanh">
-                                                <span class="cart-item__color-menu__name">Xanh</span>
-                                            </li>
+                                            @foreach (var colorOption in item.AvailableColors)
+                                            {
+                                                <li class="cart-item__color-menu__item">
+                                                    <img class="cart-item__color-menu__img" src="@colorOption.ImageUrl" alt="@colorOption.Color" />
+                                                    <span class="cart-item__color-menu__name">@colorOption.Color</span>
+                                                </li>
+                                            }
                                         </ul>
                                     </div>
                                 </div>
 
                                 <div class="cart-item__price-box">
                                     <span class="cart-item__price-current">
-                                        @((item.Price * (1 - item.Discount / 100m)).ToString("N0"))đ
+                                        @item.FinalPrice.ToString("N0")đ
                                     </span>
 
-                                    @if (item.Discount > 0)
+                                    @if (item.DiscountType != CartDiscountType.None)
                                     {
                                         <span class="cart-item__price-old">@item.Price.ToString("N0")đ</span>
                                     }
                                 </div>
-
-                                <div class="cart-item__quantity .cart-item__quantity--disable">
+                                <!-- cart-item__quantity--disable -->
+                                <div class="cart-item__quantity">
                                     <button class="cart-item__btn cart-item__btn--minus">-</button>
                                     <span class="cart-item__quantity-value">@item.Quantity</span>
                                     <button class="cart-item__btn cart-item__btn--plus">+</button>
@@ -124,25 +118,27 @@
 
                         <div class="cart-summary__item">
                             <span class="cart-summary__label">Tổng khuyến mãi</span>
-                            <span class="cart-summary__value">0đ</span>
+                            <span class="cart-summary__value">
+                                @( (Model.TotalDiscount + Model.TotalVoucherDiscount).ToString("N0") )đ
+                            </span>
                         </div>
 
                         <!-- Nhóm giảm giá -->
                         <div class="cart-summary__group">
                             <div class="cart-summary__item">
                                 <span class="cart-summary__label">Giảm giá sản phẩm</span>
-                                <span class="cart-summary__value">0đ</span>
+                                <span class="cart-summary__value">@Model.TotalDiscount.ToString("N0")đ</span>
                             </div>
 
                             <div class="cart-summary__item cart-summary__divider--dashed">
                                 <span class="cart-summary__label">Voucher</span>
-                                <span class="cart-summary__value">0đ</span>
+                                <span class="cart-summary__value">@Model.TotalVoucherDiscount.ToString("N0")đ</span>
                             </div>
                         </div>
 
                         <div class="cart-summary__item cart-summary__item--total">
                             <span class="cart-summary__label">Cần thanh toán</span>
-                            <span class="cart-summary__value cart-summary__value--highlight">0đ</span>
+                            <span class="cart-summary__value cart-summary__value--highlight">@Model.TotalPayable.ToString("N0")đ</span>
                         </div>
 
                         <button class="cart-summary__btn btn btn--primary-color">
@@ -157,3 +153,170 @@
     </div>
 </div>
 
+<!-- js xử lý xóa, tăng giảm số lượng -->
+<script>
+    const deleteAllBtn = document.querySelector(".cart__delete-all");
+    const selectAll = document.getElementById("selectAll");
+    const countSelectedSpan = document.getElementById("countSelected");
+
+    function updateSelectedCount() {
+        const selectedCheckboxes = document.querySelectorAll(".cart-item__checkbox:checked");
+        const totalCheckboxes = document.querySelectorAll(".cart-item__checkbox").length;
+
+        countSelectedSpan.textContent = selectedCheckboxes.length;
+
+        if (selectedCheckboxes.length > 0) deleteAllBtn.classList.remove("disabled");
+        else deleteAllBtn.classList.add("disabled");
+
+        document.querySelectorAll(".cart-item").forEach(item => {
+            const checkbox = item.querySelector(".cart-item__checkbox");
+            const deleteBtn = item.querySelector(".cart-item__delete");
+            if (checkbox.checked) deleteBtn.classList.remove("disabled");
+            else deleteBtn.classList.add("disabled");
+        });
+
+        selectAll.checked = selectedCheckboxes.length === totalCheckboxes;
+    }
+
+    // Chọn từng item
+    document.querySelectorAll(".cart-item__checkbox").forEach(cb => {
+        cb.addEventListener("change", updateSelectedCount);
+    });
+
+    // Chọn tất cả
+    selectAll.addEventListener("change", () => {
+        document.querySelectorAll(".cart-item__checkbox")
+            .forEach(cb => cb.checked = selectAll.checked);
+        updateSelectedCount();
+    });
+
+    // Xóa từng item
+    document.querySelectorAll(".cart-item__delete").forEach(btn => {
+        btn.addEventListener("click", () => {
+            if (btn.classList.contains("disabled")) return;
+            const item = btn.closest(".cart-item");
+            const variantId = item.dataset.variantId;
+
+            fetch("/Cart/Remove", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `variantId=${variantId}`
+                }).then(res => res.json())
+                .then(data => {
+                    item.remove();
+                    updateSelectedCount();
+                    updateSummary(data);
+                    updateCartBadge(); // thêm
+                });
+        });
+    });
+
+    // Xóa nhiều item
+    deleteAllBtn.addEventListener("click", () => {
+        if (deleteAllBtn.classList.contains("disabled")) return;
+        const ids = [];
+        document.querySelectorAll(".cart-item__checkbox:checked").forEach(cb => {
+            ids.push(parseInt(cb.closest(".cart-item").dataset.variantId));
+        });
+        if (ids.length === 0) return;
+
+        fetch("/Cart/RemoveSelected", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(ids)
+            }).then(res => res.json())          // nhận data từ controller
+            .then(data => {
+                document.querySelectorAll(".cart-item__checkbox:checked")
+                    .forEach(cb => cb.closest(".cart-item").remove());
+
+                updateSelectedCount();
+                updateSummary(data);          // truyền data
+                updateCartBadge(); // thêm
+            });
+    });
+
+    // Hàm cập nhật quantity + total price + summary
+        function updateItem(itemEl, data) {
+        const variantId = itemEl.dataset.variantId;
+        const itemData = data.items.find(i => i.variantId == variantId);
+
+        if (!itemData) {
+            // nếu item không còn trong cart => xóa DOM
+            itemEl.remove();
+            updateSelectedCount();
+            return;
+        }
+
+        itemEl.querySelector(".cart-item__quantity-value").textContent = itemData.quantity;
+        // finalPrice là giá 1 SP sau giảm, backend đảm bảo itemData.finalPrice * itemData.quantity
+        itemEl.querySelector(".cart-item__price-current").textContent = (itemData.finalPrice * itemData.quantity).toLocaleString("vi-VN") + "đ";
+    }
+
+    // Cập nhật summary
+        function updateSummary(data) {
+        const summaryValues = document.querySelectorAll(".cart-summary__value");
+
+        if (summaryValues.length < 5) return;
+
+        // 0️⃣ Tạm tính (chưa giảm)
+        summaryValues[0].textContent =
+            data.totalMoney.toLocaleString("vi-VN") + "đ";
+
+        // 1️⃣ Tổng giảm (giảm SP + voucher)
+        summaryValues[1].textContent =
+            (data.totalDiscount + data.voucher).toLocaleString("vi-VN") + "đ";
+
+        // 2️⃣ Giảm sản phẩm
+        summaryValues[2].textContent =
+            data.totalDiscount.toLocaleString("vi-VN") + "đ";
+
+        // 3️⃣ Voucher
+        summaryValues[3].textContent =
+            data.voucher.toLocaleString("vi-VN") + "đ";
+
+        // 4️⃣ Tổng thanh toán
+        summaryValues[4].textContent =
+            data.totalPayable.toLocaleString("vi-VN") + "đ";
+    }
+
+    // Nút +
+    document.querySelectorAll(".cart-item__btn--plus").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const item = btn.closest(".cart-item");
+            const variantId = item.dataset.variantId;
+
+            fetch("/Cart/Increase", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `variantId=${variantId}`
+            }).then(res => res.json())
+            .then(data => {
+                updateItem(item, data);
+                updateSummary(data);
+                updateCartBadge(); // thêm
+            });
+        });
+    });
+
+    // Nút -
+    document.querySelectorAll(".cart-item__btn--minus").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const item = btn.closest(".cart-item");
+            const variantId = item.dataset.variantId;
+
+            fetch("/Cart/Decrease", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `variantId=${variantId}`
+            }).then(res => res.json())
+            .then(data => {
+                updateItem(item, data); // nếu quantity <= 0 thì item tự remove
+                updateSummary(data);
+                updateCartBadge(); // thêm
+            });
+        });
+    });
+
+    // Khởi tạo trạng thái ban đầu
+    updateSelectedCount();
+</script>
