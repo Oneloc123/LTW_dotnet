@@ -1,17 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using WebApplication1.Models;
+using WebApplication1.Models; 
+
 using WebApplication1.Models.BlogEdit;
+using WebApplication1.Models.UserEdit;
+using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly Models.UserEdit.AppDbContext _context;
 
+        
+        private readonly AppDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, Models.UserEdit.AppDbContext context)
+        
+        public HomeController(ILogger<HomeController> logger, AppDbContext context)
         {
             _logger = logger;
             _context = context;
@@ -19,40 +25,39 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-            // ====== Demo sản phẩm ======
-            var products = new List<Products>()
-            {
-                new Products(){ Id=1, Name="Laptop Gaming MSI", Image="/images/laptop.jpg", Price=25000000, Description="Hiệu năng mạnh mẽ" },
-                new Products(){ Id=2, Name="Iphone 15 Pro", Image="/images/iphone.jpg", Price=32000000, Description="Camera cực tốt" },
-                new Products(){ Id=3, Name="Tai nghe Sony", Image="/images/headphone.jpg", Price=3500000, Description="Chống ồn tốt" }
-            };
+            
+            var featuredProducts = _context.Products
+                .Include(p => p.Images)           
+                .Include(p => p.Reviews)          
+                .OrderByDescending(p => p.Reviews.Average(r => r.Rating)) 
+                .Take(6)                          
+                .ToList();
 
-            // ====== Query blog ======
-            var blogs = _context.Blogs.AsQueryable();
-
-            // Blog nổi bật
-            ViewBag.FeaturedBlogs = blogs
-                .OrderByDescending(b => b.ViewCount)
+            
+            var blogs = _context.Blogs
+                .OrderByDescending(b => b.ViewCount) 
                 .Take(2)
                 .ToList();
 
-            ViewBag.Blogs = blogs.Take(2).ToList();
-            ViewBag.Products = products;
+           
+            ViewBag.Products = featuredProducts;
+            ViewBag.Blogs = blogs.ToList();
 
             return View();
         }
 
-        public ActionResult ProductDetail(int id)
+        public IActionResult ProductDetail(int id)
         {
-            // Demo chi tiết sản phẩm
-            var product = new Products()
+            
+            var product = _context.Products
+                .Include(p => p.Reviews)
+                .Include(p => p.Specifications)
+                .FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
             {
-                Id = id,
-                Name = "Laptop Gaming MSI",
-                Image = "/images/laptop.jpg",
-                Price = 25000000,
-                Description = "CPU Core i7, RAM 16GB, SSD 1TB"
-            };
+                return NotFound();
+            }
 
             return View(product);
         }

@@ -11,15 +11,15 @@ namespace WebApplication1.Models
         public int Id { get; set; }
 
         [Column("spec_name")]
-        public string SpecName { get; set; } = "";  // Ví dụ: "RAM"
+        public string SpecName { get; set; } = "";
 
         [Column("spec_value")]
-        public string SpecValue { get; set; } = ""; // Ví dụ: "8GB"
+        public string SpecValue { get; set; } = "";
 
         [Column("product_id")]
         public int ProductId { get; set; }
 
         [ForeignKey("ProductId")]
-        public Product Product { get; set; } // Quan hệ navigation
+        public Products Product { get; set; }
     }
 }

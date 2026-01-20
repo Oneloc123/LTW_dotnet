@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Models;
 using WebApplication1.Helpers;
 using WebApplication1.Models.UserEdit;
+using WebApplication1.ViewModels;
 namespace WebApplication1.Controllers
 {
     public class AccountController : Controller

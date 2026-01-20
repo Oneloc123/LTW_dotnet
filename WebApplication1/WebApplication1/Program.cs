@@ -32,6 +32,9 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30); // thời gian sống của session
     options.Cookie.HttpOnly = true; // chỉ có HTTP truy cập
     options.Cookie.IsEssential = true; // cookie cần thiết
+
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.SameSite = SameSiteMode.Lax;
 });
 
 var app = builder.Build();
@@ -60,8 +63,9 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-
-
-
+// admin
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
