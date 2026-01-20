@@ -26,12 +26,12 @@ namespace WebApplication1.Controllers
         public IActionResult Index()
         {
 
-            var featuredProducts = _context.Products;
-                //.Include(p => p.Images)           
-                //.Include(p => p.Reviews)          
-                //.OrderByDescending(p => p.Reviews.Average(r => r.Rating)) 
-                //.Take(6)                          
-                //.ToList();
+            var featuredProducts = _context.Products
+                .Include(p => p.Images)           
+                .Include(p => p.Reviews)          
+                .OrderByDescending(p => p.Reviews.Average(r => r.Rating)) 
+                .Take(6)                          
+                .ToList();
 
             
             var blogs = _context.Blogs
