@@ -64,5 +64,7 @@ namespace WebApplication1.Models.UserEdit
 
         public DbSet<Discount> Discounts { get; set; }
 
+        public DbSet<WishListItem> WishListItems { get; set; }
+
     }
 }
