@@ -1,6 +1,20 @@
 ﻿@using WebApplication1.Models.BlogEdit
 @model List<Blog>
+<style>
+        .blog-thumb {
+        width: 100%;
+        height: 200px;          /* chiều cao cố định */
+        overflow: hidden;
+        border-radius: 6px;
+    }
 
+    .blog-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;      /* cắt ảnh cho vừa khung */
+    }
+
+</style>
 <div class="container mt-4">
 
     <!-- 🔍 SEARCH + FILTER -->
@@ -22,13 +36,23 @@
             <div class="row g-4">
                 @foreach (var blog in Model)
                 {
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-4">
                         <div class="card h-100 shadow-sm">
+
+                            <!-- Ảnh -->
+                            @{
+                                var thumbnail = string.IsNullOrEmpty(blog.Thumbnail)
+                                    ? "https://i.ytimg.com/vi/FAVnv3Douvs/maxresdefault.jpg"
+                                    : blog.Thumbnail;
+                            }
+                            <div class="blog-thumb">
+                                <img src="@thumbnail"
+                                     alt="@blog.Title"
+                                     class="img-fluid blog-img" />
+                            </div>
+
                             <div class="card-body">
                                 <h5 class="card-title">@blog.Title</h5>
-                                <p class="card-text text-muted">
-                                    @blog.Content?.Substring(0, Math.Min(100, blog.Content.Length))...
-                                </p>
 
                                 <small class="text-secondary">
                                     👁 @blog.ViewCount lượt xem |
@@ -46,6 +70,7 @@
                         </div>
                     </div>
                 }
+
             </div>
         </div>
 

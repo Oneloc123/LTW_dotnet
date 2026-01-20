@@ -72,7 +72,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string title, string content, IFormFile wordFile)
+        public async Task<IActionResult> Create(string title,string? img, string content, IFormFile wordFile)
         {
             if (!IsLoggedIn())
                 return RedirectToAction("Login", "Account");
@@ -93,6 +93,7 @@ namespace WebApplication1.Controllers
                 Title = title,
                 Content = content,
                 UserId = GetCurrentUserId(),
+                Thumbnail = img,
                 CreatedAt = DateTime.Now
             };
 

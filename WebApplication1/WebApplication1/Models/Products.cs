@@ -36,8 +36,6 @@ namespace WebApplication1.Models
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
         // Navigation
-
-
         public List<ProductImage> Images { get; set; } = new List<ProductImage>();
         public List<Specification> Specifications { get; set; } = new();
         public ICollection<Reviews> Reviews { get; set; } = new List<Reviews>();
