@@ -79,6 +79,6 @@ namespace WebApplication1.Models.UserEdit
         public ICollection<Blog> Blogs { get; set; }
         public ICollection<BlogComment> BlogComments { get; set; }
 
-
+        public ICollection<WishListItem> WishListItems { get; set; }
     }
 }

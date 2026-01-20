@@ -155,6 +155,10 @@
                         onclick="addToCart(@Model.ProductVariants.First().Id)">
                     THÊM VÀO GIỎ HÀNG
                 </button>
+                <button onclick="toggleWishlist(@Model.Id)"
+                        class="btn btn-outline-danger">
+                    ❤️ Yêu thích
+                </button>
             }
             else
             {

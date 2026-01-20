@@ -1,0 +1,41 @@
+﻿@model List<WebApplication1.Models.WishListViewModel>
+
+<div class="container mt-4">
+    <h3>❤️ Wish List</h3>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">Chưa có sản phẩm nào</div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <img src="@(item.ImageUrl ?? "/images/no-image.png")"
+                             class="card-img-top"
+                             style="height:200px; object-fit:cover" />
+
+                        <div class="card-body">
+                            <h5>@item.ProductName</h5>
+                            <p class="text-danger fw-bold">
+                                @item.Price.ToString("N0") đ
+                            </p>
+                        </div>
+
+                        <div class="card-footer bg-white">
+                           
+                                <input type="hidden" name="id" value="@item.WishListId" />
+                                <button class="btn btn-outline-danger w-100"
+                                        onclick="removeWishlist(@item.WishListId)">
+                                    ❌ Xóa khỏi wishlist
+                                </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
