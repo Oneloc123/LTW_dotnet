@@ -1,30 +1,31 @@
-﻿@using WebApplication1.Models.UserEdit
-@model User
+﻿@model WebApplication1.Models.UserEdit.User
 @{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h3>@ViewBag.Title</h3>
+<h2>Thêm User</h2>
 
-<form method="post">
-    <div class="mb-3">
-        <label>Email</label>
-        <input asp-for="Email" class="form-control" />
+<form method="post" action="/Admin/User/Create">
+    @Html.AntiForgeryToken()
+
+    <input name="Username" class="form-control mb-2" placeholder="Username" required />
+    <input name="Email" type="email" class="form-control mb-2" placeholder="Email" required />
+    <input name="PasswordHash" type="password" class="form-control mb-2" placeholder="Password" required />
+
+    <input name="FullName" class="form-control mb-2" placeholder="Họ tên" />
+    <input name="PhoneNumber" class="form-control mb-2" placeholder="Số điện thoại" />
+
+    <select name="Role" class="form-control mb-2">
+        <option>User</option>
+        <option>Admin</option>
+        <option>Manager</option>
+    </select>
+
+    <div class="form-check mb-2">
+        <input type="checkbox" name="IsActive" class="form-check-input" checked />
+        <label class="form-check-label">Kích hoạt</label>
     </div>
 
-    <div class="mb-3">
-        <label>Họ tên</label>
-        <input asp-for="FullName" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label>Trạng thái</label>
-        <select asp-for="IsActive" class="form-select">
-            <option value="true">Active</option>
-            <option value="false">Inactive</option>
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-success">Lưu</button>
-    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    <button class="btn btn-success">Lưu</button>
+    <a href="/Admin/User" class="btn btn-secondary">Quay lại</a>
 </form>
