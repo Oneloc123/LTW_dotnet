@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Helpers;
 using WebApplication1.Models.UserEdit;
 
 namespace WebApplication1.Areas.Admin.Controllers
@@ -13,65 +14,102 @@ namespace WebApplication1.Areas.Admin.Controllers
             _context = context;
         }
 
+        // ======================
         // LIST
+        // ======================
         public IActionResult Index()
         {
-            return View(_context.Users.ToList());
+            var users = _context.Users
+                .OrderByDescending(x => x.CreatedAt)
+                .ToList();
+
+            return View(users);
         }
 
+        // ======================
         // CREATE
+        // ======================
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(User user)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Users.Add(user);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
+            if (!ModelState.IsValid)
+                return View(user);
+
+            user.PasswordHash = PasswordHelper.Hash(user.PasswordHash);
+            user.CreatedAt = DateTime.Now;
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            return Redirect("/Admin/User");
         }
 
+        // ======================
         // EDIT
+        // ======================
         public IActionResult Edit(int id)
         {
             var user = _context.Users.Find(id);
             if (user == null) return NotFound();
+
             return View(user);
         }
 
         [HttpPost]
-        public IActionResult Edit(User user)
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(User model)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Users.Update(user);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = _context.Users.Find(model.Id);
+            if (user == null) return NotFound();
+
+            user.Email = model.Email;
+            user.FullName = model.FullName;
+            user.PhoneNumber = model.PhoneNumber;
+            user.Role = model.Role;
+            user.IsActive = model.IsActive;
+            user.Gender = model.Gender;
+            user.DateOfBirth = model.DateOfBirth;
+            user.UpdatedAt = DateTime.Now;
+
+            _context.SaveChanges();
+
+            return Redirect("/Admin/User");
         }
 
-        // DELETE
+        // ======================
+        // DELETE (CONFIRM)
+        // ======================
         public IActionResult Delete(int id)
         {
             var user = _context.Users.Find(id);
             if (user == null) return NotFound();
+
             return View(user);
         }
 
-        [HttpPost, ActionName("Delete")]
+        // ======================
+        // DELETE (POST)
+        // ======================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             var user = _context.Users.Find(id);
+            if (user == null) return NotFound();
+
             _context.Users.Remove(user);
             _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+
+            return Redirect("/Admin/User");
         }
     }
 }

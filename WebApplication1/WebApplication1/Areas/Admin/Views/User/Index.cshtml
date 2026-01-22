@@ -1,42 +1,39 @@
-﻿@using WebApplication1.Models.UserEdit
-@model IEnumerable<User>
+﻿@model List<WebApplication1.Models.UserEdit.User>
 @{
-    ViewBag.Title = "Quản lý User";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h3>Danh sách User</h3>
+<h2>Quản lý User</h2>
 
-<a asp-action="Create" class="btn btn-primary mb-3">➕ Thêm User</a>
+<a href="/Admin/User/Create" class="btn btn-primary mb-3">+ Thêm User</a>
 
-<table class="table table-bordered table-hover bg-white">
-    <thead class="table-dark">
+<table class="table table-bordered table-hover">
+    <thead>
         <tr>
+            <th>ID</th>
+            <th>Username</th>
             <th>Email</th>
-            <th>Họ tên</th>
-            <th>Trạng thái</th>
-            <th width="150">Thao tác</th>
+            <th>Role</th>
+            <th>Active</th>
+            <th width="160">Hành động</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var u in Model)
         {
             <tr>
+                <td>@u.Id</td>
+                <td>@u.Username</td>
                 <td>@u.Email</td>
-                <td>@u.FullName</td>
+                <td>@u.Role</td>
+                <td>@(u.IsActive ? "✔" : "✖")</td>
                 <td>
-                    @if (u.IsActive)
-                    {
-                        <span class="badge bg-success">Active</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-secondary">Inactive</span>
-                    }
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@u.Id" class="btn btn-sm btn-warning">Sửa</a>
-                    <a asp-action="Delete" asp-route-id="@u.Id" class="btn btn-sm btn-danger">Xóa</a>
+                    <a href="/Admin/User/Edit/@u.Id" class="btn btn-warning btn-sm">Sửa</a>
+                    <a href="/Admin/User/Delete/@u.Id"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Xác nhận xoá user này?')">
+                        Xoá
+                    </a>
                 </td>
             </tr>
         }
