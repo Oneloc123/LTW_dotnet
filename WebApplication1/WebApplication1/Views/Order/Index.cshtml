@@ -1,34 +1,80 @@
 ﻿@using WebApplication1.Models.OrderEdit.Order
 @model List<Order>
 
-<h2>Đơn hàng của tôi</h2>
+<h3 class="mb-4">📦 Đơn hàng của tôi</h3>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Mã đơn</th>
-            <th>Ngày đặt</th>
-            <th>Trạng thái</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var order in Model)
-        {
-            <tr>
-                <td>#@order.Id</td>
-                <td>@order.CreatedAt.ToString("dd/MM/yyyy")</td>
-                <td>
-                    <span class="badge bg-info">@order.Status</span>
-                </td>
-                <td>
-                    <a class="btn btn-sm btn-primary"
-                       href="/Order/Details/@order.Id">
-                        Xem chi tiết
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Bạn chưa có đơn hàng nào.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Mã đơn</th>
+                    <th>Sản phẩm</th>
+                    <th>Giá trị</th>
+                    <th>Ngày đặt</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                </tr>
+            </thead>
 
-</table>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>#@order.Id</strong>
+                        </td>
+
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="@order.GetFirstImageUrl()"
+                                     style="width:60px;height:60px;object-fit:cover;border-radius:6px"
+                                     onerror="this.src='/images/no-image.png'" />
+
+                                <div>
+                                    <div class="fw-semibold">
+                                        @order.GetFirstProductName()
+                                    </div>
+
+                                    <small class="text-muted">
+                                        + @order.GetRemainingItemCount() sản phẩm
+                                    </small>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="fw-bold text-danger">
+                            @order.TotalPrice.ToString("N0") ₫
+                        </td>
+
+                        <td>
+                            @order.CreatedAt.ToString("dd/MM/yyyy")
+                        </td>
+
+                        <td>
+                            <span class="badge bg-info">
+                                @order.Status
+                            </span>
+                        </td>
+
+                        <td>
+                            <a asp-action="Details"
+                               asp-route-id="@order.Id"
+                               class="btn btn-sm btn-outline-primary">
+                                Xem chi tiết
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+

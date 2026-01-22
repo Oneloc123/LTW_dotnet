@@ -38,7 +38,11 @@
                     <div class="cart__list">
                         @foreach (var item in Model.Items)
                         {
-                            <article class="cart-item" data-variant-id="@item.VariantId">
+                            <article class="cart-item"
+                                     data-variant-id="@item.VariantId"
+                                     data-price="@item.FinalPrice"
+                                     data-quantity="@item.Quantity">
+
                                 <input type="checkbox" class="cart-item__checkbox" />
 
                                 <a href="#!">
@@ -138,12 +142,16 @@
 
                         <div class="cart-summary__item cart-summary__item--total">
                             <span class="cart-summary__label">Cần thanh toán</span>
-                            <span class="cart-summary__value cart-summary__value--highlight">@Model.TotalPayable.ToString("N0")đ</span>
+                            <span class="cart-summary__value cart-summary__value--highlight">0đ</span>
                         </div>
 
-                        <button class="cart-summary__btn btn btn--primary-color">
+                        <a href="javascript:void(0)"
+                           id="checkoutBtn"
+                           class="cart-summary__btn btn btn--primary-color">
                             Xác nhận đơn
-                        </button>
+                        </a>
+
+
                     </aside>
                 </div>
             </div>
@@ -155,45 +163,129 @@
 
 <!-- js xử lý xóa, tăng giảm số lượng -->
 <script>
+    /* =====================================================
+       1. KHAI BÁO BIẾN DÙNG CHUNG
+    ===================================================== */
     const deleteAllBtn = document.querySelector(".cart__delete-all");
     const selectAll = document.getElementById("selectAll");
     const countSelectedSpan = document.getElementById("countSelected");
+    const checkoutBtn = document.getElementById("checkoutBtn");
 
+    /* =====================================================
+       2. HÀM CẬP NHẬT UI LIÊN QUAN ĐẾN CHECKBOX
+    ===================================================== */
+
+    // Cập nhật số lượng item được chọn + trạng thái nút
     function updateSelectedCount() {
         const selectedCheckboxes = document.querySelectorAll(".cart-item__checkbox:checked");
         const totalCheckboxes = document.querySelectorAll(".cart-item__checkbox").length;
 
+        // Cập nhật số lượng hiển thị
         countSelectedSpan.textContent = selectedCheckboxes.length;
 
-        if (selectedCheckboxes.length > 0) deleteAllBtn.classList.remove("disabled");
-        else deleteAllBtn.classList.add("disabled");
+        // Bật / tắt nút xóa nhiều
+        deleteAllBtn.classList.toggle("disabled", selectedCheckboxes.length === 0);
 
+        // Bật / tắt nút xóa từng item
         document.querySelectorAll(".cart-item").forEach(item => {
             const checkbox = item.querySelector(".cart-item__checkbox");
             const deleteBtn = item.querySelector(".cart-item__delete");
-            if (checkbox.checked) deleteBtn.classList.remove("disabled");
-            else deleteBtn.classList.add("disabled");
+            deleteBtn.classList.toggle("disabled", !checkbox.checked);
         });
 
-        selectAll.checked = selectedCheckboxes.length === totalCheckboxes;
+        // Đồng bộ trạng thái checkbox "Chọn tất cả"
+        selectAll.checked = selectedCheckboxes.length === totalCheckboxes && totalCheckboxes > 0;
+
+        // Cập nhật trạng thái nút Checkout
+        toggleCheckoutBtn();
     }
 
-    // Chọn từng item
+    // Enable / Disable nút Checkout
+    function toggleCheckoutBtn() {
+        const checked = document.querySelectorAll(".cart-item__checkbox:checked").length;
+        checkoutBtn.classList.toggle("disabled", checked === 0);
+    }
+
+    /* =====================================================
+       3. HÀM RESET & CẬP NHẬT SUMMARY
+    ===================================================== */
+
+    // Reset toàn bộ summary về 0
+    function resetSummary() {
+        document.querySelectorAll(".cart-summary__value").forEach(v => {
+            v.textContent = "0đ";
+        });
+    }
+
+    // Cập nhật summary từ data backend
+    function updateSummary(data) {
+        const summaryValues = document.querySelectorAll(".cart-summary__value");
+        if (summaryValues.length < 5) return;
+
+        summaryValues[0].textContent = data.totalMoney.toLocaleString("vi-VN") + "đ";
+        summaryValues[1].textContent = (data.totalDiscount + data.voucher).toLocaleString("vi-VN") + "đ";
+        summaryValues[2].textContent = data.totalDiscount.toLocaleString("vi-VN") + "đ";
+        summaryValues[3].textContent = data.voucher.toLocaleString("vi-VN") + "đ";
+        summaryValues[4].textContent = data.totalPayable.toLocaleString("vi-VN") + "đ";
+    }
+
+    /* =====================================================
+       4. XỬ LÝ CHỌN / BỎ CHỌN SẢN PHẨM (TÍNH TIỀN)
+    ===================================================== */
+
+    function handleSelectChange() {
+        const ids = [];
+
+        document.querySelectorAll(".cart-item__checkbox:checked").forEach(cb => {
+            ids.push(parseInt(cb.closest(".cart-item").dataset.variantId));
+        });
+
+        // Không chọn gì → reset UI
+        if (ids.length === 0) {
+            resetSummary();
+            updateSelectedCount();
+            return;
+        }
+
+        // Gửi danh sách item được chọn lên backend để tính tiền
+        fetch("/Cart/CalculateSelected", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(ids)
+        })
+        .then(res => res.json())
+        .then(data => {
+            updateSummary(data);
+            updateSelectedCount();
+        });
+    }
+
+    /* =====================================================
+       5. EVENT LISTENER - CHECKBOX
+    ===================================================== */
+
+    // Checkbox từng sản phẩm
     document.querySelectorAll(".cart-item__checkbox").forEach(cb => {
-        cb.addEventListener("change", updateSelectedCount);
+        cb.addEventListener("change", handleSelectChange);
     });
 
-    // Chọn tất cả
+    // Checkbox "Chọn tất cả"
     selectAll.addEventListener("change", () => {
         document.querySelectorAll(".cart-item__checkbox")
             .forEach(cb => cb.checked = selectAll.checked);
-        updateSelectedCount();
+
+        handleSelectChange();
     });
+
+    /* =====================================================
+       6. XÓA SẢN PHẨM
+    ===================================================== */
 
     // Xóa từng item
     document.querySelectorAll(".cart-item__delete").forEach(btn => {
         btn.addEventListener("click", () => {
             if (btn.classList.contains("disabled")) return;
+
             const item = btn.closest(".cart-item");
             const variantId = item.dataset.variantId;
 
@@ -201,19 +293,21 @@
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: `variantId=${variantId}`
-                }).then(res => res.json())
-                .then(data => {
-                    item.remove();
-                    updateSelectedCount();
-                    updateSummary(data);
-                    updateCartBadge(); // thêm
-                });
+            })
+            .then(res => res.json())
+            .then(data => {
+                item.remove();
+                updateSelectedCount();
+                updateSummary(data);
+                updateCartBadge();
+            });
         });
     });
 
     // Xóa nhiều item
     deleteAllBtn.addEventListener("click", () => {
         if (deleteAllBtn.classList.contains("disabled")) return;
+
         const ids = [];
         document.querySelectorAll(".cart-item__checkbox:checked").forEach(cb => {
             ids.push(parseInt(cb.closest(".cart-item").dataset.variantId));
@@ -224,62 +318,37 @@
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(ids)
-            }).then(res => res.json())          // nhận data từ controller
-            .then(data => {
-                document.querySelectorAll(".cart-item__checkbox:checked")
-                    .forEach(cb => cb.closest(".cart-item").remove());
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.querySelectorAll(".cart-item__checkbox:checked")
+                .forEach(cb => cb.closest(".cart-item").remove());
 
-                updateSelectedCount();
-                updateSummary(data);          // truyền data
-                updateCartBadge(); // thêm
-            });
+            updateSelectedCount();
+            updateSummary(data);
+            updateCartBadge();
+        });
     });
 
-    // Hàm cập nhật quantity + total price + summary
-        function updateItem(itemEl, data) {
+    /* =====================================================
+       7. TĂNG / GIẢM SỐ LƯỢNG
+    ===================================================== */
+
+    function updateItem(itemEl, data) {
         const variantId = itemEl.dataset.variantId;
         const itemData = data.items.find(i => i.variantId == variantId);
 
         if (!itemData) {
-            // nếu item không còn trong cart => xóa DOM
             itemEl.remove();
             updateSelectedCount();
             return;
         }
 
         itemEl.querySelector(".cart-item__quantity-value").textContent = itemData.quantity;
-        // finalPrice là giá 1 SP sau giảm, backend đảm bảo itemData.finalPrice * itemData.quantity
-        itemEl.querySelector(".cart-item__price-current").textContent = (itemData.finalPrice * itemData.quantity).toLocaleString("vi-VN") + "đ";
+        itemEl.querySelector(".cart-item__price-current").textContent =
+            (itemData.finalPrice * itemData.quantity).toLocaleString("vi-VN") + "đ";
     }
 
-    // Cập nhật summary
-        function updateSummary(data) {
-        const summaryValues = document.querySelectorAll(".cart-summary__value");
-
-        if (summaryValues.length < 5) return;
-
-        // 0️⃣ Tạm tính (chưa giảm)
-        summaryValues[0].textContent =
-            data.totalMoney.toLocaleString("vi-VN") + "đ";
-
-        // 1️⃣ Tổng giảm (giảm SP + voucher)
-        summaryValues[1].textContent =
-            (data.totalDiscount + data.voucher).toLocaleString("vi-VN") + "đ";
-
-        // 2️⃣ Giảm sản phẩm
-        summaryValues[2].textContent =
-            data.totalDiscount.toLocaleString("vi-VN") + "đ";
-
-        // 3️⃣ Voucher
-        summaryValues[3].textContent =
-            data.voucher.toLocaleString("vi-VN") + "đ";
-
-        // 4️⃣ Tổng thanh toán
-        summaryValues[4].textContent =
-            data.totalPayable.toLocaleString("vi-VN") + "đ";
-    }
-
-    // Nút +
     document.querySelectorAll(".cart-item__btn--plus").forEach(btn => {
         btn.addEventListener("click", () => {
             const item = btn.closest(".cart-item");
@@ -289,16 +358,16 @@
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: `variantId=${variantId}`
-            }).then(res => res.json())
+            })
+            .then(res => res.json())
             .then(data => {
                 updateItem(item, data);
-                updateSummary(data);
-                updateCartBadge(); // thêm
+                handleSelectChange();
+                updateCartBadge();
             });
         });
     });
 
-    // Nút -
     document.querySelectorAll(".cart-item__btn--minus").forEach(btn => {
         btn.addEventListener("click", () => {
             const item = btn.closest(".cart-item");
@@ -308,15 +377,44 @@
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: `variantId=${variantId}`
-            }).then(res => res.json())
+            })
+            .then(res => res.json())
             .then(data => {
-                updateItem(item, data); // nếu quantity <= 0 thì item tự remove
-                updateSummary(data);
-                updateCartBadge(); // thêm
+                updateItem(item, data);
+                handleSelectChange();
+                updateCartBadge();
             });
         });
     });
 
-    // Khởi tạo trạng thái ban đầu
+    /* =====================================================
+       8. CHECKOUT
+    ===================================================== */
+
+    checkoutBtn.addEventListener("click", () => {
+        const selectedIds = [];
+
+        document.querySelectorAll(".cart-item__checkbox:checked").forEach(cb => {
+            selectedIds.push(cb.closest(".cart-item").dataset.variantId);
+        });
+
+        if (selectedIds.length === 0) {
+            alert("Vui lòng chọn ít nhất 1 sản phẩm");
+            return;
+        }
+
+        fetch("/Checkout/Prepare", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(selectedIds)
+        }).then(() => {
+            window.location.href = "/Checkout";
+        });
+    });
+
+    /* =====================================================
+       9. KHỞI TẠO BAN ĐẦU
+    ===================================================== */
+    resetSummary();
     updateSelectedCount();
 </script>
