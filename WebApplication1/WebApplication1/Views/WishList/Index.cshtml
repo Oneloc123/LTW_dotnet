@@ -28,6 +28,9 @@
                         <div class="card-footer bg-white">
                            
                                 <input type="hidden" name="id" value="@item.WishListId" />
+                                <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.ProductId" class="btn btn-primary-custom btn-custom">
+                                    Xem chi tiết
+                                </a>
                                 <button class="btn btn-outline-danger w-100"
                                         onclick="removeWishlist(@item.WishListId)">
                                     ❌ Xóa khỏi wishlist

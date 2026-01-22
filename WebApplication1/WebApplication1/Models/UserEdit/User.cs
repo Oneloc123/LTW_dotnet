@@ -81,4 +81,4 @@ namespace WebApplication1.Models.UserEdit
 
         public ICollection<WishListItem> WishListItems { get; set; }
     }
-}
+}       
