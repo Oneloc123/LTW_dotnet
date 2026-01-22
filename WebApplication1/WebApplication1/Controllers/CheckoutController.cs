@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebApplication1.Helpers;
 using WebApplication1.Models;
 using WebApplication1.Models.Checkout;
@@ -20,9 +21,24 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
+            var json = HttpContext.Session.GetString("CheckoutItems");
+
+            if (string.IsNullOrEmpty(json))
+                return RedirectToAction("Index", "Cart");
+
+            var ids = JsonConvert.DeserializeObject<List<int>>(json);
+
+
             var cart = CartSessionHelper.GetCart(HttpContext);
 
-            if (!cart.Items.Any())
+            var items = cart.Items
+            .Where(i => ids.Contains(i.VariantId))
+            .ToList();
+
+
+
+            // Ensure we check the filtered items, not the entire cart
+            if (!items.Any())
                 return RedirectToAction("Index", "Cart");
             var userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
@@ -35,11 +51,20 @@ namespace WebApplication1.Controllers
              .Where(a => a.UserId == userId.Value)
              .ToList();
 
+            // Create a new Carts instance and populate it using AddOrUpdate
+            var checkoutCart = new Carts();
+            foreach (var ci in items)
+            {
+                // AddOrUpdate expects a CartItem; items are CartItem instances already
+                checkoutCart.AddOrUpdate(ci);
+            }
+
+
             var vm = new Checkout
             {
                 FullName = user.FullName,
                 Phone = user.PhoneNumber,
-                Cart = cart,
+                Cart = checkoutCart, // use the filtered cart
                 Addresses = addresses
             };
 
@@ -63,7 +88,9 @@ namespace WebApplication1.Controllers
                 UserId = userId.Value,
                 AddressId = addressid,
                 Status = "Pending",
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                TotalPrice = cart.TotalPayable
+                
             };
 
             _context.Orders.Add(order);
@@ -71,14 +98,22 @@ namespace WebApplication1.Controllers
 
             foreach (var item in cart.Items)
             {
-                _context.OrderItems.Add(new OrderItem
+                var orderItem = new OrderItem
                 {
                     OrderId = order.Id,
+                    ProductId = item.ProductId,
                     VariantId = item.VariantId,
                     Quantity = item.Quantity,
-                });
+                    Name = item.Name,
+                    Price = item.Price,
+                    ImageUrl = item.ImageUrl,
+                    CreatedAt = DateTime.Now,
+                    TotalPrice = item.FinalPrice * item.Quantity
+                    
+                };
+                _context.OrderItems.Add(orderItem);
+               
             }
-
             _context.SaveChanges();
 
             // XÓA CART SAU KHI ĐẶT
@@ -140,5 +175,19 @@ namespace WebApplication1.Controllers
 
             return Content("Order placed successfully");
         }
+
+        [HttpPost]
+        public IActionResult Prepare([FromBody] List<int> variantIds)
+        {
+            HttpContext.Session.SetString(
+                "CheckoutItems",
+                JsonConvert.SerializeObject(variantIds)
+            );
+
+            return Ok();
+        }
+
+
+
     }
 }

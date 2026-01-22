@@ -70,7 +70,9 @@ namespace WebApplication1.Controllers
 
             cart.AddOrUpdate(new CartItem
             {
+
                 VariantId = variant.Id,
+                ProductId = variant.ProductId,
                 Name = variant.Product.Name,
                 ImageUrl = !string.IsNullOrEmpty(variant.ImageUrl)
                 ? variant.ImageUrl
@@ -229,56 +231,39 @@ namespace WebApplication1.Controllers
                 totalPayable = cart.TotalPayable
             });
         }
+
+
+        // Tính toán các sản phẩm được chọn
         [HttpPost]
-        public IActionResult PlaceOrder(Checkout model)
+        public IActionResult CalculateSelected([FromBody] List<int> variantIds)
         {
-            // 1️⃣ Validate cơ bản
-            if (!ModelState.IsValid)
-                return View("Index", model);
-
-            var cart = CartSessionHelper.GetCart(HttpContext);
-            if (!cart.Items.Any())
-                return RedirectToAction("Index", "Cart");
-
-            // 2️⃣ Lấy user từ session
-            var userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
-                return RedirectToAction("Login", "Account");
-
-            // 3️⃣ Tạo ORDER
-            var order = new Order
+            if (variantIds == null || !variantIds.Any())
             {
-                UserId = userId.Value,
-                AddressId = model.AddressId,
-                Status = "Pending",
-                CreatedAt = DateTime.Now
-            };
-
-            db.Orders.Add(order);
-            db.SaveChanges(); // 🔥 BẮT BUỘC để có order.Id
-
-            // 4️⃣ Tạo ORDER ITEMS (THEO VARIANT)
-            foreach (var item in cart.Items)
-            {
-                var orderItem = new OrderItem
+                return Json(new
                 {
-                    OrderId = order.Id,
-                    VariantId = item.VariantId,
-                    Quantity = item.Quantity,
-                    //Price = item.FinalPrice // đóng băng giá lúc mua
-                };
-
-                db.OrderItems.Add(orderItem);
+                    totalMoney = 0,
+                    totalDiscount = 0,
+                    voucher = 0,
+                    totalPayable = 0
+                });
             }
 
-            db.SaveChanges();
+            var cart = CartSessionHelper.GetCart(HttpContext);
 
-            // 5️⃣ Clear cart
-            CartSessionHelper.Clear(HttpContext);
+            var items = cart.Items
+                .Where(i => variantIds.Contains(i.VariantId))
+                .ToList();
 
-            // 6️⃣ Redirect sang trang chi tiết đơn hàng
-            return RedirectToAction("Details", "Order", new { id = order.Id });
+            return Json(new
+            {
+                totalMoney = items.Sum(i => i.Price * i.Quantity),
+                totalDiscount = items.Sum(i => i.DiscountValue),
+                voucher = 0,
+                totalPayable = items.Sum(i => i.FinalPrice * i.Quantity)
+            });
         }
+
+
 
 
 

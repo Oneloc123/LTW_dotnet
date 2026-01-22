@@ -21,9 +21,11 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("Login", "Account");
 
             var orders = _context.Orders
-                .Where(o => o.UserId == userId)
-                .OrderByDescending(o => o.CreatedAt)
-                .ToList();
+    .Where(o => o.UserId == userId)
+    .Include(o => o.OrderItems)   
+    .OrderByDescending(o => o.CreatedAt)
+    .ToList();
+
 
             return View(orders);
         }

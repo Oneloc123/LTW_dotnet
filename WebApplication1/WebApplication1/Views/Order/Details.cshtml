@@ -1,32 +1,84 @@
-﻿@model WebApplication1.Models.OrderEdit.Order.Order
-@{
-    var variants = ViewBag.Variants as List<ProductVariant>;
-}
+﻿@using WebApplication1.Models.OrderEdit.Order
+@model Order
 
-<h2>Chi tiết đơn hàng #@Model.Id</h2>
+<h3 class="mb-3">🧾 Chi tiết đơn hàng #@Model.Id</h3>
 
-<p>Trạng thái: <strong>@Model.Status</strong></p>
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <strong>Trạng thái:</strong><br />
+                <span class="badge bg-info">@Model.Status</span>
+            </div>
 
-<table border="1" cellpadding="8">
-    <thead>
-        <tr>
-            <th>Sản phẩm</th>
-            <th>Màu</th>
-            <th>Bộ nhớ</th>
-            <th>Số lượng</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.OrderItems)
-        {
-            var variant = variants.FirstOrDefault(v => v.Id == item.ProductId);
+            <div class="col-md-4">
+                <strong>Ngày đặt:</strong><br />
+                @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+            </div>
 
-            <tr>
-                <td>@variant?.Product?.Name</td>
-                <td>@variant?.Color</td>
-                <td>@variant?.Memory</td>
-                <td>@item.Quantity</td>
-            </tr>
-        }
-    </tbody>
-</table>
+            <div class="col-md-4">
+                <strong>Tổng tiền:</strong><br />
+                <span class="text-danger fw-bold">
+                    @Model.TotalPrice.ToString("N0") ₫
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header fw-bold">
+        Danh sách sản phẩm
+    </div>
+
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.OrderItems)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="@item.ImageUrl"
+                                     style="width:60px;height:60px;object-fit:cover;border-radius:6px"
+                                     onerror="this.src='/images/no-image.png'" />
+
+                                <div>
+                                    <div class="fw-semibold">
+                                        @item.Name
+                                    </div>
+
+                                    <small class="text-muted">
+                                        Variant ID: @item.VariantId
+                                    </small>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            @item.Price.ToString("N0") ₫
+                        </td>
+
+                        <td>
+                            @item.Quantity
+                        </td>
+
+                        <td class="fw-bold text-danger">
+                            @item.TotalPrice.ToString("N0") ₫
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

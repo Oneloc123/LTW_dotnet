@@ -81,6 +81,7 @@
                     <div class="checkout-gift">
                         <i class="checkout-gift__icon fa-solid fa-gift"></i>
                         <span class="checkout-gift__text">
+                        <span class="checkout-gift__text">
                             <span class="checkout-gift__count">0</span> Quà tặng đơn hàng
                         </span>
                         <i class="fa-solid fa-angle-right checkout-gift__arrow"></i>
@@ -259,12 +260,12 @@
 
                         <div class="checkout-right__item checkout-right__item--divider">
                             <span class="checkout-right__label">Tổng tiền</span>
-                            <span class="checkout-right__value">0đ</span>
+                            <span class="checkout-right__value">@Model.Cart.TotalMoney.ToString("N0")đ</span>
                         </div>
 
                         <div class="checkout-right__item">
                             <span class="checkout-right__label">Tổng khuyến mãi</span>
-                            <span class="checkout-right__value">0đ</span>
+                            <span class="checkout-right__value">@Model.Cart.TotalDiscount.ToString("N0")đ</span>
                         </div>
 
                         <!-- Nhóm giảm giá -->
@@ -287,7 +288,7 @@
 
                         <div class="checkout-right__item checkout-right__item--total">
                             <span class="checkout-right__label">Cần thanh toán</span>
-                            <span class="checkout-right__value checkout-right__value--highlight">0đ</span>
+                            <span class="checkout-right__value checkout-right__value--highlight">@Model.Cart.TotalPayable.ToString("N0")đ</span>
                         </div>
 
                         <button type="submit" form="checkoutForm" class="checkout-right__btn btn btn--primary-color">

@@ -18,6 +18,9 @@ namespace WebApplication1.Models.OrderEdit.Order
         [Column("address_id")]
         public int? AddressId { get; set; }
 
+        [Column("total_price")]
+        [Required]
+        public decimal TotalPrice { get; set; }
 
         [Required]
         [Column("order_status")]
@@ -27,7 +30,32 @@ namespace WebApplication1.Models.OrderEdit.Order
         [Column("created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public List<OrderItem>? OrderItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+
+        public void add(OrderItem orderItem)
+        {
+            this.OrderItems.Add(orderItem);
+        }
+
+
+
+        public string GetFirstImageUrl()
+        {
+            return OrderItems.FirstOrDefault()?.ImageUrl ?? "/images/no-image.png";
+        }
+
+        public string GetFirstProductName()
+        {
+            return OrderItems.FirstOrDefault()?.Name ?? "Sản phẩm";
+        }
+
+        public int GetRemainingItemCount()
+        {
+            return Math.Max(0, OrderItems.Count );
+        }
+
+
 
     }
+
 }
