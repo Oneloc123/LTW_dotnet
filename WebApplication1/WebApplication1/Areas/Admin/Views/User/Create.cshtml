@@ -1,0 +1,31 @@
+﻿@model WebApplication1.Models.UserEdit.User
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Thêm User</h2>
+
+<form method="post" action="/Admin/User/Create">
+    @Html.AntiForgeryToken()
+
+    <input name="Username" class="form-control mb-2" placeholder="Username" required />
+    <input name="Email" type="email" class="form-control mb-2" placeholder="Email" required />
+    <input name="PasswordHash" type="password" class="form-control mb-2" placeholder="Password" required />
+
+    <input name="FullName" class="form-control mb-2" placeholder="Họ tên" />
+    <input name="PhoneNumber" class="form-control mb-2" placeholder="Số điện thoại" />
+
+    <select name="Role" class="form-control mb-2">
+        <option>User</option>
+        <option>Admin</option>
+        <option>Manager</option>
+    </select>
+
+    <div class="form-check mb-2">
+        <input type="checkbox" name="IsActive" class="form-check-input" checked />
+        <label class="form-check-label">Kích hoạt</label>
+    </div>
+
+    <button class="btn btn-success">Lưu</button>
+    <a href="/Admin/User" class="btn btn-secondary">Quay lại</a>
+</form>

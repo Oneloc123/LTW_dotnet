@@ -80,26 +80,35 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult AddReview(int productId, string comment, int rating)
         {
-            // Mặc định tên là "Guest"
-            string tenNguoiDung = "Guest";
+            
+            int? userId = HttpContext.Session.GetInt32("UserId");
 
-            // Nếu hệ thống phát hiện đã đăng nhập, thì lấy tên User đè vào
-            if (User.Identity.IsAuthenticated)
+         
+            if (userId == null)
             {
-                tenNguoiDung = User.Identity.Name ?? "User";
+                return RedirectToAction("Login", "Account");
             }
 
-            // Tạo Review
+            
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+           
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+           
             var newReview = new WebApplication1.Models.Reviews
             {
                 ProductId = productId,
+                UserId = user.Id,
                 Comment = comment,
                 Rating = rating,
-                UserName = tenNguoiDung, // Gán cái tên đã xử lý ở trên vào đây
+                UserName = user.Username, // Code cũ bị lỗi ở đây vì user bị null
                 CreatedAt = DateTime.Now
             };
 
-            // Lưu vào Database
             _context.Reviews.Add(newReview);
             _context.SaveChanges();
 

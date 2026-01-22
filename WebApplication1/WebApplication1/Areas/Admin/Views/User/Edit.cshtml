@@ -1,0 +1,31 @@
+﻿@model WebApplication1.Models.UserEdit.User
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Sửa User</h2>
+
+<form method="post" action="/Admin/User/Edit">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <input name="Email" value="@Model.Email" class="form-control mb-2" />
+    <input name="FullName" value="@Model.FullName" class="form-control mb-2" />
+    <input name="PhoneNumber" value="@Model.PhoneNumber" class="form-control mb-2" />
+
+    <select name="Role" class="form-control mb-2">
+        <option selected>@Model.Role</option>
+        <option>User</option>
+        <option>Admin</option>
+        <option>Manager</option>
+    </select>
+
+    <div class="form-check mb-2">
+        <input type="checkbox" name="IsActive" class="form-check-input"
+               @(Model.IsActive ? "checked" : "") />
+        <label class="form-check-label">Kích hoạt</label>
+    </div>
+
+    <button class="btn btn-success">Cập nhật</button>
+    <a href="/Admin/User" class="btn btn-secondary">Quay lại</a>
+</form>

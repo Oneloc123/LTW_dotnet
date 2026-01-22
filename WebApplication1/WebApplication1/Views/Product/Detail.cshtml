@@ -5,8 +5,6 @@
     ViewData["Title"] = "Chi tiết sản phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml"; // Đã bổ sung Layout
 
-    // XỬ LÝ LỖI LAMBDA EXPRESSION:
-    // Tách logic xử lý chuỗi ra khỏi HTML để tránh lỗi Runtime
     string moTaHienThi = "Đang cập nhật...";
     if (!string.IsNullOrEmpty(Model.Description))
     {
@@ -151,10 +149,23 @@
                 <strong>Tình trạng:</strong> <span style="color:green; font-weight:bold;">Còn hàng</span>
             </p>
 
-            <button class="btn-buy"
-                    onclick="addToCart(@Model.ProductVariants.First().Id)">
-                THÊM VÀO GIỎ HÀNG
-            </button>
+            @if (Model.ProductVariants != null && Model.ProductVariants.Any())
+            {
+                <button class="btn-add-cart"
+                        onclick="addToCart(@Model.ProductVariants.First().Id)">
+                    THÊM VÀO GIỎ HÀNG
+                </button>
+                <button onclick="toggleWishlist(@Model.Id)"
+                        class="btn btn-outline-danger">
+                    ❤️ Yêu thích
+                </button>
+            }
+            else
+            {
+                <button class="btn-add-cart" style="background-color: #ccc; cursor: not-allowed;" disabled>
+                    TẠM HẾT HÀNG
+                </button>
+            }
         </div>
     </div>
 
@@ -177,42 +188,50 @@
 
                     <h4 style="margin-top: 0;">Viết đánh giá của bạn</h4>
 
-                    @if (User.Identity.IsAuthenticated)
+                    @{
+                        var isLoggedIn = Context.Session.GetInt32("UserId") != null;
+                    }
+
+                    @if (isLoggedIn)
                     {
-                        <p style="font-size: 13px; color: green;">
-                            <i class="fa-solid fa-user-check"></i> Bạn đang viết dưới tên: <strong>@User.Identity.Name</strong>
-                        </p>
+
+
+
+                        <form method="post" action="/Product/AddReview">
+                            <input type="hidden" name="productId" value="@Model.Id" />
+
+                            <div style="margin-bottom: 15px;">
+                                <label style="font-weight: bold;">Đánh giá:</label>
+                                <select name="rating" style="padding: 5px; border-radius: 4px;">
+                                    <option value="5">5 Sao (Tuyệt vời)</option>
+                                    <option value="4">4 Sao (Tốt)</option>
+                                    <option value="3">3 Sao (Bình thường)</option>
+                                    <option value="2">2 Sao (Tệ)</option>
+                                    <option value="1">1 Sao (Rất tệ)</option>
+                                </select>
+                            </div>
+
+                            <div style="margin-bottom: 15px;">
+                                <textarea name="comment" rows="3" placeholder="Sản phẩm dùng thế nào?..." required
+                                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-add-cart" style="width: auto; padding: 10px 30px; font-size: 14px;">
+                                Gửi đánh giá
+                            </button>
+                        </form>
                     }
                     else
                     {
-                        <p style="font-size: 13px; color: #666;">
-                            <i class="fa-solid fa-user-secret"></i> Bạn đang viết ẩn danh (Guest)
-                        </p>
+                        //Chua dang nhap
+                        <a asp-controller="Account"
+                           asp-action="Login"
+                           class="btn btn-outline-primary">
+                            🔐 Đăng nhập để đánh giá
+                        </a>
+
                     }
 
-                    <form method="post" action="/Product/AddReview">
-                        <input type="hidden" name="productId" value="@Model.Id" />
-
-                        <div style="margin-bottom: 15px;">
-                            <label style="font-weight: bold;">Đánh giá:</label>
-                            <select name="rating" style="padding: 5px; border-radius: 4px;">
-                                <option value="5">5 Sao (Tuyệt vời)</option>
-                                <option value="4">4 Sao (Tốt)</option>
-                                <option value="3">3 Sao (Bình thường)</option>
-                                <option value="2">2 Sao (Tệ)</option>
-                                <option value="1">1 Sao (Rất tệ)</option>
-                            </select>
-                        </div>
-
-                        <div style="margin-bottom: 15px;">
-                            <textarea name="comment" rows="3" placeholder="Sản phẩm dùng thế nào?..." required
-                                      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn-add-cart" style="width: auto; padding: 10px 30px; font-size: 14px;">
-                            Gửi đánh giá
-                        </button>
-                    </form>
                 </div>
 
                 @if (Model.Reviews != null && Model.Reviews.Any())

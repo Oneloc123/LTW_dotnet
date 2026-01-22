@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h5>Người dùng</h5>
+            <h2>@ViewBag.TotalUsers</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h5>Sản phẩm</h5>
+            <h2>@ViewBag.TotalProducts</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h5>Đơn hàng</h5>
+            <h2>@ViewBag.TotalOrders</h2>
+        </div>
+    </div>
+</div>

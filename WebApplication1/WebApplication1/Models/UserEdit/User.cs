@@ -32,10 +32,10 @@ namespace WebApplication1.Models.UserEdit
         // ======================
 
         [StringLength(100)]
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
 
         [StringLength(15)]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
         public DateTime? DateOfBirth { get; set; }
 
@@ -43,7 +43,7 @@ namespace WebApplication1.Models.UserEdit
         public int Gender { get; set; } = 0;
 
         [StringLength(255)]
-        public string AvatarUrl { get; set; }
+        public string? AvatarUrl { get; set; }
 
         // ======================
         // Trạng thái & bảo mật
@@ -72,13 +72,13 @@ namespace WebApplication1.Models.UserEdit
         // Audit
         // ======================
 
-        public DateTime CreatedAt { get; set; } 
+        public DateTime? CreatedAt { get; set; } 
 
         public DateTime? UpdatedAt { get; set; }
 
         public ICollection<Blog> Blogs { get; set; }
         public ICollection<BlogComment> BlogComments { get; set; }
 
-
+        public ICollection<WishListItem> WishListItems { get; set; }
     }
-}
+}       

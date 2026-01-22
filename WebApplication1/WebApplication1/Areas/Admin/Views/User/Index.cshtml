@@ -1,0 +1,41 @@
+﻿@model List<WebApplication1.Models.UserEdit.User>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Quản lý User</h2>
+
+<a href="/Admin/User/Create" class="btn btn-primary mb-3">+ Thêm User</a>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Active</th>
+            <th width="160">Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.Id</td>
+                <td>@u.Username</td>
+                <td>@u.Email</td>
+                <td>@u.Role</td>
+                <td>@(u.IsActive ? "✔" : "✖")</td>
+                <td>
+                    <a href="/Admin/User/Edit/@u.Id" class="btn btn-warning btn-sm">Sửa</a>
+                    <a href="/Admin/User/Delete/@u.Id"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Xác nhận xoá user này?')">
+                        Xoá
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

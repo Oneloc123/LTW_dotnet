@@ -27,12 +27,11 @@ namespace WebApplication1.Controllers
         {
 
             var featuredProducts = _context.Products
-                .Include(p => p.Images)
-                .Include(p => p.Reviews)
-                .OrderByDescending(p => p.Reviews.Average(r => r.Rating))
-                .Take(6)
+                .Include(p => p.Images)           
+                .Include(p => p.Reviews)          
+                .OrderByDescending(p => p.Reviews.Average(r => r.Rating)) 
+                .Take(6)                          
                 .ToList();
-
 
             var blogs = _context.Blogs
                 .OrderByDescending(b => b.ViewCount) 

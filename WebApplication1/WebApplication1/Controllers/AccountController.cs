@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Helpers;
+using WebApplication1.Models;
 using WebApplication1.Models.UserEdit;
 using WebApplication1.ViewModels;
 namespace WebApplication1.Controllers
@@ -27,10 +28,6 @@ namespace WebApplication1.Controllers
             }
             return View();
         }
-
-        // =========================
-        // POST: /Account/Login
-        // =========================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -141,10 +138,6 @@ namespace WebApplication1.Controllers
             }
             return View();
         }
-
-        // =========================
-        // POST: /Account/Register
-        // =========================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
@@ -202,8 +195,96 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Login");
+
+            var user = await _context.Users.FindAsync(userId);
+
+            // Check mật khẩu hiện tại
+            if (user.PasswordHash != PasswordHelper.Hash(model.CurrentPassword))
+            {
+                ModelState.AddModelError("", "Mật khẩu hiện tại không đúng");
+                return View(model);
+            }
+
+            // Sinh OTP
+            string otp = new Random().Next(100000, 999999).ToString();
+
+            // Lưu tạm vào Session (5 phút)
+            HttpContext.Session.SetString("ChangePasswordOtp", otp);
+            HttpContext.Session.SetString("NewPasswordTemp",
+                PasswordHelper.Hash(model.NewPassword));
+            HttpContext.Session.SetString("OtpExpire",
+                DateTime.Now.AddMinutes(5).ToString());
+
+            // Gửi email
+            EmailHelper.Send(
+                user.Email,
+                "Xác thực đổi mật khẩu",
+                $"Mã xác thực của bạn là: {otp}\nCó hiệu lực 5 phút."
+            );
+
+            return RedirectToAction("VerifyChangePassword");
+        }
+        [HttpGet]
+        public IActionResult VerifyChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> VerifyChangePassword(VerifyChangePasswordViewModel model)
+        {
+            string otpSession = HttpContext.Session.GetString("ChangePasswordOtp");
+            string otpExpire = HttpContext.Session.GetString("OtpExpire");
+
+            if (otpSession == null || DateTime.Parse(otpExpire) < DateTime.Now)
+            {
+                ModelState.AddModelError("", "Mã xác thực đã hết hạn");
+                return View(model);
+            }
+
+            if (model.Otp != otpSession)
+            {
+                ModelState.AddModelError("", "Mã xác thực không đúng");
+                return View(model);
+            }
+
+            int userId = HttpContext.Session.GetInt32("UserId").Value;
+            var user = await _context.Users.FindAsync(userId);
+
+            user.PasswordHash = HttpContext.Session.GetString("NewPasswordTemp");
+            await _context.SaveChangesAsync();
+
+            // Xoá session tạm
+            HttpContext.Session.Remove("ChangePasswordOtp");
+            HttpContext.Session.Remove("NewPasswordTemp");
+            HttpContext.Session.Remove("OtpExpire");
+
+            TempData["Success"] = "Đổi mật khẩu thành công!";
+            return RedirectToAction("Index", "Profile");
+        }
+        
     }
-    
+
 
 }
 
