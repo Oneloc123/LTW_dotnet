@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Helpers;
 using WebApplication1.Models;
+using WebApplication1.Models.Checkout;
 using WebApplication1.Models.Enum;
+using WebApplication1.Models.OrderEdit.Order;
 using WebApplication1.Models.UserEdit;
 
 namespace WebApplication1.Controllers
@@ -227,6 +229,58 @@ namespace WebApplication1.Controllers
                 totalPayable = cart.TotalPayable
             });
         }
+        [HttpPost]
+        public IActionResult PlaceOrder(Checkout model)
+        {
+            // 1️⃣ Validate cơ bản
+            if (!ModelState.IsValid)
+                return View("Index", model);
+
+            var cart = CartSessionHelper.GetCart(HttpContext);
+            if (!cart.Items.Any())
+                return RedirectToAction("Index", "Cart");
+
+            // 2️⃣ Lấy user từ session
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Login", "Account");
+
+            // 3️⃣ Tạo ORDER
+            var order = new Order
+            {
+                UserId = userId.Value,
+                AddressId = model.AddressId,
+                Status = "Pending",
+                CreatedAt = DateTime.Now
+            };
+
+            db.Orders.Add(order);
+            db.SaveChanges(); // 🔥 BẮT BUỘC để có order.Id
+
+            // 4️⃣ Tạo ORDER ITEMS (THEO VARIANT)
+            foreach (var item in cart.Items)
+            {
+                var orderItem = new OrderItem
+                {
+                    OrderId = order.Id,
+                    VariantId = item.VariantId,
+                    Quantity = item.Quantity,
+                    //Price = item.FinalPrice // đóng băng giá lúc mua
+                };
+
+                db.OrderItems.Add(orderItem);
+            }
+
+            db.SaveChanges();
+
+            // 5️⃣ Clear cart
+            CartSessionHelper.Clear(HttpContext);
+
+            // 6️⃣ Redirect sang trang chi tiết đơn hàng
+            return RedirectToAction("Details", "Order", new { id = order.Id });
+        }
+
+
 
         /* post -> xóa hết sản phẩm trong cart */
         [HttpPost]

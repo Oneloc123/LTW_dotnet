@@ -141,9 +141,12 @@
                             <span class="cart-summary__value cart-summary__value--highlight">@Model.TotalPayable.ToString("N0")đ</span>
                         </div>
 
-                        <button class="cart-summary__btn btn btn--primary-color">
+                        <a asp-controller="Checkout"
+                           asp-action="Index"
+                           class="cart-summary__btn btn btn--primary-color">
                             Xác nhận đơn
-                        </button>
+                        </a>
+
                     </aside>
                 </div>
             </div>
@@ -315,6 +318,27 @@
                 updateCartBadge(); // thêm
             });
         });
+    });
+
+    // Đưa qua trang order
+        document.getElementById("checkoutBtn").addEventListener("click", () => {
+        const selectedIds = [];
+
+        document.querySelectorAll(".cart-item__checkbox:checked")
+            .forEach(cb => {
+                selectedIds.push(
+                    cb.closest(".cart-item").dataset.variantId
+                );
+            });
+
+        if (selectedIds.length === 0) {
+            alert("Vui lòng chọn ít nhất 1 sản phẩm để thanh toán");
+            return;
+        }
+
+        // Chuyển sang checkout
+        const query = selectedIds.join(",");
+        window.location.href = `/Checkout?variantIds=${query}`;
     });
 
     // Khởi tạo trạng thái ban đầu

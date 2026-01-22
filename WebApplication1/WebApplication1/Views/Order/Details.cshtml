@@ -1,28 +1,31 @@
-﻿@using WebApplication1.Models.OrderEdit.Order
-@model Order
+﻿@model WebApplication1.Models.OrderEdit.Order.Order
+@{
+    var variants = ViewBag.Variants as List<ProductVariant>;
+}
 
 <h2>Chi tiết đơn hàng #@Model.Id</h2>
 
-<p><b>Trạng thái:</b> @Model.Status</p>
-<p><b>Ngày đặt:</b> @Model.CreatedAt</p>
+<p>Trạng thái: <strong>@Model.Status</strong></p>
 
-<table class="table">
+<table border="1" cellpadding="8">
     <thead>
         <tr>
             <th>Sản phẩm</th>
+            <th>Màu</th>
+            <th>Bộ nhớ</th>
             <th>Số lượng</th>
-            <th>Giá</th>
-            <th>Tạm tính</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.OrderItems)
         {
+            var variant = variants.FirstOrDefault(v => v.Id == item.ProductId);
+
             <tr>
-                <td>@item.Product.Name</td>
+                <td>@variant?.Product?.Name</td>
+                <td>@variant?.Color</td>
+                <td>@variant?.Memory</td>
                 <td>@item.Quantity</td>
-                <td>@item.Product.Price</td>
-                <td>@(item.Quantity* item.Product.Price)</td>
             </tr>
         }
     </tbody>

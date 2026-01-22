@@ -11,6 +11,11 @@ namespace WebApplication1.Models.OrderEdit.Order
         public int Id { get; set; }
 
         [Required]
+        [Column("variant_id")]
+        public int VariantId { get; set; }
+
+
+        [Required]
         [Column("order_id")]
         public int OrderId { get; set; }
 
@@ -24,10 +29,10 @@ namespace WebApplication1.Models.OrderEdit.Order
 
         // ===== Navigation Properties (optional) =====
         [ForeignKey("OrderId")]
-        public Order Order { get; set; }
+        public Order? Order { get; set; }
 
         // Nếu có bảng Product
         [ForeignKey("ProductId")]
-        public Products Product { get; set; }
+        public Products? Product { get; set; }
     }
 }

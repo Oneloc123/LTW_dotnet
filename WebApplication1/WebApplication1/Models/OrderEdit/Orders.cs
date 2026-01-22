@@ -16,18 +16,18 @@ namespace WebApplication1.Models.OrderEdit.Order
 
         [Required]
         [Column("address_id")]
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
 
 
         [Required]
         [Column("order_status")]
         [StringLength(50)]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderItem>? OrderItems { get; set; }
 
     }
 }
