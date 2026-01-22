@@ -21,12 +21,13 @@
     <PrivateAssets>all</PrivateAssets>
     <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
   </PackageReference>
+  <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   <PackageReference Include="OpenXmlPowerTools" Version="4.5.3.2" />
   <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0" />
 </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
 </Project>

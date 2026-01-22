@@ -1,0 +1,33 @@
+﻿@model WebApplication1.Models.UserEdit.User
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Xóa User</h2>
+
+<div class="alert alert-danger">
+    <p>Bạn có chắc chắn muốn xóa user này không?</p>
+</div>
+
+<table class="table">
+    <tr>
+        <th>Username</th>
+        <td>@Model.Username</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Role</th>
+        <td>@Model.Role</td>
+    </tr>
+</table>
+
+<form href="/Admin/User/DeleteConfirmed" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <button class="btn btn-danger">Xóa</button>
+    <a href="/Admin/User/Index" class="btn btn-secondary">Hủy</a>
+</form>

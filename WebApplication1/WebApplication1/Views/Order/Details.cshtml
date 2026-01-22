@@ -1,29 +1,84 @@
 ﻿@using WebApplication1.Models.OrderEdit.Order
 @model Order
 
-<h2>Chi tiết đơn hàng #@Model.Id</h2>
+<h3 class="mb-3">🧾 Chi tiết đơn hàng #@Model.Id</h3>
 
-<p><b>Trạng thái:</b> @Model.Status</p>
-<p><b>Ngày đặt:</b> @Model.CreatedAt</p>
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <strong>Trạng thái:</strong><br />
+                <span class="badge bg-info">@Model.Status</span>
+            </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Sản phẩm</th>
-            <th>Số lượng</th>
-            <th>Giá</th>
-            <th>Tạm tính</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.OrderItems)
-        {
-            <tr>
-                <td>@item.Product.Name</td>
-                <td>@item.Quantity</td>
-                <td>@item.Product.Price</td>
-                <td>@(item.Quantity* item.Product.Price)</td>
-            </tr>
-        }
-    </tbody>
-</table>
+            <div class="col-md-4">
+                <strong>Ngày đặt:</strong><br />
+                @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+            </div>
+
+            <div class="col-md-4">
+                <strong>Tổng tiền:</strong><br />
+                <span class="text-danger fw-bold">
+                    @Model.TotalPrice.ToString("N0") ₫
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header fw-bold">
+        Danh sách sản phẩm
+    </div>
+
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.OrderItems)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="@item.ImageUrl"
+                                     style="width:60px;height:60px;object-fit:cover;border-radius:6px"
+                                     onerror="this.src='/images/no-image.png'" />
+
+                                <div>
+                                    <div class="fw-semibold">
+                                        @item.Name
+                                    </div>
+
+                                    <small class="text-muted">
+                                        Variant ID: @item.VariantId
+                                    </small>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            @item.Price.ToString("N0") ₫
+                        </td>
+
+                        <td>
+                            @item.Quantity
+                        </td>
+
+                        <td class="fw-bold text-danger">
+                            @item.TotalPrice.ToString("N0") ₫
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

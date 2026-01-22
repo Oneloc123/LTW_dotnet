@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Helpers;
 using WebApplication1.Models;
+using WebApplication1.Models.Checkout;
 using WebApplication1.Models.Enum;
+using WebApplication1.Models.OrderEdit.Order;
 using WebApplication1.Models.UserEdit;
 
 namespace WebApplication1.Controllers
@@ -68,7 +70,9 @@ namespace WebApplication1.Controllers
 
             cart.AddOrUpdate(new CartItem
             {
+
                 VariantId = variant.Id,
+                ProductId = variant.ProductId,
                 Name = variant.Product.Name,
                 ImageUrl = !string.IsNullOrEmpty(variant.ImageUrl)
                 ? variant.ImageUrl
@@ -227,6 +231,41 @@ namespace WebApplication1.Controllers
                 totalPayable = cart.TotalPayable
             });
         }
+
+
+        // Tính toán các sản phẩm được chọn
+        [HttpPost]
+        public IActionResult CalculateSelected([FromBody] List<int> variantIds)
+        {
+            if (variantIds == null || !variantIds.Any())
+            {
+                return Json(new
+                {
+                    totalMoney = 0,
+                    totalDiscount = 0,
+                    voucher = 0,
+                    totalPayable = 0
+                });
+            }
+
+            var cart = CartSessionHelper.GetCart(HttpContext);
+
+            var items = cart.Items
+                .Where(i => variantIds.Contains(i.VariantId))
+                .ToList();
+
+            return Json(new
+            {
+                totalMoney = items.Sum(i => i.Price * i.Quantity),
+                totalDiscount = items.Sum(i => i.DiscountValue),
+                voucher = 0,
+                totalPayable = items.Sum(i => i.FinalPrice * i.Quantity)
+            });
+        }
+
+
+
+
 
         /* post -> xóa hết sản phẩm trong cart */
         [HttpPost]

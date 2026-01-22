@@ -1,5 +1,6 @@
 ﻿@using WebApplication1.Models
-@model WebApplication1.Models.Carts
+@model WebApplication1.Models.Checkout.Checkout
+
 
 @{
     ViewData["Title"] = "Thanh toán";
@@ -34,12 +35,12 @@
             <!-- left checkout -->
             <div class="col l-9 m-12 c-12">
                 <div class="checkout__wrap">
-                    <h2 class="checkout__heading">Sản phẩm trong đơn (<span id="countSelected">@Model.Items.Sum(i => i.Quantity)</span>)</h2>
+                    <h2 class="checkout__heading">Sản phẩm trong đơn (<span id="countSelected">@Model.Cart.Items.Sum(i => i.Quantity)</span>)</h2>
 
                     <!-- list sản phẩm -->
                     <div class="checkout__list">
 
-                        @foreach (var item in Model.Items)
+                        @foreach (var item in Model.Cart.Items)
                         {
                             <article class="checkout-item">
 
@@ -80,6 +81,7 @@
                     <div class="checkout-gift">
                         <i class="checkout-gift__icon fa-solid fa-gift"></i>
                         <span class="checkout-gift__text">
+                        <span class="checkout-gift__text">
                             <span class="checkout-gift__count">0</span> Quà tặng đơn hàng
                         </span>
                         <i class="fa-solid fa-angle-right checkout-gift__arrow"></i>
@@ -90,24 +92,44 @@
                 <div class="checkout__wrap">
                     <h2 class="checkout__heading">Người đặt hàng</h2>
 
-                    <form class="checkout-order__form" method="post" action="/checkout/pay">
+                    <form id="checkoutForm" class="checkout-order__form" asp-action="Pay" method="post">
 
                         <div class="checkout-order__field">
                             <label class="checkout-order__label">Họ và tên</label>
-                            <input type="text" name="fullname" class="checkout-order__input" required placeholder="Nhập họ và tên" />
+                            <input type="text"
+                                   name="fullname"
+                                   class="checkout-order__input"
+                                   required
+                                   placeholder="Nhập họ và tên"
+                                   value="@Model.FullName" />
                         </div>
+
 
                         <div class="checkout-order__field">
                             <label class="checkout-order__label">Số điện thoại</label>
-                            <input type="text" name="phone" class="checkout-order__input" required placeholder="Nhập số điện thoại" />
+                            <input type="text" 
+                                name="phone" 
+                                class="checkout-order__input" 
+                                required placeholder="Nhập số điện thoại" 
+                                value="@Model.Phone" />
                         </div>
 
-                        <div class="checkout-order__field">
-                            <label class="checkout-order__label">Email (không bắt buộc)</label>
-                            <input type="email" name="email" class="checkout-order__input" placeholder="Nhập email" />
-                        </div>
+                        <label>Địa chỉ nhận hàng</label>
+                        <select name="addressid" required>
+                            @foreach (var addr in Model.Addresses)
+                            {
+                                <option value="@addr.Id">
+                                    @addr.FullAddress
+                                </option>
+                            }
+                        </select>
+                      
 
                     </form>
+
+                    
+
+
                 </div>
 
                 <div class="checkout__wrap">
@@ -238,12 +260,12 @@
 
                         <div class="checkout-right__item checkout-right__item--divider">
                             <span class="checkout-right__label">Tổng tiền</span>
-                            <span class="checkout-right__value">0đ</span>
+                            <span class="checkout-right__value">@Model.Cart.TotalMoney.ToString("N0")đ</span>
                         </div>
 
                         <div class="checkout-right__item">
                             <span class="checkout-right__label">Tổng khuyến mãi</span>
-                            <span class="checkout-right__value">0đ</span>
+                            <span class="checkout-right__value">@Model.Cart.TotalDiscount.ToString("N0")đ</span>
                         </div>
 
                         <!-- Nhóm giảm giá -->
@@ -266,12 +288,12 @@
 
                         <div class="checkout-right__item checkout-right__item--total">
                             <span class="checkout-right__label">Cần thanh toán</span>
-                            <span class="checkout-right__value checkout-right__value--highlight">0đ</span>
+                            <span class="checkout-right__value checkout-right__value--highlight">@Model.Cart.TotalPayable.ToString("N0")đ</span>
                         </div>
 
-                        <button class="checkout-right__btn btn btn--primary-color">
+                        <button type="submit" form="checkoutForm" class="checkout-right__btn btn btn--primary-color">
                             Đặt hàng
-                        </button>
+                        </>
                     </aside>
 
                     <!-- Footer điều khoản -->

@@ -33,7 +33,6 @@ namespace WebApplication1.Controllers
                 .Take(6)                          
                 .ToList();
 
-            
             var blogs = _context.Blogs
                 .OrderByDescending(b => b.ViewCount) 
                 .Take(2)
