@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Models\**" />
     <Compile Remove="wwwroot\NewFolder\**" />
+    <Content Remove="Areas\Admin\Models\**" />
     <Content Remove="wwwroot\NewFolder\**" />
+    <EmbeddedResource Remove="Areas\Admin\Models\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder\**" />
+    <None Remove="Areas\Admin\Models\**" />
     <None Remove="wwwroot\NewFolder\**" />
   </ItemGroup>
 
@@ -21,12 +25,10 @@
     <PrivateAssets>all</PrivateAssets>
     <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
   </PackageReference>
+  <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   <PackageReference Include="OpenXmlPowerTools" Version="4.5.3.2" />
   <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0" />
+  <PackageReference Include="System.Drawing.Common" Version="10.0.2" />
 </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
-  </ItemGroup>
 
 </Project>

@@ -1,0 +1,60 @@
+﻿@model List<WebApplication1.Models.Discount>
+
+@{
+    ViewData["Title"] = "Quản lý mã giảm giá";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh sách mã giảm giá</h2>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Tên</th>
+            <th>Loại</th>
+            <th>Giá trị</th>
+            <th>Thời gian</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var d in Model)
+        {
+            <tr class="@(d.IsActive ? "" : "table-secondary")">
+                <td>@d.Name</td>
+                <td>
+                    @(d.Type == DiscountType.Percentage ? "Phần trăm" : "Số tiền")
+                </td>
+                <td>
+                    @(d.Type == DiscountType.Percentage
+                                    ? $"{d.Value}%"
+                                    : $"{d.Value:N0} đ")
+            </td>
+            <td>
+                @d.StartDate.ToString("dd/MM/yyyy")
+                →
+                @d.EndDate.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @if (d.IsActive)
+                    {
+                        <span class="badge bg-success">Đang áp dụng</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Tắt</span>
+                    }
+                </td>
+                <td>
+                    <form method="post" action="/Admin/Discount/ToggleActive">
+                        <input type="hidden" name="id" value="@d.Id" />
+                        <button class="btn btn-sm btn-warning">
+                            @(d.IsActive ? "Tắt" : "Bật")
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

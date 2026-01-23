@@ -5,8 +5,10 @@ namespace WebApplication1.Models
     public class CartItem
     {
         public int VariantId { get; set; }
-        public string? Name { get; set; }
-        public string? ImageUrl { get; set; }
+
+        public int ProductId { get; set; }
+        public string Name { get; set; }
+        public string ImageUrl { get; set; }
 
         public string Color { get; set; }
         public string Memory { get; set; }

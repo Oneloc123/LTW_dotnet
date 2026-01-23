@@ -66,5 +66,9 @@ namespace WebApplication1.Models.UserEdit
 
         public DbSet<WishListItem> WishListItems { get; set; }
 
+        // Thêm bảng liên hệ
+
+        public DbSet<Contact> Contacts { get; set; }
+
     }
 }

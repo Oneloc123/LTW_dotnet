@@ -1,0 +1,70 @@
+﻿@model List<WebApplication1.Models.Contact>
+
+@{
+    ViewData["Title"] = "Quản lý liên hệ";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh sách liên hệ</h2>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Điện thoại</th>
+            <th>Ngày gửi</th>
+            <th>Nội dung</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr class="@(c.IsRead ? "" : "table-warning")">
+                <td>@c.FullName</td>
+                <td>@c.Email</td>
+                <td>@c.Phone</td>
+
+                <td>@c.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+
+                <td>
+                    <a href="/Admin/Contact/Details/@c.Id"
+                       class="btn btn-sm btn-primary">
+                        Xem
+                    </a>
+                </td>
+
+                <td>
+                    @if (c.IsRead)
+                    {
+                        <span class="badge bg-success">Đã đọc</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Chưa đọc</span>
+                    }
+                </td>
+                <td>
+                    @if (!c.IsRead)
+                    {
+                        <form method="post" action="/Admin/Contact/MarkAsRead"
+                              style="display:inline">
+                            <input type="hidden" name="id" value="@c.Id" />
+                            <button class="btn btn-sm btn-success">
+                                Đánh dấu đã đọc
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="text-muted fst-italic">
+                            Đã xử lý
+                        </span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
