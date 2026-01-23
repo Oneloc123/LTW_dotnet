@@ -39,6 +39,10 @@ public class ProfileController : Controller
     .Where(b => b.UserId == user.Id)
     .ToList();
 
+        var order = _context.Orders
+    .Where(o => o.UserId == user.Id)
+    .ToList();
+
 
         var vm = new ProfileEditViewModel
         {
@@ -53,7 +57,9 @@ public class ProfileController : Controller
 
             CurrentAvatarUrl = user.AvatarUrl ?? "/uploads/avtars/default-avatar.png",
 
-            Blogs = blogs
+            Blogs = blogs,
+            Orders = order
+            
 
         };
 

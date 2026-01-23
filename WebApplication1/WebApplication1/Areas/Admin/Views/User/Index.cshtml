@@ -28,12 +28,14 @@
                 <td>@u.Role</td>
                 <td>@(u.IsActive ? "✔" : "✖")</td>
                 <td>
+
                     <a href="/Admin/User/Edit/@u.Id" class="btn btn-warning btn-sm">Sửa</a>
                     <a href="/Admin/User/Delete/@u.Id"
                        class="btn btn-danger btn-sm"
                        onclick="return confirm('Xác nhận xoá user này?')">
                         Xoá
                     </a>
+
                 </td>
             </tr>
         }

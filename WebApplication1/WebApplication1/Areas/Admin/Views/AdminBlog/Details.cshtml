@@ -1,0 +1,42 @@
+﻿@model WebApplication1.Models.BlogEdit.Blog
+
+@{
+    ViewData["Title"] = "Chi tiết Blog";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a asp-area="Admin"
+   asp-controller="AdminBlog"
+   asp-action="Index"
+   class="btn btn-secondary mb-3">
+    ← Quay lại
+</a>
+
+<h2>@Model.Title</h2>
+
+<p class="text-muted">
+    Tác giả: @Model.User?.FullName <br />
+    Ngày tạo: @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+</p>
+
+@if (!string.IsNullOrEmpty(Model.Thumbnail))
+{
+    <img src="@Model.Thumbnail"
+         class="img-fluid mb-3 rounded"
+         alt="thumbnail" />
+}
+
+<hr />
+
+<div class="blog-content">
+    @Html.Raw(Model.Content)
+</div>
+
+<hr />
+
+<h5>Thống kê</h5>
+<ul>
+    <li>Lượt xem: @Model.ViewCount</li>
+    <li>Số comment: @Model.Comments?.Count()</li>
+    <li>Điểm trung bình: @(Model.Ratings.Any() ? Model.Ratings.Average(r => r.Rating) : 0)</li>
+</ul>

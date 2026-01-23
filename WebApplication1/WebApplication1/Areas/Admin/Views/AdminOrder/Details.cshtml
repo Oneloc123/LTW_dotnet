@@ -1,0 +1,79 @@
+﻿@model WebApplication1.Areas.Admin.Models.Admin.Order.AdminOrderDetailViewModel
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+
+}
+
+<h2>Chi tiết đơn hàng #@Model.OrderId</h2>
+
+<div class="row">
+    <!-- CUSTOMER -->
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header fw-bold">Khách hàng</div>
+            <div class="card-body">
+                <p><strong>Tên:</strong> @Model.CustomerName</p>
+                <p><strong>Email:</strong> @Model.Email</p>
+                <p><strong>SĐT:</strong> @Model.Phone</p>
+                <p><strong>Địa chỉ:</strong> @Model.ShippingAddress</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ORDER -->
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header fw-bold">Đơn hàng</div>
+            <div class="card-body">
+                <p><strong>Ngày đặt:</strong> @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</p>
+                <p>
+                    <strong>Trạng thái:</strong>
+                    <span class="badge bg-warning">@Model.Status</span>
+                </p>
+                <p class="fs-5 text-danger">
+                    <strong>Tổng tiền:</strong>
+                    @Model.TotalPrice.ToString("N0") đ
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ITEMS -->
+<div class="card">
+    <div class="card-header fw-bold">Sản phẩm</div>
+    <table class="table mb-0">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>
+                        <img src="@item.ImageUrl" width="40" class="me-2" />
+                        @item.Name
+                    </td>
+                    <td>@item.Price.ToString("N0") đ</td>
+                    <td>@item.Quantity</td>
+                    <td class="text-danger">
+                        @item.TotalPrice.ToString("N0") đ
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">
+    ← Quay lại danh sách
+</a>
