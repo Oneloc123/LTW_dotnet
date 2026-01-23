@@ -1,0 +1,31 @@
+﻿@if (TempData["success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        Gửi liên hệ thất bại. Vui lòng kiểm tra lại thông tin.
+    </div>
+}
+
+<form asp-action="Index" method="post">
+    @Html.AntiForgeryToken()
+
+    <input name="FullName" class="form-control mb-2" placeholder="Họ tên" required />
+    <input name="Email" class="form-control mb-2" placeholder="Email" required />
+    <input name="Phone" class="form-control mb-2" placeholder="SĐT" />
+    <textarea name="Message" class="form-control mb-3" placeholder="Nội dung" required></textarea>
+
+    <button class="btn btn-primary">Gửi liên hệ</button>
+</form>
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.alert')
+            .forEach(a => a.remove());
+    }, 3000);
+</script>
