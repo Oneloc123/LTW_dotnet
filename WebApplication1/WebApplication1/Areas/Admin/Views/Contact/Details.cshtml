@@ -1,0 +1,23 @@
+﻿@using WebApplication1.Models
+@model Contact
+
+<h3>📨 Nội dung liên hệ</h3>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <p><strong>Họ tên:</strong> @Model.FullName</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>SĐT:</strong> @Model.Phone</p>
+        <p><strong>Ngày gửi:</strong> @Model.CreatedAt</p>
+
+        <hr />
+        <p><strong>Nội dung:</strong></p>
+        <p>@Model.Message</p>
+
+        <a href="/Admin/Contact"
+           class="btn btn-back mt-3">
+            ← Quay lại
+        </a>
+
+    </div>
+</div>

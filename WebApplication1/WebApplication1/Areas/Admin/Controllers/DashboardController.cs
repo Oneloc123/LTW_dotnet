@@ -28,6 +28,8 @@ namespace WebApplication1.Areas.Admin.Controllers
 
             ViewBag.ChartLabels = ordersByMonth.Select(x => "Tháng " + x.Month).ToList();
             ViewBag.ChartData = ordersByMonth.Select(x => x.Count).ToList();
+            ViewBag.TotalContacts = _context.Contacts.Count();
+            ViewBag.TotalDiscount = _context.Discounts.Count();
 
             return View();
         }

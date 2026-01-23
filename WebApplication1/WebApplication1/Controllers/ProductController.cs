@@ -15,7 +15,7 @@ namespace WebApplication1.Controllers
             _context = context;
         }
 
-        string connectionString = "server=localhost;port=3306;database=netdb;user=root;password=1111";
+        string connectionString = "server=localhost;port=3306;database=netdb;user=root;password=";
 
 
         //Index

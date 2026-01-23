@@ -72,7 +72,7 @@ namespace WebApplication1.Models.UserEdit
         // Audit
         // ======================
 
-        public DateTime? CreatedAt { get; set; } 
+        public DateTime CreatedAt { get; set; } 
 
         public DateTime? UpdatedAt { get; set; }
 
