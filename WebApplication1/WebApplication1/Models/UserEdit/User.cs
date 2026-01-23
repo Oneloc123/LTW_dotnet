@@ -72,9 +72,9 @@ namespace WebApplication1.Models.UserEdit
         // Audit
         // ======================
 
-        public DateTime CreatedAt { get; set; } 
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
         public ICollection<Blog> Blogs { get; set; }
         public ICollection<BlogComment> BlogComments { get; set; }
