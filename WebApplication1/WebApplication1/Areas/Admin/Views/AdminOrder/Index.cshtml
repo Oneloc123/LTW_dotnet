@@ -1,0 +1,113 @@
+﻿@model List<WebApplication1.Areas.Admin.Models.Admin.Order.AdminOrderViewModel>
+
+@{
+    ViewData["Title"] = "Quản lý đơn hàng";
+    int page = ViewBag.Page;
+    int pageSize = ViewBag.PageSize;
+    int totalItems = ViewBag.TotalItems;
+    int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<h2>Quản lý đơn hàng</h2>
+
+<!-- FILTER -->
+<form method="get" class="row g-3 mb-3">
+    <div class="col-md-2">
+        <input name="orderId" class="form-control" placeholder="Mã đơn" />
+    </div>
+
+    <div class="col-md-3">
+        <input name="customer" class="form-control" placeholder="Khách hàng / Email" />
+    </div>
+
+    <div class="col-md-2">
+        <select name="status" class="form-control">
+            <option value="">-- Trạng thái --</option>
+            <option value="Pending">Chờ xác nhận</option>
+            <option value="Confirmed">Đã xác nhận</option>
+            <option value="Shipping">Đang giao</option>
+            <option value="Completed">Hoàn tất</option>
+            <option value="Cancelled">Đã hủy</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <input type="date" name="fromDate" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <input type="date" name="toDate" class="form-control" />
+    </div>
+
+    <div class="col-md-1">
+        <button class="btn btn-primary w-100">Lọc</button>
+    </div>
+</form>
+
+<!-- TABLE -->
+<table class="table table-bordered table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Mã</th>
+            <th>Khách hàng</th>
+            <th>Sản phẩm</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Ngày đặt</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var o in Model)
+        {
+            <tr>
+                <td>#@o.OrderId</td>
+                <td>
+                    <strong>@o.CustomerName</strong><br />
+                    <small>@o.Email</small>
+                </td>
+                <td>
+                    <img src="@o.FirstImageUrl" width="40" class="me-2" />
+                    @o.FirstProductName
+                    @if (o.ItemCount > 1)
+                    {
+                        <span class="text-muted">
+                            (+@(o.ItemCount - 1) sản phẩm)
+                        </span>
+                    }
+                </td>
+                <td class="text-danger fw-bold">
+                    @o.TotalPrice.ToString("N0") đ
+                </td>
+                <td>
+                    <span class="badge bg-info">@o.Status</span>
+                </td>
+                <td>@o.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@o.OrderId"
+                       class="btn btn-sm btn-outline-primary">
+                        Chi tiết
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- PAGING -->
+<nav>
+    <ul class="pagination">
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == page ? "active" : "")">
+                <a class="page-link"
+                   href="?page=@i&pageSize=@pageSize">
+                    @i
+                </a>
+            </li>
+        }
+    </ul>
+</nav>
