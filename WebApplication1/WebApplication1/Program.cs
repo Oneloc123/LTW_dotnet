@@ -37,6 +37,9 @@ builder.Services.AddSession(options =>
     options.Cookie.SameSite = SameSiteMode.Lax;
 });
 
+
+AppContext.SetSwitch("System.Drawing.EnableUnixSupport", true);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -58,15 +61,16 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-
-// admin
+// admin (PHẢI ĐẶT TRƯỚC)
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
 );
+
+// default
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();

@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Admin Blog";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mb-3">Quản lý Blog người dùng</h2>
+
+
+<table class="table table-bordered table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Ảnh</th>
+            <th>Tiêu đề</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
+            <th width="220">Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        {
+            <tr>
+                <td>@blog.Id</td>
+
+                <td>
+                    <img src="@blog.Thumbnail"
+                         width="80"
+                         class="rounded border"
+                         alt="thumbnail" />
+                </td>
+
+                <td>
+                    <strong>@blog.Title</strong>
+                    <br />
+                    <small class="text-muted">
+                        @* @blog.ShortDescription *@
+                    </small>
+                </td>
+
+                <td>
+                    
+                </td>
+
+                <td>@blog.CreatedAt.ToString("dd/MM/yyyy")</td>
+
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@blog.Id"
+                       class="btn btn-sm btn-info">
+                        Xem
+                    </a>
+
+                    <form 
+                          asp-area="Admin"
+      asp-controller="AdminBlog"
+      asp-action="Delete"
+      asp-route-id="@blog.Id"
+      method="post"
+                          class="d-inline">
+
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-sm btn-danger"
+                                onclick="return confirm('XÓA vĩnh viễn bài viết?')" >
+                            Xóa
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

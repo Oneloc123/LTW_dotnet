@@ -15,8 +15,8 @@
                     <!-- Avatar -->
                     <div class="profile-avatar">
                         <img src="@(string.IsNullOrEmpty(Model.CurrentAvatarUrl)
-                                     ? "/images/default-avatar.png"
-                                     : Model.CurrentAvatarUrl)"
+                                                                                                                                                         ? "/images/default-avatar.png"
+                                                                                                                                                         : Model.CurrentAvatarUrl)"
                              alt="Avatar"
                              style="width:120px;height:120px;border-radius:50%;object-fit:cover" />
                     </div>
@@ -91,28 +91,73 @@
             <div class="card shadow-sm mt-4">
                 <div class="card-header bg-white">
                     <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                        
                         <li class="nav-item">
-                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#blogs">
-                                📝 Blog đã viết
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#orders">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#orders">
                                 🛒 Đơn hàng
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews">
-                                ⭐ Đánh giá
+                            <button class="nav-link " data-bs-toggle="tab" data-bs-target="#blogs">
+                                📝 Blog đã viết
                             </button>
                         </li>
+                        
                     </ul>
                 </div>
 
                 <div class="card-body tab-content">
 
+                    <!-- ===== Orders ===== -->
+                    <div class="tab-pane fade show active" id="orders">
+                        @if (!Model.Orders.Any())
+                        {
+                            <p class="text-muted">Chưa có đơn hàng nào.</p>
+                        }
+                        else
+                        {
+                            <a asp-controller="Order"
+                             
+                               class="btn btn-sm btn-outline-primary">
+                                Xem Ttất cả đơn hàng
+                            </a>
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Mã đơn</th>
+                                        <th>Ngày</th>
+                                        <th>Tổng</th>
+                                        <th>Trạng thái</th>
+                                        <th>Chi tiết</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var o in Model.Orders)
+                                    {
+                                        <tr>
+                                            <td>#@o.Id</td>
+                                            <td>@o.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                            <td>@o.TotalPrice.ToString("N0") đ</td>
+                                            <td>
+                                                <span class="badge bg-info">@o.Status</span>
+                                            </td>
+                                            <td>
+                                                <a asp-controller="Order"
+                                                    asp-action="Details"
+                                                   asp-route-id="@o.Id"
+                                                   class="btn btn-sm btn-outline-primary">
+                                                    Xem chi tiết
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+
                     <!-- ===== Blogs ===== -->
-                    <div class="tab-pane fade show active" id="blogs">
+                    <div class="tab-pane fade " id="blogs">
                         @if (!Model.Blogs.Any())
                         {
                             <p class="text-muted">Bạn chưa viết blog nào.</p>
@@ -135,39 +180,7 @@
                         }
                     </div>
 
-                    <!-- ===== Orders ===== -->
-                    <div class="tab-pane fade" id="orders">
-                        @if (!Model.Orders.Any())
-                        {
-                            <p class="text-muted">Chưa có đơn hàng nào.</p>
-                        }
-                        else
-                        {
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Mã đơn</th>
-                                        <th>Ngày</th>
-                                        <th>Tổng</th>
-                                        <th>Trạng thái</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var o in Model.Orders)
-                                    {
-                                        <tr>
-                                            <td>#@o.Id</td>
-                                            <td>@o.CreatedAt.ToString("dd/MM/yyyy")</td>
-                                            @*<td>@o.TotalPrice.ToString("N0") đ</td> *@
-                                            <td>
-                                                <span class="badge bg-info">@o.Status</span>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        }
-                    </div>
+
 
                     <!-- ===== Reviews ===== -->
                     @* <div class="tab-pane fade" id="reviews">

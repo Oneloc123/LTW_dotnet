@@ -28,41 +28,14 @@
                 <td>@u.Role</td>
                 <td>@(u.IsActive ? "✔" : "✖")</td>
                 <td>
-<<<<<<< HEAD
-                    @if (u.IsActive)
-                    {
-                        <span class="badge bg-success">Active</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-secondary">Inactive</span>
-                    }
-                </td>
-                <td>
-                    <a asp-area="Admin"
-                       asp-controller="User"
-                       asp-action="Edit"
-                       asp-route-id="@u.Id"
-                       class="btn btn-warning btn-sm">
-                        Edit
-                    </a>
 
-                    <a asp-area="Admin"
-                       asp-controller="User"
-                       asp-action="Delete"
-                       asp-route-id="@u.Id"
-                       class="btn btn-danger btn-sm">
-                        Delete
-                    </a>
-
-=======
                     <a href="/Admin/User/Edit/@u.Id" class="btn btn-warning btn-sm">Sửa</a>
                     <a href="/Admin/User/Delete/@u.Id"
                        class="btn btn-danger btn-sm"
                        onclick="return confirm('Xác nhận xoá user này?')">
                         Xoá
                     </a>
->>>>>>> 3178bd6b45c74e4f61bbd468700d54cc2d87b2de
+
                 </td>
             </tr>
         }
