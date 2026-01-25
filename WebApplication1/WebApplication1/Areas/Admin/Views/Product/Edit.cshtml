@@ -1,0 +1,39 @@
+﻿@model WebApplication1.Models.Products
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Sửa Sản phẩm</h2>
+
+<form method="post" action="/Admin/Product/Edit">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label>Tên sản phẩm</label>
+        <input name="Name" value="@Model.Name" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Giá bán</label>
+        <input name="Price" type="number" value="@Model.Price" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Thương hiệu</label>
+        <input name="Brand" value="@Model.Brand" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Link hình ảnh</label>
+        <input name="MainImageUrl" value="@Model.MainImageUrl" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Mô tả</label>
+        <textarea name="Description" class="form-control" rows="3">@Model.Description</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Cập nhật</button>
+    <a href="/Admin/Product" class="btn btn-secondary">Quay lại</a>
+</form>
