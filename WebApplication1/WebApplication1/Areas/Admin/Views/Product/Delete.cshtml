@@ -1,0 +1,33 @@
+﻿@model WebApplication1.Models.Products
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Xóa Sản phẩm</h2>
+
+<div class="alert alert-danger">
+    <p>Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
+</div>
+
+<table class="table table-bordered" style="max-width: 600px;">
+    <tr>
+        <th style="width: 150px;">Tên sản phẩm</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Giá</th>
+        <td class="text-danger fw-bold">@Model.Price.ToString("#,##0")₫</td>
+    </tr>
+    <tr>
+        <th>Thương hiệu</th>
+        <td>@Model.Brand</td>
+    </tr>
+</table>
+
+<form action="/Admin/Product/DeleteConfirmed" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a href="/Admin/Product" class="btn btn-secondary">Hủy</a>
+</form>
