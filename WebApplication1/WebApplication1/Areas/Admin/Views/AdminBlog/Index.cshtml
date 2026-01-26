@@ -5,11 +5,12 @@
 
 <h2 class="mb-3">Quản lý Blog người dùng</h2>
 
-
+  <div class="card shadow mb-4">
+                <div class="card-body">
 <table class="table table-bordered table-hover align-middle">
     <thead class="table-dark">
         <tr>
-            <th>#</th>
+            <th>Mã</th>
             <th>Ảnh</th>
             <th>Tiêu đề</th>
             <th>Trạng thái</th>
@@ -21,7 +22,7 @@
         @foreach (var blog in Model)
         {
             <tr>
-                <td>@blog.Id</td>
+                <td>#@blog.Id</td>
 
                 <td>
                     <img src="@blog.Thumbnail"
@@ -70,4 +71,5 @@
         }
     </tbody>
 </table>
-
+</div>
+</div>

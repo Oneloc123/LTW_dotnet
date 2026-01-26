@@ -3,40 +3,174 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Dashboard</h2>
+<header>
+  <style>
+    .dashboard-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
 
-<div class="row">
+    .dashboard-card {
+        cursor: pointer;
+        transition: transform .2s ease, box-shadow .2s ease;
+        border-radius: 12px;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .icon-box {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+    }
+</style>
+
+
+</header>
+
+<h3 class="mb-4 fw-bold">Dashboard</h3>
+
+<div class="row g-4">
+
+    <!-- Users -->
     <div class="col-md-4">
-        <div class="card p-3">
-            <h5>Người dùng</h5>
-            <h2>@ViewBag.TotalUsers</h2>
-        </div>
+        <a href="/Admin/User" class="dashboard-link">
+            <div class="card shadow-sm border-0 dashboard-card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="icon-box bg-primary text-white">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0 text-muted">Người dùng</h6>
+                        <h3 class="fw-bold">@ViewBag.TotalUsers</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
     </div>
 
+    <!-- Products -->
     <div class="col-md-4">
-        <div class="card p-3">
-            <h5>Sản phẩm</h5>
-            <h2>@ViewBag.TotalProducts</h2>
-        </div>
+        <a href="/Admin/Product" class="dashboard-link">
+            <div class="card shadow-sm border-0 dashboard-card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="icon-box bg-success text-white">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0 text-muted">Sản phẩm</h6>
+                        <h3 class="fw-bold">@ViewBag.TotalProducts</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
     </div>
 
+    <!-- Orders -->
     <div class="col-md-4">
-        <div class="card p-3">
-            <h5>Đơn hàng</h5>
-            <h2>@ViewBag.TotalOrders</h2>
-        </div>
+        <a href="/Admin/AdminOrder" class="dashboard-link">
+            <div class="card shadow-sm border-0 dashboard-card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="icon-box bg-warning text-white">
+                        <i class="bi bi-receipt"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0 text-muted">Đơn hàng</h6>
+                        <h3 class="fw-bold">@ViewBag.TotalOrders</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
     </div>
 
+    <!-- Contacts -->
     <div class="col-md-4">
-        <div class="card p-3">
-            <h5>Liên hệ</h5>
-            <h2>@ViewBag.TotalContacts</h2>
-        </div>
+        <a href="/Admin/Contact" class="dashboard-link">
+            <div class="card shadow-sm border-0 dashboard-card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="icon-box bg-info text-white">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0 text-muted">Liên hệ</h6>
+                        <h3 class="fw-bold">@ViewBag.TotalContacts</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
     </div>
+
+    <!-- Discount -->
     <div class="col-md-4">
-        <div class="card p-3">
-            <h5>Mã giảm giá</h5>
-            <h2>@ViewBag.TotalDiscount</h2>
+        <a href="/Admin/Discount" class="dashboard-link">
+            <div class="card shadow-sm border-0 dashboard-card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="icon-box bg-danger text-white">
+                        <i class="bi bi-percent"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0 text-muted">Mã giảm giá</h6>
+                        <h3 class="fw-bold">@ViewBag.TotalDiscount</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-header fw-bold">
+                Thống kê tổng quan
+            </div>
+            <div class="card-body">
+                <canvas id="dashboardChart" height="120"></canvas>
+            </div>
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('dashboardChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Users', 'Products', 'Orders', 'Contacts', 'Discounts'],
+            datasets: [{
+                label: 'Số lượng',
+                data: [
+                    @ViewBag.TotalUsers,
+                    @ViewBag.TotalProducts,
+                    @ViewBag.TotalOrders,
+                    @ViewBag.TotalContacts,
+                    @ViewBag.TotalDiscount
+                ],
+                backgroundColor: [
+                    '#0d6efd',
+                    '#198754',
+                    '#ffc107',
+                    '#0dcaf0',
+                    '#dc3545'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+</script>
