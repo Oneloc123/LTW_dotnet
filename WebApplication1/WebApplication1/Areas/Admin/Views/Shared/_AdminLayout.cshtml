@@ -1,52 +1,118 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentPath = Context.Request.Path.ToString().ToLower();
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Admin</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
     <style>
         body {
-            margin: 0
+            margin: 0;
+            background-color: #f4f6f9;
+            font-family: "Segoe UI", Tahoma, sans-serif;
         }
 
+        /* Sidebar */
         .sidebar {
-            width: 220px;
+            width: 240px;
             height: 100vh;
             position: fixed;
-            background: #343a40;
+            background: linear-gradient(180deg, #343a40, #212529);
             color: #fff;
             padding: 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.15);
         }
 
-            .sidebar a {
-                color: #fff;
-                display: block;
-                padding: 10px 0;
-                text-decoration: none;
-            }
+        .sidebar h4 {
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
 
-                .sidebar a:hover {
-                    background: #495057;
-                }
+        .sidebar a {
+            color: #ced4da;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            margin-bottom: 6px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 15px;
+        }
 
+        .sidebar a i {
+            font-size: 18px;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+            color: #fff;
+            transform: translateX(3px);
+        }
+
+        .sidebar a.active {
+            background-color: #0d6efd;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Content */
         .content {
             margin-left: 240px;
-            padding: 20px;
+            padding: 25px;
+            min-height: 100vh;
         }
     </style>
 </head>
+
 <body>
 
     <div class="sidebar">
-        <h4>ADMIN</h4>
-        <hr />
-        <a href="/Admin/Dashboard">📊 Dashboard</a>
-        <a href="/Admin/User">👤 Users</a>
-        <a href="/Admin/Product">📦 Products</a>
-        <a href="/Admin/AdminOrder">🧾 Orders</a>
-        <a href="/Admin/Contact">Liên hệ</a>
-        <a href="/Admin/Discount">Discounts</a>
-        <a href="/Admin/AdminOrder">🧾 Orders</a>       
-        <a href="/Admin/AdminBlog">🧾 Blog</a>
+        <h4>ADMIN PANEL</h4>
+        <hr class="text-secondary"/>
+
+        <a href="/Admin/Dashboard"
+         class="@(currentPath.Contains("/admin/dashboard") ? "active" : "")" >
+            <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+
+<a href="/Admin/User"
+   class="@(currentPath.Contains("/admin/user") ? "active" : "")" >
+    <i class="bi bi-people"></i> Users
+</a>
+
+<a href="/Admin/Product"
+   class="@(currentPath.Contains("/admin/product") ? "active" : "")" >
+    <i class="bi bi-box-seam"></i> Products
+</a>
+
+<a href="/Admin/AdminOrder"
+   class="@(currentPath.Contains("/admin/adminorder") ? "active" : "")" >
+    <i class="bi bi-receipt"></i> Orders
+</a>
+
+<a href="/Admin/AdminBlog"
+   class="@(currentPath.Contains("/admin/adminblog") ? "active" : "")" >
+    <i class="bi bi-journal-text"></i> Blog
+</a>
+
+<a href="/Admin/Discount"
+   class="@(currentPath.Contains("/admin/discount") ? "active" : "")" >
+    <i class="bi bi-percent"></i> Discounts
+</a>
+
+<a href="/Admin/Contact"
+   class="@(currentPath.Contains("/admin/contact") ? "active" : "")" >
+    <i class="bi bi-envelope"></i> Liên hệ
+</a>
 
     </div>
 

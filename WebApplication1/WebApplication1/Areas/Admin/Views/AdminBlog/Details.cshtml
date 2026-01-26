@@ -4,13 +4,8 @@
     ViewData["Title"] = "Chi tiết Blog";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+<h2>Chi Tiết Blog #@Model.Id</h2>
 
-<a asp-area="Admin"
-   asp-controller="AdminBlog"
-   asp-action="Index"
-   class="btn btn-secondary mb-3">
-    ← Quay lại
-</a>
 
 <h2>@Model.Title</h2>
 
@@ -40,3 +35,10 @@
     <li>Số comment: @Model.Comments?.Count()</li>
     <li>Điểm trung bình: @(Model.Ratings.Any() ? Model.Ratings.Average(r => r.Rating) : 0)</li>
 </ul>
+
+<a asp-area="Admin"
+   asp-controller="AdminBlog"
+   asp-action="Index"
+   class="btn btn-secondary mb-3">
+    ← Quay lại
+</a>
