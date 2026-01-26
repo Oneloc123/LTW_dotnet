@@ -15,6 +15,14 @@ namespace WebApplication1.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            // Kiểm tra quyền ngay khi vào trang
+            var role = HttpContext.Session.GetString("Role");
+            if (string.IsNullOrEmpty(role) || role != "Admin")
+            {
+                // Nếu không phải Admin, đá về trang Login của khách
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+
             ViewBag.TotalUsers = _context.Users.Count();
             ViewBag.TotalProducts = _context.Products.Count();
             ViewBag.TotalOrders = _context.Orders.Count();
