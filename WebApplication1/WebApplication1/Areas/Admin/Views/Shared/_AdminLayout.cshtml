@@ -28,41 +28,41 @@
             box-shadow: 2px 0 10px rgba(0,0,0,0.15);
         }
 
-        .sidebar h4 {
-            text-align: center;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
+            .sidebar h4 {
+                text-align: center;
+                font-weight: 700;
+                letter-spacing: 1px;
+                margin-bottom: 20px;
+            }
 
-        .sidebar a {
-            color: #ced4da;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            margin-bottom: 6px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            font-size: 15px;
-        }
+            .sidebar a {
+                color: #ced4da;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 10px 14px;
+                margin-bottom: 6px;
+                border-radius: 8px;
+                text-decoration: none;
+                transition: all 0.2s ease;
+                font-size: 15px;
+            }
 
-        .sidebar a i {
-            font-size: 18px;
-        }
+                .sidebar a i {
+                    font-size: 18px;
+                }
 
-        .sidebar a:hover {
-            background-color: #495057;
-            color: #fff;
-            transform: translateX(3px);
-        }
+                .sidebar a:hover {
+                    background-color: #495057;
+                    color: #fff;
+                    transform: translateX(3px);
+                }
 
-        .sidebar a.active {
-            background-color: #0d6efd;
-            color: #fff;
-            font-weight: 600;
-        }
+                .sidebar a.active {
+                    background-color: #0d6efd;
+                    color: #fff;
+                    font-weight: 600;
+                }
 
         /* Content */
         .content {
@@ -77,43 +77,52 @@
 
     <div class="sidebar">
         <h4>ADMIN PANEL</h4>
-        <hr class="text-secondary"/>
+        <hr class="text-secondary" />
 
         <a href="/Admin/Dashboard"
-         class="@(currentPath.Contains("/admin/dashboard") ? "active" : "")" >
+           class="@(currentPath.Contains("/admin/dashboard") ? "active" : "")">
             <i class="bi bi-speedometer2"></i> Dashboard
-            </a>
+        </a>
 
-<a href="/Admin/User"
-   class="@(currentPath.Contains("/admin/user") ? "active" : "")" >
-    <i class="bi bi-people"></i> Users
-</a>
+        <a href="/Admin/User"
+           class="@(currentPath.Contains("/admin/user") ? "active" : "")">
+            <i class="bi bi-people"></i> Users
+        </a>
 
-<a href="/Admin/Product"
-   class="@(currentPath.Contains("/admin/product") ? "active" : "")" >
-    <i class="bi bi-box-seam"></i> Products
-</a>
+        <a href="/Admin/Product"
+           class="@(currentPath.Contains("/admin/product") ? "active" : "")">
+            <i class="bi bi-box-seam"></i> Products
+        </a>
 
-<a href="/Admin/AdminOrder"
-   class="@(currentPath.Contains("/admin/adminorder") ? "active" : "")" >
-    <i class="bi bi-receipt"></i> Orders
-</a>
+        <a href="/Admin/AdminOrder"
+           class="@(currentPath.Contains("/admin/adminorder") ? "active" : "")">
+            <i class="bi bi-receipt"></i> Orders
+        </a>
 
-<a href="/Admin/AdminBlog"
-   class="@(currentPath.Contains("/admin/adminblog") ? "active" : "")" >
-    <i class="bi bi-journal-text"></i> Blog
-</a>
+        <a href="/Admin/AdminBlog"
+           class="@(currentPath.Contains("/admin/adminblog") ? "active" : "")">
+            <i class="bi bi-journal-text"></i> Blog
+        </a>
 
-<a href="/Admin/Discount"
-   class="@(currentPath.Contains("/admin/discount") ? "active" : "")" >
-    <i class="bi bi-percent"></i> Discounts
-</a>
+        <a href="/Admin/Discount"
+           class="@(currentPath.Contains("/admin/discount") ? "active" : "")">
+            <i class="bi bi-percent"></i> Discounts
+        </a>
 
-<a href="/Admin/Contact"
-   class="@(currentPath.Contains("/admin/contact") ? "active" : "")" >
-    <i class="bi bi-envelope"></i> Liên hệ
-</a>
+        <a href="/Admin/Contact"
+           class="@(currentPath.Contains("/admin/contact") ? "active" : "")">
+            <i class="bi bi-envelope"></i> Liên hệ
+        </a>
+        <a class="dropdown-item text-danger"
+            asp-area="defaut"
+           asp-controller="Account"
+           asp-action="Logout">
+            <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+        </a>
 
+    </div>
+    <div>
+       
     </div>
 
     <div class="content">
