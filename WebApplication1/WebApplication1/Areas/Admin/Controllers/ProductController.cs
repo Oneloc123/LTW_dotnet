@@ -40,19 +40,45 @@ namespace WebApplication1.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Products model)
+        // Nhận thêm các tham số từ form nhập liệu mới
+        public IActionResult Create(Products model, int Stock, string Ram, string Rom, string Color,
+                            string Screen, string Camera, string CPU, string Battery)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            if (!ModelState.IsValid) return View(model);
 
-            // Gán ngày tạo mặc định
+            // 1. Lưu Bảng Product
             model.CreatedAt = DateTime.Now;
             model.UpdatedAt = DateTime.Now;
-
-            // Lưu sản phẩm (Nếu bên View có gửi kèm list Images/Specs thì nó tự lưu luôn)
             _context.Products.Add(model);
+            _context.SaveChanges(); // Lưu xong để lấy model.Id
+
+            // 2. Lưu Bảng ProductVariants (Để có hàng tồn kho & giá)
+            var variant = new ProductVariant
+            {
+                ProductId = model.Id,
+                Color = Color ?? "Mặc định",
+                Memory = $"{Ram}/{Rom}", // Gộp Ram và Rom ví dụ "8GB/128GB"
+                Price = model.Price,     // Giá biến thể theo giá gốc
+                Stock = Stock,           // QUAN TRỌNG: Có cái này mới hết "Tạm hết hàng"
+                ImageUrl = model.MainImageUrl,
+                
+            };
+            _context.ProductVariants.Add(variant);
+
+            // 3. Lưu Bảng Specifications (Để hiện thông số kỹ thuật)
+            if (!string.IsNullOrEmpty(Screen))
+                _context.Specifications.Add(new Specification { ProductId = model.Id, SpecName = "Màn hình", SpecValue = Screen });
+
+            if (!string.IsNullOrEmpty(Camera))
+                _context.Specifications.Add(new Specification { ProductId = model.Id, SpecName = "Camera", SpecValue = Camera });
+
+            if (!string.IsNullOrEmpty(CPU))
+                _context.Specifications.Add(new Specification { ProductId = model.Id, SpecName = "CPU", SpecValue = CPU });
+
+            if (!string.IsNullOrEmpty(Battery))
+                _context.Specifications.Add(new Specification { ProductId = model.Id, SpecName = "Pin", SpecValue = Battery });
+
+            // Lưu tất cả thay đổi phụ
             _context.SaveChanges();
 
             return Redirect("/Admin/Product");
