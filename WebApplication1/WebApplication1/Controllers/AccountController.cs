@@ -98,9 +98,11 @@ namespace WebApplication1.Controllers
             // Lưu Session
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("Username", user.Username);
-            HttpContext.Session.SetString("Role", user.Role);
-            HttpContext.Session.SetString("avatar", user.AvatarUrl);
-
+            HttpContext.Session.SetString("Role", user.Role); // Lưu quyền để check ở View
+            if (user.AvatarUrl != null)
+            {
+                HttpContext.Session.SetString("avatar", user.AvatarUrl);
+            }
 
             // Remember me (basic)
             if (model.RememberMe)
@@ -113,7 +115,13 @@ namespace WebApplication1.Controllers
                 Response.Cookies.Append("Username", user.Username, options);
             }
 
-            return RedirectToAction("Index", "Home");
+            if (user.Role == "Admin")
+            {
+                return RedirectToAction("Index", "User", new { area = "Admin" });
+            }
+
+            // Nếu không phải Admin, về trang chủ người dùng (không có area)
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         // =========================
@@ -124,7 +132,7 @@ namespace WebApplication1.Controllers
         {
             HttpContext.Session.Clear();
             Response.Cookies.Delete("Username");
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "Account", new { area = "" });
         }
         // =========================
         // GET: /Account/Register
@@ -145,54 +153,59 @@ namespace WebApplication1.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            // Kiểm tra Username đã tồn tại
-            bool usernameExists = await _context.Users
-                .AnyAsync(u => u.Username == model.Username);
+            // 1. Kiểm tra Username tồn tại
+            bool usernameExists = await _context.Users.AnyAsync(u => u.Username == model.Username);
             if (usernameExists)
             {
                 ModelState.AddModelError("Username", "Tên đăng nhập đã tồn tại");
                 return View(model);
             }
 
-            // Kiểm tra Email đã tồn tại
-            bool emailExists = await _context.Users
-                .AnyAsync(u => u.Email == model.Email);
+            // 2. Kiểm tra Email tồn tại
+            bool emailExists = await _context.Users.AnyAsync(u => u.Email == model.Email);
             if (emailExists)
             {
                 ModelState.AddModelError("Email", "Email đã được sử dụng");
                 return View(model);
             }
 
-            // Hash mật khẩu
+            // 3. Hash mật khẩu
             string passwordHash = PasswordHelper.Hash(model.Password);
 
-            // Tạo user mới
+            // 4. Tạo user mới (Gán đủ các giá trị để tránh lỗi Null trong Dashboard)
             var user = new User
             {
                 Username = model.Username,
                 Email = model.Email,
                 PasswordHash = passwordHash,
 
-                Role = "User",
+                Role = "User", // Mặc định luôn là User để bảo mật
                 IsActive = true,
                 EmailConfirmed = false,
 
+                // Quan trọng: Gán giá trị cụ thể thay vì để mặc định từ Model 
+                // để chắc chắn dữ liệu đồng bộ vào DB
                 CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+
                 AvatarUrl = "/uploads/avatars/default-avatar.png",
                 FullName = "",
                 PhoneNumber = "",
-                Gender = 0
+                Gender = 0,
+                FailedLoginCount = 0
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            // (Tuỳ chọn) Tự động đăng nhập sau khi đăng ký
+            // 5. Tự động đăng nhập sau khi đăng ký
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("Username", user.Username);
             HttpContext.Session.SetString("Role", user.Role);
+            HttpContext.Session.SetString("avatar", user.AvatarUrl);
 
-            return RedirectToAction("Index", "Home");
+            // Vì mới đăng ký mặc định là "User", nên trả về Home chính
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         [HttpGet]
