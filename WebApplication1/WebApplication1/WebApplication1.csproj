@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Admin\Models\**" />
     <Compile Remove="wwwroot\NewFolder\**" />
-    <Content Remove="Areas\Admin\Models\**" />
     <Content Remove="wwwroot\NewFolder\**" />
-    <EmbeddedResource Remove="Areas\Admin\Models\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder\**" />
-    <None Remove="Areas\Admin\Models\**" />
     <None Remove="wwwroot\NewFolder\**" />
   </ItemGroup>
 
